@@ -1,0 +1,202 @@
+<html>
+<head>
+	<title>Title</title>
+	<!-- Regular styles -->
+	<link href="styles.css" media="all" rel="Stylesheet" type="text/css" />
+	<!-- Syntax Highlighter styles and JS -->
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCSharp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDelphi.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDiff.js"></script>
+	<script type="text/javascript" src="scripts/shBrushGroovy.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJava.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPlain.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="scripts/shBrushRuby.js"></script>
+	<script type="text/javascript" src="scripts/shBrushScala.js"></script>
+	<script type="text/javascript" src="scripts/shBrushSql.js"></script>
+	<script type="text/javascript" src="scripts/shBrushVb.js"></script>
+	<script type="text/javascript" src="scripts/shBrushXml.js"></script>
+	<link type="text/css" rel="stylesheet" href="styles/shCore.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css"/>
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+	<div class="content">
+
+		<h1>Chicago-Area Scala Enthusiasts (CASE) Meeting #3</h1>
+
+
+			<p style="text-align:center;"><em>April 16, 2009  @Thoughtworks</em></p>
+
+
+			<p style="text-align:center;"><em>dean@deanwampler.com</em></p>
+
+
+			<p>We&#8217;re doing hands-on exercises tonight.</p>
+
+
+			<h2>Setup</h2>
+
+
+			<p>Download this zip file: <a href="http://polyglotprogramming.com/case-04162009/exercises.zip">http://polyglotprogramming.com/case-04162009/exercises.zip</a>.</p>
+
+
+			<p>It contains this <span class="caps">HTML</span> page, a lib directory with the <em>ScalaTest</em> jar (used below) and example solutions to the exercises.</p>
+
+
+			<p>If you want to build the exercises and run the tests, type <code>make</code> or <code>build.bat</code> in the directory where you unzipped the contents.</p>
+
+
+			<h2>Functional Programming.</h2>
+
+
+			<p><em>&#8220;S-99: Ninety-Nine Scala Problems&#8221;</em> <a href="http://aperiodic.net/phil/scala/s-99/">http://aperiodic.net/phil/scala/s-99/</a></p>
+
+
+			<p>Most of the exercises (which would take days to complete) exercise functional programming.</p>
+
+
+			<p>Do the following exercises: 1-2, 4-6</p>
+
+
+			<p>Extra credit: 7, 14, 15</p>
+
+
+			<p>Take about 20-25 minutes. Try to avoid looping, mutable variables, <em>etc.</em></p>
+
+
+			<h2>Object-Oriented Programming</h2>
+
+
+			<p>Consider a simple Bank Account class.</p>
+
+
+		<pre class="brush: scala;">
+		package bank1
+		class BankAccount(var balance: Double) {
+		    def deposit(amount: Double) = balance += amount
+		    def withdraw(amount: Double) = balance -= amount
+		}
+		</pre>
+
+			<p>(Use <code>package bank1</code> for all files in this exercise.) What if we want to observe balance changes? Use a <em>Trait</em> to implement the Observer Pattern.</p>
+
+
+			<ul>
+			<li>Define an <code>Account</code> trait that declares the <code>balance</code> reader, <code>deposit</code> and <code>withdraw</code> methods. Change the class to use the trait (<code>with</code> keyword).</li>
+			</ul>
+
+
+			<ul>
+			<li>Define another trait that defines the observer abstraction.</li>
+			</ul>
+
+
+		<pre class="brush: scala;">
+		trait Observer[A] {
+		    def receiveUpdate(x: A)
+		}
+		</pre>
+
+			<ul>
+			<li>Define a <em>subtrait</em> of <code>Account</code> that implements the Observer pattern. Something like this:</li>
+			</ul>
+
+
+		<pre class="brush: scala;">
+		trait ObservedAccount extends Account {
+		    abstract override def deposit(amount: Double) = {
+		        super.deposit(amount)
+		        // notify observers after change. I.e., call "receiveUpdate" on each.
+		    }
+		    // Similarly for "withdraw"...
+
+		    // Manage list of observers (don't worry about deletion...)
+		}
+		</pre>
+
+			<ul>
+			<li>Using these commands:</li>
+			</ul>
+
+
+		<pre class="brush: bash;">
+		scalac -classpath .:lib/scalatest-0.9.5.jar *.scala 
+		scala -classpath .:lib/scalatest-0.9.5.jar org.scalatest.tools.Runner -o -s bank1.ObservedBankAccountTest
+		</pre>
+
+			<ul>
+			<li>... make this <em>ScalaTest</em> pass:</li>
+			</ul>
+
+
+		<pre class="brush: scala;">
+		// bank-account1-test.scala: ScalaTest to exercise code.
+
+		package bank1
+
+		import org.scalatest._
+		import org.scalatest.matchers._
+		import java.util.NoSuchElementException
+
+		class ObservedBankAccountTest extends FunSuite with ShouldMatchers {
+
+		    // I could have put the test inside "receiveUpdate", rather than
+		    // save the balance to "newBalance" and do the test at the end.
+		    // However, there's a flaw with that approach. What is it?
+		    test("Deposits are observed after the balance change") {
+		        val account = new BankAccount(100.0) with ObservedAccount
+		        var newBalance = 0.0
+		        account.addObserver(new Observer[Account] {
+		            def receiveUpdate(a: Account) = newBalance = a.balance
+		        })
+		        account.deposit(10.1)
+		        newBalance should be (110.1 plusOrMinus .01)
+		    }
+
+		    test("Withdraws are observed after the balance change") {
+		        val account = new BankAccount(100.0) with ObservedAccount
+		        var newBalance = 0.0
+		        account.addObserver(new Observer[Account] {
+		            def receiveUpdate(a: Account) = newBalance = a.balance
+		        })
+		        account.withdraw(10.1)
+		        newBalance should be (89.9 plusOrMinus .01)
+		    }
+		}
+		</pre>
+
+			<p><strong>Note:</strong> Solutions can be found in <code>bank-account1.scala</code> and <code>bank-account1-test.scala</code>.</p>
+
+
+			<ul>
+			<li>Variation: support <em>before</em> and <em>after</em> observation.
+			<ul>
+			<li>Use a boolean flag to indicate which case it is. </li>
+				<li>Solutions can be found in <code>bank-account2.scala</code> and <code>bank-account2-test.scala</code>.</li>
+			</ul></li>
+			</ul>
+
+
+			<ul>
+			<li>Extra Credit: Use <em>structural typing</em> for the observer abstraction. 
+			<ul>
+			<li>Solutions can be found in <code>bank-account3.scala</code> and <code>bank-account3-test.scala</code>.</li>
+			</ul></li>
+			</ul>
+
+
+			<h2>Implement the Next Google in Scala. Take about 25 minutes.</h2>
+
+	</div>
+</body>
+</html>

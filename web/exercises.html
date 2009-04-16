@@ -46,14 +46,60 @@
 
 			<h2>Setup</h2>
 
+			<p>Go to GitHub to download or clone these files: <a href="http://github.com/chicagoscala/beginning-exercises/tree/master">http://github.com/chicagoscala/beginning-exercises/tree/master</a>.
 
-			<p>Download this zip file: <a href="http://polyglotprogramming.com/case-04162009/exercises.zip">http://polyglotprogramming.com/case-04162009/exercises.zip</a>.</p>
+			<p>It contains this HTML page ("web/exercises.html":web/exercises.html), a lib directory with the _ScalaTest_ jar (used below) and example solutions to the exercises.</p>
+
+			<p>If you want to build the exercises and run the tests, type @make@ or @build.bat@ in the directory where you put the contents.</p>
 
 
-			<p>It contains this <span class="caps">HTML</span> page, a lib directory with the <em>ScalaTest</em> jar (used below) and example solutions to the exercises.</p>
+			<h2>Cheat Sheet</h2>
 
 
-			<p>If you want to build the exercises and run the tests, type <code>make</code> or <code>build.bat</code> in the directory where you unzipped the contents.</p>
+			<p>Here are a few Scala-isms that you might find useful. Start the <code>scala</code> interpreter and paste this text at the <code>scala&gt;</code> prompt.</p>
+
+
+		<pre class="brush: scala;">
+		    val list = List(1,2,3,4)
+
+		    5 :: list
+
+		    5 :: list.reverse
+
+		    6 :: 5 :: list.reverse
+
+		    List(6, 5) ::: list.reverse
+
+		    list ++ List(5, 6)
+
+		    val (a, b) = (list, list.length)
+
+		    def tupledlist(l: List[_]) = (l, l.length)
+
+		    val (a2, b2) = tupledlist(list)
+
+		    list map { x =&gt; x * x }
+		    list foreach { x =&gt; println(x * x) }
+
+		    trait T1 { def m1(i: Int) }
+		    trait T2 { def m2(d: Double) }
+
+		    class C extends T1 with T2 { 
+		        def m1(i: Int) = println("Int: " + i) 
+		        def m2(d: Double) = println("Double: " + d) 
+		    }
+		    val c = new C
+		    c.m1(10)
+		    c.m2(22.2)
+		</pre>
+
+			<p>Scaladocs:</p>
+
+
+			<ul>
+			<li>Scala <span class="caps">API</span>: <a href="http://www.scala-lang.org/docu/files/api/index.html">http://www.scala-lang.org/docu/files/api/index.html</a></li>
+				<li>ScalaTest: <a href="http://www.artima.com/scalatest/doc-0.9.5/index.html">http://www.artima.com/scalatest/doc-0.9.5/index.html</a></li>
+			</ul>
 
 
 			<h2>Functional Programming.</h2>
@@ -133,6 +179,11 @@
 		scalac -classpath .:lib/scalatest-0.9.5.jar *.scala 
 		scala -classpath .:lib/scalatest-0.9.5.jar org.scalatest.tools.Runner -o -s bank1.ObservedBankAccountTest
 		</pre>
+
+			<ul>
+			<li>where you copied the <code>lib</code> directory from the zip file to your work area, ...</li>
+			</ul>
+
 
 			<ul>
 			<li>... make this <em>ScalaTest</em> pass:</li>

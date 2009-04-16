@@ -8,11 +8,11 @@ We're doing hands-on exercises tonight.
 
 h2. Setup
 
-Download this zip file: "http://polyglotprogramming.com/case-04162009/exercises.zip":http://polyglotprogramming.com/case-04162009/exercises.zip.
+Go to GitHub to download or clone these files: "http://github.com/chicagoscala/beginning-exercises/tree/master":http://github.com/chicagoscala/beginning-exercises/tree/master.
 
 It contains this HTML page ("web/exercises.html":web/exercises.html), a lib directory with the _ScalaTest_ jar (used below) and example solutions to the exercises.
 
-If you want to build the exercises and run the tests, type @make@ or @build.bat@ in the directory where you unzipped the contents.
+If you want to build the exercises and run the tests, type @make@ or @build.bat@ in the directory where you put the contents.
 
 h2. Cheat Sheet
 

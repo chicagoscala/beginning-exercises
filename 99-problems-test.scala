@@ -9,12 +9,25 @@ import java.util.NoSuchElementException
 class NinetyNineProblemsTest extends FunSuite with ShouldMatchers {
 
     test("P01 (*) Find the last element of a list.") {
-        def last(l: List[_]) = l.reverse.head
-
+        def last[A](l: List[A]): A = l match {
+            case Nil => throw new NoSuchElementException
+            case head :: Nil => head
+            case head :: tail => last(tail)
+        }
+        
         last(List(1, 1, 2, 3, 5, 8)) should equal (8)
         last(List(1)) should equal (1)
         intercept[NoSuchElementException] {
-            last(Nil) 
+            last(List[String]()) 
+        }
+
+        // Or, do it the easy way:
+        def lastEasy(l: List[_]) = l.reverse.head
+
+        lastEasy(List(1, 1, 2, 3, 5, 8)) should equal (8)
+        lastEasy(List(1)) should equal (1)
+        intercept[NoSuchElementException] {
+            lastEasy(Nil) 
         }
     }
     

@@ -11,7 +11,7 @@ foo:
 	find . -name "*.class" -exec ls {} \;
 
 compile:
-	scalac -classpath ${CP} *.scala 
+	scalac -classpath ${CP} 99-problems-test.scala bank-account[123]*.scala 
 
 test:
 	scala -classpath ${CP} org.scalatest.tools.Runner  -o -s ninetynine.NinetyNineProblemsTest

@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class Ordinal in org.scalatest.events</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/events$package.html" target="_self">org.scalatest.events</a>
+        <br></br>
+        <span class="entity">class  Ordinal</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/events/Ordinal"><code>org/scalatest/events/Ordinal.scala</code></a>]
+      </div><hr></hr>
+      <a name="Ordinal"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>Ordinal</em>(<code>val </code><em>runStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>private </code><em>stamps</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>])
+      </dt>
+      <dd><code> extends </code><a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>]</dd>
+    </dl>
+      <dl><dd>Class used to specify a sequential order for events reported during a test run, so they
+ can be arranged in that order in a report even if the events were fired in some other order
+ during concurrent or distributed execution.
+
+ <p>
+ An <code>Ordinal</code> is an immutable object holding a <em>run stamp</em> and a sequence
+ of <em>stamps</em>.
+ The run stamp is an integer that identifies a particular run. All events
+ reported during the same run should share the same run stamp. By contrast, each
+ event reported during a particular run should have a different stamps sequence.
+ One use case for the run stamp is that the initial run from ScalaTest's GUI
+ will have run stamp 0. Subsequent reruns will have run stamps 1,
+ 2, 3, <em>etc.</em>, so that reports in the GUI can simply be sorted in "ordinal" order. Another
+ use case is a set of servers used to run multiple tests simultaneously in a distributed
+ fashion. The run stamp can be used to identify the run for which an event belongs.
+ </p>
+
+ <p>
+ The stamps sequence is designed to allow a sequential order of events to be specified during
+ concurrent execution of ScalaTest suites. ScalaTest's model for concurrent execution is that
+ the suites that make up a run may be executed concurrently, but the tests within a single suite
+ will be executed sequentially. In addition to tests, suites may contain nested suites. The default implementation
+ of <code>execute</code> in class <code>Suite</code> will first invoke <code>runNestedSuites</code> and
+ then <code>runTests</code>. If no <code>Distributor</code> is passed to <code>execute</code>, the
+ <code>runNestedSuites</code> method will execute the nested suites sequentially via the same thread
+ that invoked <code>runNestedSuites</code>. As a result, suites will by default executed in depth first order
+ when executed sequentially. If a <code>Distributor</code> is passed to <code>execute</code>, the
+ <code>runNestedSuites</code> method will simply put its nested suites into the <code>Distributor</code>
+ and return. Some other threads or processes must then execute those nested suites. Given the default
+ implementations of <code>execute</code> and <code>runNestedSuites</code> described here, the <code>Ordinal</code>
+ will allow the events from a concurrent run to be sorted in the same depth-first order that the events
+ from a corresponding sequential run would arrive.
+ </p>
+
+ <p>
+ Each event reported during a run should be given a unique <code>Ordinal</code>. An <code>Ordinal</code> is required
+ by all <code>Event</code> subclasses, instances of which are used to send information to the <code>report</code>
+ function passed to a <code>Suite</code>'s <code>execute</code> method. The first <code>Ordinal</code> for a run
+ can be produced be passing a run stamp to <code>Ordinal</code>'s lone public constructor:
+ </p>
+ 
+ <pre>
+ val firstOrdinal = new Ordinal(99)
+ </pre>
+
+ <p>
+ The run stamp can be any integer. The <code>Ordinal</code> created in this way can be passed along with the first
+ reported event of the run, such as a <code>RunStarting</code> event. Thereafter, new <code>Ordinal</code>s for the same run
+ can be obtained by calling either <code>next</code> or <code>nextNewOldPair</code> on the previously obtained <code>Ordinal</code>.
+ In other words, given an <code>Ordinal</code>, you can obtain the next <code>Ordinal</code> by invoking one of these two
+ "next" methods on the <code>Ordinal</code> you have in hand. Before executing a new <code>Suite</code>, the <code>nextNewOldPair</code>
+ method should be invoked. This will return two new <code>Ordinal</code>s, one for the new <code>Suite</code> about to be executed, and
+ one for the currently executing entity (either a <code>Suite</code> or some sort of test runner). At any other time, the next <code>Ordinal</code>
+ can be obtained by simply invoking <code>next</code> on the current <code>Ordinal</code>.
+ </p>
+
+ <p>
+ You can convert an <code>Ordinal</code> to a <code>List</code> by invoking <code>toList</code> on it. The resulting <code>List</code> will contain
+ the run stamp as its first element, and the contents of its stamps sequence as the subsequent elements. The stamps
+ sequence will initially be composed of a single element with the value 0. Thus, <code>toList</code> invoked on the <code>firstOrdinal</code> shown above will 
+ result in:
+ </p>
+ 
+ <pre>
+ firstOrdinal.toList // results in: List(99, 0)
+ </pre>
+
+ <p>
+ Each time <code>next</code> is invoked, the rightmost integer returned by <code>toList</code> will increment: 
+ </p>
+ 
+ <pre>
+ val secondOrdinal = firstOrdinal.next
+ secondOrdinal.toList // results in: List(99, 1)
+ 
+ val thirdOrdinal = secondOrdinal.next
+ thirdOrdinal.toList  // result is : List(99, 2)
+ </pre>
+
+ <p>
+ When <code>nextNewOldPair</code> is invoked the result will be a tuple whose first element is the first <code>Ordinal</code> for
+ the new <code>Suite</code> about to be executed (for example, a nested <code>Suite</code> of the currently executing <code>Suite</code>). The
+ second element is the next <code>Ordinal</code> for the currently executing <code>Suite</code> or other entity:
+ </p>
+
+ <pre>
+ val (nextForNewSuite, nextForThisRunner) = thirdOrdinal.nextNewOldPair
+ nextForNewSuite.toList   // results in: (99, 2, 0)
+ nextForThisRunner.toList // results in: (99, 3)
+ </pre>
+
+ <p>
+ The <code>toList</code> method of the <code>Ordinal</code> for the new suite starts with the same sequence of elements as the <code>Ordinal</code> from which it was
+ created, but has one more element, a 0, appended at the end. Subsequent invocations of <code>next</code> on this series of <code>Ordinal</code>s will
+ increment that last element:
+ </p>
+
+ <pre>
+ val newSuiteOrdinal2 = nextForNewSuite.next
+ newSuiteOrdinal2.toList // results in: List(99, 2, 1)
+ 
+ val newSuiteOrdinal3 = newSuiteOrdinal2.next
+ newSuiteOrdinal3.toList  // result is : List(99, 2, 2)
+ </pre>
+
+ <p>
+ This behavior allows events fired by <code>Suite</code> running concurrently to be reordered in a pre-determined sequence after all the events
+ have been reported. The ordering of two <code>Ordinal</code>s can be determined by first comparing the first element of the <code>List</code>s obtained
+ by invoking <code>toList</code> on both <code>Ordinal</code>s. These values represent the <code>runStamp</code>. If one run stamp is a lower number than
+ the other, that <code>Ordinal</code> comes first. For example, an <code>Ordinal</code> with a run stamp of 98 is ordered before an <code>Ordinal</code> with
+ a run stamp of 99. If the run stamps are equal, the next number in the list is inspected. As with the run stamps, an  <code>Ordinal</code> with a lower
+ number is ordered before an <code>Ordinal</code> with a higher number. If two corresponding elements are equal, the next pair of elements will be inspected.
+ This will continue no down the length of the <code>List</code>s until a position is found where the element values are not equal, or the end of one or both of
+ the <code>List</code>s are reached. If the two <code>List</code>s are identical all the way to the end, and both <code>List</code>s have the same lengths, 
+ then the <code>Ordinal</code>s are equal. (Equal <code>Ordinal</code>s will not happen if correctly used by creating a new <code>Ordinal</code> for
+ each fired event and each new <code>Suite</code>.). If the two <code>List</code>s are identical all the way to the end of one, but the other <code>List</code>
+ is longer (has more elements), then the shorter list is ordered before the longer one.
+ </p>
+
+ <p>
+ As an example, here are some <code>Ordinal</code> <code>List</code> forms in order:
+ </p>
+
+ <pre>
+ List(99, 0)
+ List(99, 1)
+ List(99, 2)
+ List(99, 2, 0)
+ List(99, 2, 1)
+ List(99, 2, 2)
+ List(99, 2, 2, 0)
+ List(99, 2, 2, 1)
+ List(99, 2, 2, 2)
+ List(99, 2, 3)
+ List(99, 2, 4)
+ List(99, 2, 4, 0)
+ List(99, 2, 4, 1)
+ List(99, 2, 4, 2)
+ List(99, 3)
+ List(99, 4)
+ List(99, 4, 0)
+ List(99, 4, 1)
+ List(99, 5)
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      <table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Additional Constructor Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#this%28Int%29" target="_self">this</a></em>
+        (<em>runStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>
+        
+        <div>Construct a the first <code>Ordinal</code> for a run.</div>
+      </td>
+    </tr>
+      </table>
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#compare%28org.scalatest.events.Ordinal%29" target="_self">compare</a></em>
+        (<em>that</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Compares this <code>Ordinal</code> with the passed <code>Ordinal</code> for order. If this object is "less than" (ordered before)
+   the passed object, <code>compare</code> will return a negative integer. If this class is "greater than" (ordered after)
+   the passed object, <code>compare</code> will return a positive integer. Otherwise, this <code>Ordinal</code> is equal to
+   the passed object, and <code>compare</code> will return 0.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#equals%28Any%29" target="_self">equals</a></em>
+        (<em>other</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+        
+        <div>Indicates whether the passed object is equal to this one.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#hashCode%28%29" target="_self">hashCode</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Returns a hash code value for this object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#next" target="_self">next</a></em>
+         : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>
+        
+        <div>Construct the next <code>Ordinal</code> for the current suite or other entity, such as a runner.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#nextNewOldPair" target="_self">nextNewOldPair</a></em>
+         : (<a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>)
+        
+        <div>Construct two new <code>Ordinal</code>s, one for a new <code>Suite</code> about to be executed and
+   one for the current <code>Suite</code> or other entity, such as a runner. The <code>Ordinal</code>
+   for the new <code>Suite</code> is the first (<code>_1</code>) element in the tuple:
+  
+   <pre>
+   val (nextOrdinalForNewSuite, nextOrdinalForThisSuite) currentOrdinal.nextNewOldPair
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/Ordinal.html#toList" target="_self">toList</a></em>
+         : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+        
+        <div>Returns a <code>List[Int]</code> representation of this <code>Ordinal</code>. A set of <code>Ordinal</code>s will be ordered
+   in the same order as the set of <code>List[Int]</code>s that are returned by invoking this method on each of the <code>Ordinal</code>s.
+   The first element of the returned <code>List[Int]</code> is the <code>runStamp</code>.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#&amp;lt;" target="contentFrame" class="scala/Ordered">scala.Ordered.&lt;</a>, <a href="#&amp;gt;" target="contentFrame" class="scala/Ordered">scala.Ordered.&gt;</a>, <a href="#&amp;lt;=" target="contentFrame" class="scala/Ordered">scala.Ordered.&lt;=</a>, <a href="#&amp;gt;=" target="contentFrame" class="scala/Ordered">scala.Ordered.&gt;=</a>, <a href="#compareTo" target="contentFrame" class="scala/Ordered">scala.Ordered.compareTo</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      <table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Additional Constructor Details</td></tr>
+        </table><div><a name="this%28Int%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>this</em>(<em>runStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Construct a the first <code>Ordinal</code> for a run.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>runStamp - </code>a number that identifies a particular run</dd></dl>
+    <hr></hr></div>
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="next"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>next</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Construct the next <code>Ordinal</code> for the current suite or other entity, such as a runner.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="nextNewOldPair"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>nextNewOldPair</em> : (<a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>)
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Construct two new <code>Ordinal</code>s, one for a new <code>Suite</code> about to be executed and
+   one for the current <code>Suite</code> or other entity, such as a runner. The <code>Ordinal</code>
+   for the new <code>Suite</code> is the first (<code>_1</code>) element in the tuple:
+  
+   <pre>
+   val (nextOrdinalForNewSuite, nextOrdinalForThisSuite) currentOrdinal.nextNewOldPair
+   </pre>
+  
+   <p>
+   The reason the next <code>Ordinal</code> for the new <code>Suite</code> is first is because it will
+   be ordered <em>before</em> the next <code>Ordinal</code> for the current <code>Suite</code> (or other
+   entity such as a runner). In fact, any event reported within the context of the new <code>Suite</code> or
+   its nested <code>Suite</code>s will be ordered before the next <code>Ordinal</code> for the current <code>Suite</code>.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>s a tuple whose first element is the first <code>Ordinal</code> for the new <code>Suite</code> and whose            second element is the next <code>Ordinal</code> for the current <code>Suite</code> or other entity, such
+            as a runner.</dd></dl>
+    <hr></hr>
+<a name="toList"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>toList</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a <code>List[Int]</code> representation of this <code>Ordinal</code>. A set of <code>Ordinal</code>s will be ordered
+   in the same order as the set of <code>List[Int]</code>s that are returned by invoking this method on each of the <code>Ordinal</code>s.
+   The first element of the returned <code>List[Int]</code> is the <code>runStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>s a <code>List[Int]</code> representation of this <code>Ordinal</code>.</dd></dl>
+    <hr></hr>
+<a name="compare%28org.scalatest.events.Ordinal%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>compare</em>(<em>that</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Compares this <code>Ordinal</code> with the passed <code>Ordinal</code> for order. If this object is "less than" (ordered before)
+   the passed object, <code>compare</code> will return a negative integer. If this class is "greater than" (ordered after)
+   the passed object, <code>compare</code> will return a positive integer. Otherwise, this <code>Ordinal</code> is equal to
+   the passed object, and <code>compare</code> will return 0.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a negative integer, 0, or positive integer indicating this <code>Ordinal</code> is less than, equal to, or greater than the passed <code>Ordinal</code>.</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>.<a href="#compare" target="contentFrame" class="scala/Ordered">scala.Ordered.compare</a>
+        </dd>
+      </dl><hr></hr>
+<a name="equals%28Any%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>equals</em>(<em>other</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Indicates whether the passed object is equal to this one.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>the - </code>object with which to compare this one for equality</dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>s true if the passed object is equal to this one</dd></dl>
+    <hr></hr>
+<a name="hashCode%28%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>hashCode</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a hash code value for this object.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>s a hash code for this object</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

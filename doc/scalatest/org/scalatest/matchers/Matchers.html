@@ -1,0 +1,2596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait Matchers in org.scalatest.matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers$package.html" target="_self">org.scalatest.matchers</a>
+        <br></br>
+        <span class="entity">trait  Matchers</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/Matchers"><code>org/scalatest/matchers/Matchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="Matchers"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>Matchers</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a></dd>
+    </dl>
+      <dl><dd>This trait is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html">ShouldMatchers</a> or
+ <a href="MustMatchers.html">MustMatchers</a> for an overview of the matchers DSL.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../../org/scalatest/matchers/ShouldMatchers.html" target="_self">ShouldMatchers</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html" target="_self">MustMatchers</a></dd>
+      </dl><hr></hr>
+      
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Value Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#a" target="_self">a</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.AWord.html" target="_self">AWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   badBook should not be a ('goodRead)
+                         ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#an" target="_self">an</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.AnWord.html" target="_self">AnWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   badBook should not be an (excellentRead)
+                         ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#be" target="_self">be</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   obj should (be theSameInstanceAs (string) and be theSameInstanceAs (string))
+               ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#contain" target="_self">contain</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   list should (contain ('a') and have length (7))
+                ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#endWith" target="_self">endWith</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   string should (endWith ("ago") and include ("score"))
+                  ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#fullyMatch" target="_self">fullyMatch</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   string should (fullyMatch regex ("Hel*o, wor.d") and not have length (99))
+                  ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#have" target="_self">have</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   list should (have length (3) and not contain ('a'))
+                ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#include" target="_self">include</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   string should (include ("hope") and not startWith ("no"))
+                  ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#key" target="_self">key</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.KeyWord.html" target="_self">KeyWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   map should not contain key (10)
+                          ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#length" target="_self">length</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.LengthWord.html" target="_self">LengthWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   "hi" should not have length (3)
+                        ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#not" target="_self">not</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>
+        
+        <div>This field enables syntax like the following: 
+  
+   <pre>
+   myFile should (not be an (directory) and not have ('name ("foo.bar")))
+                  ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#regex" target="_self">regex</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.RegexWord.html" target="_self">RegexWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   "eight" should not fullyMatch regex ("""(-)?(\d+)(\.\d*)?""".r)
+                                 ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#size" target="_self">size</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.SizeWord.html" target="_self">SizeWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   set should not have size (3)
+                       ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#startWith" target="_self">startWith</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   string should (startWith ("Four") and include ("year"))
+                  ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#theSameInstanceAs" target="_self">theSameInstanceAs</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.TheSameInstanceAsPhrase.html" target="_self">TheSameInstanceAsPhrase</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   oneString should not be theSameInstanceAs (anotherString)
+                           ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#value" target="_self">value</a></em>
+         : <a href="../../../org/scalatest/matchers/Matchers.ValueWord.html" target="_self">ValueWord</a>
+        
+        <div>This field enables the following syntax: 
+  
+   <pre>
+   map should not contain value (10)
+                          ^
+   </pre></div>
+      </td>
+    </tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29" target="_self">&lt;</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$13</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html" target="_self">ResultOfLessThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be < (10) and not be > (17))
+                      ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29" target="_self">&lt;=</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$15</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html" target="_self">ResultOfLessThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be <= (10) and not be > (17))
+                      ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#%3D%3D%3D%28Any%29" target="_self">===</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTripleEqualsApplication.html" target="_self">ResultOfTripleEqualsApplication</a>
+        
+        <div>This method enables the following syntax:
+  
+   <pre>
+   num should not be === (10)
+                     ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29" target="_self">&gt;</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$14</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html" target="_self">ResultOfGreaterThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be > (10) and not be < (7))
+                      ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29" target="_self">&gt;=</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$16</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html" target="_self">ResultOfGreaterThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be >= (10) and not be < (7))
+                      ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertByteToPlusOrMinusWrapper%28Byte%29" target="_self">convertByteToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>) : <a href="../../../org/scalatest/matchers/Matchers.BytePlusOrMinusWrapper.html" target="_self">BytePlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Byte</code> to a <code>BytePlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertDoubleToPlusOrMinusWrapper%28Double%29" target="_self">convertDoubleToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>) : <a href="../../../org/scalatest/matchers/Matchers.DoublePlusOrMinusWrapper.html" target="_self">DoublePlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Double</code> to a <code>DoublePlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertFloatToPlusOrMinusWrapper%28Float%29" target="_self">convertFloatToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>) : <a href="../../../org/scalatest/matchers/Matchers.FloatPlusOrMinusWrapper.html" target="_self">FloatPlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Float</code> to a <code>FloatPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToIntLengthWrapper%28AnyRef%7BdefgetLength%3AInt%7D%29" target="_self">convertGetLengthFieldToIntLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getLength</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToLongLengthWrapper%28AnyRef%7BdefgetLength%3ALong%7D%29" target="_self">convertGetLengthFieldToLongLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getLength</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToIntLengthWrapper%28AnyRef%7BdefgetLength%28%29%3AInt%7D%29" target="_self">convertGetLengthMethodToIntLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getLength</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToLongLengthWrapper%28AnyRef%7BdefgetLength%28%29%3ALong%7D%29" target="_self">convertGetLengthMethodToLongLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getLength</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToIntSizeWrapper%28AnyRef%7BdefgetSize%3AInt%7D%29" target="_self">convertGetSizeFieldToIntSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getSize</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToLongSizeWrapper%28AnyRef%7BdefgetSize%3ALong%7D%29" target="_self">convertGetSizeFieldToLongSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getSize</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToIntSizeWrapper%28AnyRef%7BdefgetSize%28%29%3AInt%7D%29" target="_self">convertGetSizeMethodToIntSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getSize</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToLongSizeWrapper%28AnyRef%7BdefgetSize%28%29%3ALong%7D%29" target="_self">convertGetSizeMethodToLongSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>getSize</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertIntToPlusOrMinusWrapper%28Int%29" target="_self">convertIntToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/matchers/Matchers.IntPlusOrMinusWrapper.html" target="_self">IntPlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Int</code> to a <code>IntPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29" target="_self">convertIterableMatcherToJavaCollectionMatcher</a></em>
+        [<em>T</em>](<em>iterableMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/Iterable">scala.Iterable</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29#T" target="_self">T</a>]]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29#T" target="_self">T</a>]]
+        
+        <div>This implicit conversion method enables the following syntax (<code>javaColl</code> is a <code>java.util.Collection</code>):
+  
+   <pre>
+   javaColl should contain ("two")
+   </pre>
+  
+   The <code>(contain element ("two"))</code> expression will result in a <code>Matcher[scala.Iterable[String]]</code>. This
+   implicit conversion method will convert that matcher to a <code>Matcher[java.util.Collection[String]]</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToIntLengthWrapper%28AnyRef%7Bdeflength%3AInt%7D%29" target="_self">convertLengthFieldToIntLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>length</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToLongLengthWrapper%28AnyRef%7Bdeflength%3ALong%7D%29" target="_self">convertLengthFieldToLongLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>length</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToIntLengthWrapper%28AnyRef%7Bdeflength%28%29%3AInt%7D%29" target="_self">convertLengthMethodToIntLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>length</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToLongLengthWrapper%28AnyRef%7Bdeflength%28%29%3ALong%7D%29" target="_self">convertLengthMethodToLongLengthWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>length</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertLongToPlusOrMinusWrapper%28Long%29" target="_self">convertLongToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>) : <a href="../../../org/scalatest/matchers/Matchers.LongPlusOrMinusWrapper.html" target="_self">LongPlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Long</code> to a <code>LongPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29" target="_self">convertMapMatcherToJavaMapMatcher</a></em>
+        [<em>K</em>, <em>V</em>](<em>mapMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#V" target="_self">V</a>]]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#V" target="_self">V</a>]]
+        
+        <div>This implicit conversion method enables the following syntax (<code>javaMap</code> is a <code>java.util.Map</code>):
+  
+   <pre>
+   javaMap should (contain key ("two"))
+   </pre>
+  
+   The <code>(contain key ("two"))</code> expression will result in a <code>Matcher[scala.collection.Map[String, Any]]</code>. This
+   implicit conversion method will convert that matcher to a <code>Matcher[java.util.Map[String, Any]]</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertShortToPlusOrMinusWrapper%28Short%29" target="_self">convertShortToPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>) : <a href="../../../org/scalatest/matchers/Matchers.ShortPlusOrMinusWrapper.html" target="_self">ShortPlusOrMinusWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>Short</code> to a <code>ShortPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToIntSizeWrapper%28AnyRef%7Bdefsize%3AInt%7D%29" target="_self">convertSizeFieldToIntSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>size</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToLongSizeWrapper%28AnyRef%7Bdefsize%3ALong%7D%29" target="_self">convertSizeFieldToLongSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>size</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToIntSizeWrapper%28AnyRef%7Bdefsize%28%29%3AInt%7D%29" target="_self">convertSizeMethodToIntSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>size</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToLongSizeWrapper%28AnyRef%7Bdefsize%28%29%3ALong%7D%29" target="_self">convertSizeMethodToLongSizeWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+        
+        <div>This implicit conversion method converts an object with a <code>size</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertSymbolToHavePropertyMatcherGenerator%28Symbol%29" target="_self">convertSymbolToHavePropertyMatcherGenerator</a></em>
+        (<em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matchers.HavePropertyMatcherGenerator.html" target="_self">HavePropertyMatcherGenerator</a>
+        
+        <div>This implicit conversion method converts a <code>Symbol</code> to a
+   <code>HavePropertyMatcherGenerator</code>, to enable the symbol to be used with the <code>have ('author ("Dickens"))</code> syntax.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29" target="_self">convertToMatcherWrapper</a></em>
+        [<em>T</em>](<em>leftMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html" target="_self">MatcherWrapper</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This implicit conversion method enables ScalaTest matchers expressions that involve <code>and</code> and <code>or</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#equal%28Any%29" target="_self">equal</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+        
+        <div>This method enables the following syntax: 
+  
+   <pre>
+   result should equal (7)
+                 ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#evaluating%28%3D%3EAny%29" target="_self">evaluating</a></em>
+        (<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a>
+        
+        <div>This method enables syntax such as the following:
+  
+   <pre>
+   evaluating { "hi".charAt(-1) } should produce [StringIndexOutOfBoundsException]
+   ^
+   </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29" target="_self">produce</a></em>
+        [<em>T</em>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfProduceInvocation.html" target="_self">ResultOfProduceInvocation</a>[<a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+  
+   <pre>
+   evaluating { "hi".charAt(-1) } should produce [StringIndexOutOfBoundsException]
+   ^
+   </pre></div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Class Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.AWord.html" target="_self">AWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.AnWord.html" target="_self">AnWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BytePlusOrMinusWrapper.html" target="_self">BytePlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ByteTolerance.html" target="_self">ByteTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.DoublePlusOrMinusWrapper.html" target="_self">DoublePlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.DoubleTolerance.html" target="_self">DoubleTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.FloatPlusOrMinusWrapper.html" target="_self">FloatPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.FloatTolerance.html" target="_self">FloatTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.HavePropertyMatcherGenerator.html" target="_self">HavePropertyMatcherGenerator</a></em>
+        (<em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.IntPlusOrMinusWrapper.html" target="_self">IntPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.IntTolerance.html" target="_self">IntTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.KeyWord.html" target="_self">KeyWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.LengthWord.html" target="_self">LengthWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.LongPlusOrMinusWrapper.html" target="_self">LongPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.LongTolerance.html" target="_self">LongTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html" target="_self">MatcherWrapper</a></em>
+        [<em>T</em>](<em>leftMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.RegexWord.html" target="_self">RegexWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToBePropertyMatcherApplication.html" target="_self">ResultOfAWordToBePropertyMatcherApplication</a></em>
+        [<em>T</em>](<code>val </code><em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToBePropertyMatcherApplication.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToSymbolApplication.html" target="_self">ResultOfAWordToSymbolApplication</a></em>
+        (<code>val </code><em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToBePropertyMatcherApplication.html" target="_self">ResultOfAnWordToBePropertyMatcherApplication</a></em>
+        [<em>T</em>](<code>val </code><em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToBePropertyMatcherApplication.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToSymbolApplication.html" target="_self">ResultOfAnWordToSymbolApplication</a></em>
+        (<code>val </code><em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfBeWordForAnyRef.html" target="_self">ResultOfBeWordForAnyRef</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfBeWordForAnyRef.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForJavaMap.html" target="_self">ResultOfContainWordForJavaMap</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForJavaMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForJavaMap.html#V" target="_self">V</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForMap.html" target="_self">ResultOfContainWordForMap</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfContainWordForMap.html#V" target="_self">V</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfElementWordApplication.html" target="_self">ResultOfElementWordApplication</a></em>
+        [<em>T</em>](<code>val </code><em>expectedElement</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfElementWordApplication.html#T" target="_self">T</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfEndWithWordForString.html" target="_self">ResultOfEndWithWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a></em>
+        (<code>val </code><em>fun</em> : () =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfFullyMatchWordForString.html" target="_self">ResultOfFullyMatchWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html" target="_self">ResultOfGreaterThanComparison</a></em>
+        [<em>T</em>](<code>val </code><em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html#T" target="_self">T</a>, <code>implicit </code><em>view$10</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html" target="_self">ResultOfGreaterThanOrEqualToComparison</a></em>
+        [<em>T</em>](<code>val </code><em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html#T" target="_self">T</a>, <code>implicit </code><em>view$12</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForCollection.html" target="_self">ResultOfHaveWordForCollection</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Collection">scala.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForCollection.html#T" target="_self">T</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaCollection.html" target="_self">ResultOfHaveWordForJavaCollection</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaCollection.html#T" target="_self">T</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaList.html" target="_self">ResultOfHaveWordForJavaList</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/List">java.util.List</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaList.html#T" target="_self">T</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaCollection.html" target="_self">ResultOfHaveWordForJavaCollection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaList.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForJavaMap.html" target="_self">ResultOfHaveWordForJavaMap</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForLengthWrapper.html" target="_self">ResultOfHaveWordForLengthWrapper</a></em>
+        [<em>A</em>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForLengthWrapper.html#A" target="_self">A</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>implicit </code><em>view$7</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForLengthWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSeq.html" target="_self">ResultOfHaveWordForSeq</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Seq">scala.Seq</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSeq.html#T" target="_self">T</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForCollection.html" target="_self">ResultOfHaveWordForCollection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSeq.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSizeWrapper.html" target="_self">ResultOfHaveWordForSizeWrapper</a></em>
+        [<em>A</em>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSizeWrapper.html#A" target="_self">A</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>implicit </code><em>view$8</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSizeWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForString.html" target="_self">ResultOfHaveWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfIncludeWordForString.html" target="_self">ResultOfIncludeWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfKeyWordApplication.html" target="_self">ResultOfKeyWordApplication</a></em>
+        [<em>T</em>](<code>val </code><em>expectedKey</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfKeyWordApplication.html#T" target="_self">T</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfLengthWordApplication.html" target="_self">ResultOfLengthWordApplication</a></em>
+        (<code>val </code><em>expectedLength</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]<code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html" target="_self">ResultOfLessThanComparison</a></em>
+        [<em>T</em>](<code>val </code><em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html#T" target="_self">T</a>, <code>implicit </code><em>view$9</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html" target="_self">ResultOfLessThanOrEqualToComparison</a></em>
+        [<em>T</em>](<code>val </code><em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html#T" target="_self">T</a>, <code>implicit </code><em>view$11</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a></em>
+        [<em>T</em>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForArray.html" target="_self">ResultOfNotWordForArray</a></em>
+        [<em>E</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForArray.html#E" target="_self">E</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForArray.html#E" target="_self">E</a>]]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html">
+<code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForByte.html" target="_self">ResultOfNotWordForByte</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html" target="_self">ResultOfNotWordForCollection</a></em>
+        [<em>E</em>, <em>T</em> &lt;: <a href="" target="contentFrame" class="scala/Collection">scala.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html#E" target="_self">E</a>]](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForIterable.html" target="_self">ResultOfNotWordForIterable</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html#E" target="_self">E</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForDouble.html" target="_self">ResultOfNotWordForDouble</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForFloat.html" target="_self">ResultOfNotWordForFloat</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForInt.html" target="_self">ResultOfNotWordForInt</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForIterable.html" target="_self">ResultOfNotWordForIterable</a></em>
+        [<em>E</em>, <em>T</em> &lt;: <a href="" target="contentFrame" class="scala/Iterable">scala.Iterable</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForIterable.html#E" target="_self">E</a>]](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForIterable.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForIterable.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaCollection.html" target="_self">ResultOfNotWordForJavaCollection</a></em>
+        [<em>E</em>, <em>T</em> &lt;: <a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaCollection.html#E" target="_self">E</a>]](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaCollection.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaCollection.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaList.html" target="_self">ResultOfNotWordForJavaList</a></em>
+        [<em>E</em>, <em>T</em> &lt;: <a href="" target="contentFrame" class="java/util/List">java.util.List</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaList.html#E" target="_self">E</a>]](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaList.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaCollection.html" target="_self">ResultOfNotWordForJavaCollection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaList.html#E" target="_self">E</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaList.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaMap.html" target="_self">ResultOfNotWordForJavaMap</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaMap.html#V" target="_self">V</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForJavaMap.html#V" target="_self">V</a>]]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForLengthWrapper.html" target="_self">ResultOfNotWordForLengthWrapper</a></em>
+        [<em>A</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForLengthWrapper.html#A" target="_self">A</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>implicit </code><em>view$6</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForLengthWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForLengthWrapper.html#A" target="_self">A</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForLong.html" target="_self">ResultOfNotWordForLong</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html" target="_self">ResultOfNotWordForMap</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#V" target="_self">V</a>], <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html" target="_self">ResultOfNotWordForCollection</a>[(<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#V" target="_self">V</a>), <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForMap.html#V" target="_self">V</a>]]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSeq.html" target="_self">ResultOfNotWordForSeq</a></em>
+        [<em>E</em>, <em>T</em> &lt;: <a href="" target="contentFrame" class="scala/Seq">scala.Seq</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSeq.html#E" target="_self">E</a>]](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSeq.html#T" target="_self">T</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForCollection.html" target="_self">ResultOfNotWordForCollection</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSeq.html#E" target="_self">E</a>, <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSeq.html#T" target="_self">T</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForShort.html" target="_self">ResultOfNotWordForShort</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWord.html" target="_self">ResultOfNotWord</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSizeWrapper.html" target="_self">ResultOfNotWordForSizeWrapper</a></em>
+        [<em>A</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSizeWrapper.html#A" target="_self">A</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>implicit </code><em>view$5</em> : (<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSizeWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForSizeWrapper.html#A" target="_self">A</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForString.html" target="_self">ResultOfNotWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForAnyRef.html" target="_self">ResultOfNotWordForAnyRef</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfProduceInvocation.html" target="_self">ResultOfProduceInvocation</a></em>
+        [<em>T</em>](<code>val </code><em>clazz</em> : <a href="" target="contentFrame" class="java/lang/Class">java.lang.Class</a>[<a href="../../../org/scalatest/matchers/Matchers.ResultOfProduceInvocation.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a></em>
+        (<code>val </code><em>regex</em> : <a href="" target="contentFrame" class="scala/util/matching/Regex">scala.util.matching.Regex</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfSizeWordApplication.html" target="_self">ResultOfSizeWordApplication</a></em>
+        (<code>val </code><em>expectedSize</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]<code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfStartWithWordForString.html" target="_self">ResultOfStartWithWordForString</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>shouldBeTrue</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfTheSameInstanceAsApplication.html" target="_self">ResultOfTheSameInstanceAsApplication</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfTripleEqualsApplication.html" target="_self">ResultOfTripleEqualsApplication</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ResultOfValueWordApplication.html" target="_self">ResultOfValueWordApplication</a></em>
+        [<em>T</em>](<code>val </code><em>expectedValue</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfValueWordApplication.html#T" target="_self">T</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ShortPlusOrMinusWrapper.html" target="_self">ShortPlusOrMinusWrapper</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ShortTolerance.html" target="_self">ShortTolerance</a></em>
+        (<code>val </code><em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>, <code>val </code><em>tolerance</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.SizeWord.html" target="_self">SizeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.TheSameInstanceAsPhrase.html" target="_self">TheSameInstanceAsPhrase</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.ValueWord.html" target="_self">ValueWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+      </table>
+
+      
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Value Details</td></tr>
+        </table><div><a name="not"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>not</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables syntax like the following: 
+  
+   <pre>
+   myFile should (not be an (directory) and not have ('name ("foo.bar")))
+                  ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>be</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   obj should (be theSameInstanceAs (string) and be theSameInstanceAs (string))
+               ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="have"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>have</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   list should (have length (3) and not contain ('a'))
+                ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="contain"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>contain</em> : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   list should (contain ('a') and have length (7))
+                ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="include"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>include</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   string should (include ("hope") and not startWith ("no"))
+                  ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="fullyMatch"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>fullyMatch</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   string should (fullyMatch regex ("Hel*o, wor.d") and not have length (99))
+                  ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="startWith"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>startWith</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   string should (startWith ("Four") and include ("year"))
+                  ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="endWith"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>endWith</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   string should (endWith ("ago") and include ("score"))
+                  ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="length"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>length</em> : <a href="../../../org/scalatest/matchers/Matchers.LengthWord.html" target="_self">LengthWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   "hi" should not have length (3)
+                        ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="size"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>size</em> : <a href="../../../org/scalatest/matchers/Matchers.SizeWord.html" target="_self">SizeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   set should not have size (3)
+                       ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="key"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>key</em> : <a href="../../../org/scalatest/matchers/Matchers.KeyWord.html" target="_self">KeyWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   map should not contain key (10)
+                          ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="value"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>value</em> : <a href="../../../org/scalatest/matchers/Matchers.ValueWord.html" target="_self">ValueWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   map should not contain value (10)
+                          ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="a"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>a</em> : <a href="../../../org/scalatest/matchers/Matchers.AWord.html" target="_self">AWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   badBook should not be a ('goodRead)
+                         ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="an"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>an</em> : <a href="../../../org/scalatest/matchers/Matchers.AnWord.html" target="_self">AnWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   badBook should not be an (excellentRead)
+                         ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="theSameInstanceAs"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>theSameInstanceAs</em> : <a href="../../../org/scalatest/matchers/Matchers.TheSameInstanceAsPhrase.html" target="_self">TheSameInstanceAsPhrase</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   oneString should not be theSameInstanceAs (anotherString)
+                           ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="regex"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>regex</em> : <a href="../../../org/scalatest/matchers/Matchers.RegexWord.html" target="_self">RegexWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This field enables the following syntax: 
+  
+   <pre>
+   "eight" should not fullyMatch regex ("""(-)?(\d+)(\.\d*)?""".r)
+                                 ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToMatcherWrapper</em>[<em>T</em>](<em>leftMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html" target="_self">MatcherWrapper</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method enables ScalaTest matchers expressions that involve <code>and</code> and <code>or</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertIterableMatcherToJavaCollectionMatcher</em>[<em>T</em>](<em>iterableMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/Iterable">scala.Iterable</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29#T" target="_self">T</a>]]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29#T" target="_self">T</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method enables the following syntax (<code>javaColl</code> is a <code>java.util.Collection</code>):
+  
+   <pre>
+   javaColl should contain ("two")
+   </pre>
+  
+   The <code>(contain element ("two"))</code> expression will result in a <code>Matcher[scala.Iterable[String]]</code>. This
+   implicit conversion method will convert that matcher to a <code>Matcher[java.util.Collection[String]]</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertMapMatcherToJavaMapMatcher</em>[<em>K</em>, <em>V</em>](<em>mapMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#V" target="_self">V</a>]]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29#V" target="_self">V</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method enables the following syntax (<code>javaMap</code> is a <code>java.util.Map</code>):
+  
+   <pre>
+   javaMap should (contain key ("two"))
+   </pre>
+  
+   The <code>(contain key ("two"))</code> expression will result in a <code>Matcher[scala.collection.Map[String, Any]]</code>. This
+   implicit conversion method will convert that matcher to a <code>Matcher[java.util.Map[String, Any]]</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertLengthFieldToIntLengthWrapper%28AnyRef%7Bdeflength%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertLengthFieldToIntLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>length</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertLengthMethodToIntLengthWrapper%28AnyRef%7Bdeflength%28%29%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertLengthMethodToIntLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>length</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetLengthFieldToIntLengthWrapper%28AnyRef%7BdefgetLength%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetLengthFieldToIntLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getLength</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetLengthMethodToIntLengthWrapper%28AnyRef%7BdefgetLength%28%29%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetLengthMethodToIntLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getLength</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertLengthFieldToLongLengthWrapper%28AnyRef%7Bdeflength%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertLengthFieldToLongLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>length</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertLengthMethodToLongLengthWrapper%28AnyRef%7Bdeflength%28%29%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertLengthMethodToLongLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>length</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetLengthFieldToLongLengthWrapper%28AnyRef%7BdefgetLength%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetLengthFieldToLongLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getLength</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetLengthMethodToLongLengthWrapper%28AnyRef%7BdefgetLength%28%29%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetLengthMethodToLongLengthWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getLength</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have length (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertSizeFieldToIntSizeWrapper%28AnyRef%7Bdefsize%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertSizeFieldToIntSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>size</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertSizeMethodToIntSizeWrapper%28AnyRef%7Bdefsize%28%29%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertSizeMethodToIntSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>size</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetSizeFieldToIntSizeWrapper%28AnyRef%7BdefgetSize%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetSizeFieldToIntSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getSize</code> field of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetSizeMethodToIntSizeWrapper%28AnyRef%7BdefgetSize%28%29%3AInt%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetSizeMethodToIntSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getSize</code> method of type <code>Int</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertSizeFieldToLongSizeWrapper%28AnyRef%7Bdefsize%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertSizeFieldToLongSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>size</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertSizeMethodToLongSizeWrapper%28AnyRef%7Bdefsize%28%29%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertSizeMethodToLongSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>size</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetSizeFieldToLongSizeWrapper%28AnyRef%7BdefgetSize%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetSizeFieldToLongSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getSize</code> field of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertGetSizeMethodToLongSizeWrapper%28AnyRef%7BdefgetSize%28%29%3ALong%7D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertGetSizeMethodToLongSizeWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts an object with a <code>getSize</code> method of type <code>Long</code> to a
+   <code>LengthWrapper</code>, to enable that object to be used with the <code>have size (7)</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertSymbolToHavePropertyMatcherGenerator%28Symbol%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertSymbolToHavePropertyMatcherGenerator</em>(<em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matchers.HavePropertyMatcherGenerator.html" target="_self">HavePropertyMatcherGenerator</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This implicit conversion method converts a <code>Symbol</code> to a
+   <code>HavePropertyMatcherGenerator</code>, to enable the symbol to be used with the <code>have ('author ("Dickens"))</code> syntax.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="equal%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>equal</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+  
+   <pre>
+   result should equal (7)
+                 ^
+   </pre>
+  
+   <p>
+   The <code>left should equal (right)</code> syntax works by calling <code>==</code> on the <code>left</code>
+   value, passing in the <code>right</code> value, on every type except arrays. If <code>left</code> is an array, <code>deepEquals</code>
+   will be invoked on <code>left</code>, passing in <code>right</code>. Thus, even though this expression
+   will yield false, because <code>Array</code>'s <code>equals</code> method compares object identity:
+   </p>
+   
+   <pre class="indent">
+   Array(1, 2) == Array(1, 2) // yields false
+   </pre>
+  
+   <p>
+   The following expression will <em>not</em> result in a <code>TestFailedException</code>, because <code>deepEquals</code> compares
+   the two arrays structurally, taking into consideration the equality of the array's contents:
+   </p>
+  
+   <pre class="indent">
+   Array(1, 2) should equal (Array(1, 2)) // succeeds (i.e., does not throw TestFailedException)
+   </pre>
+  
+   <p>
+   If you ever do want to verify that two arrays are actually the same object (have the same identity), you can use the
+   <code>be theSameInstanceAs</code> syntax.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertDoubleToPlusOrMinusWrapper%28Double%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertDoubleToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>) : <a href="../../../org/scalatest/matchers/Matchers.DoublePlusOrMinusWrapper.html" target="_self">DoublePlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Double</code> to a <code>DoublePlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertFloatToPlusOrMinusWrapper%28Float%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertFloatToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>) : <a href="../../../org/scalatest/matchers/Matchers.FloatPlusOrMinusWrapper.html" target="_self">FloatPlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Float</code> to a <code>FloatPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertLongToPlusOrMinusWrapper%28Long%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertLongToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>) : <a href="../../../org/scalatest/matchers/Matchers.LongPlusOrMinusWrapper.html" target="_self">LongPlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Long</code> to a <code>LongPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertIntToPlusOrMinusWrapper%28Int%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertIntToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/matchers/Matchers.IntPlusOrMinusWrapper.html" target="_self">IntPlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Int</code> to a <code>IntPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertShortToPlusOrMinusWrapper%28Short%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertShortToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>) : <a href="../../../org/scalatest/matchers/Matchers.ShortPlusOrMinusWrapper.html" target="_self">ShortPlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Short</code> to a <code>ShortPlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertByteToPlusOrMinusWrapper%28Byte%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertByteToPlusOrMinusWrapper</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>) : <a href="../../../org/scalatest/matchers/Matchers.BytePlusOrMinusWrapper.html" target="_self">BytePlusOrMinusWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>Byte</code> to a <code>BytePlusOrMinusWrapper</code>,
+   to enable a <code>plusOrMinus</code> method to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3C%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&lt;</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$13</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html" target="_self">ResultOfLessThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be < (10) and not be > (17))
+                      ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3E%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&gt;</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$14</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html" target="_self">ResultOfGreaterThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be > (10) and not be < (7))
+                      ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3C%3D%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&lt;=</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$15</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html" target="_self">ResultOfLessThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be <= (10) and not be > (17))
+                      ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3E%3D%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&gt;=</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$16</em> : (<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html" target="_self">ResultOfGreaterThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+  
+   <pre>
+   num should (not be >= (10) and not be < (7))
+                      ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3D%3D%3D%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>===</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTripleEqualsApplication.html" target="_self">ResultOfTripleEqualsApplication</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+  
+   <pre>
+   num should not be === (10)
+                     ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="evaluating%28%3D%3EAny%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>evaluating</em>(<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+  
+   <pre>
+   evaluating { "hi".charAt(-1) } should produce [StringIndexOutOfBoundsException]
+   ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="produce%28scala.reflect.Manifest%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>produce</em>[<em>T</em>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfProduceInvocation.html" target="_self">ResultOfProduceInvocation</a>[<a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+  
+   <pre>
+   evaluating { "hi".charAt(-1) } should produce [StringIndexOutOfBoundsException]
+   ^
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

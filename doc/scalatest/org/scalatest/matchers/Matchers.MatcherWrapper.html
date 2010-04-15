@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class MatcherWrapper in org.scalatest.matchers.Matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">org.scalatest.matchers.Matchers</a>
+        <br></br>
+        <span class="entity">class  MatcherWrapper</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/Matchers"><code>org/scalatest/matchers/Matchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="MatcherWrapper"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>MatcherWrapper</em>[<em>T</em>](<em>leftMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>])
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.HaveWord%29" target="_self">and</a></em>
+        (<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndHaveWord.html" target="_self">AndHaveWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Array(1, 2) should (have size (2) and have size (3 - 1))
+                                       ^ 
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.ContainWord%29" target="_self">and</a></em>
+        (<em>containWord</em> : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndContainWord.html" target="_self">AndContainWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (contain key ("two") and contain key ("one"))
+                                                             ^ 
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.IncludeWord%29" target="_self">and</a></em>
+        (<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndIncludeWord.html" target="_self">AndIncludeWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "hello, world" should (include regex ("hel*o") and include regex ("wor.d"))
+                                               ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.NotWord%29" target="_self">and</a></em>
+        (<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndNotWord.html" target="_self">AndNotWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (not contain value (5) and not contain value (3))
+                                                               ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.StartWithWord%29" target="_self">and</a></em>
+        (<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndStartWithWord.html" target="_self">AndStartWithWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.78" should (have length (4) and startWith regex ("1.7"))
+                                    ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.EndWithWord%29" target="_self">and</a></em>
+        (<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndEndWithWord.html" target="_self">AndEndWithWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (endWith regex (decimalRegex) and endWith regex (decimalRegex))
+                                                ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.FullyMatchWord%29" target="_self">and</a></em>
+        (<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndFullyMatchWord.html" target="_self">AndFullyMatchWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (fullyMatch regex (decimalRegex) and fullyMatch regex (decimalRegex))
+                                                   ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28org.scalatest.matchers.Matcher%5BU%5D%29" target="_self">and</a></em>
+        [<em>U</em> &lt;: <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>](<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]
+        
+        <div>Returns a matcher whose <code>apply</code> method returns a <code>MatchResult</code>
+     that represents the logical-and of the results of the wrapped and the passed matcher applied to
+     the same value.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28Matchers.this.BeWord%29" target="_self">and</a></em>
+        (<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndBeWord.html" target="_self">AndBeWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     isFileMock should (be a ('file) and be a ('file))
+                                     ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.FullyMatchWord%29" target="_self">or</a></em>
+        (<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrFullyMatchWord.html" target="_self">OrFullyMatchWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (fullyMatch regex ("hello") or fullyMatch regex (decimal))
+                                              ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.HaveWord%29" target="_self">or</a></em>
+        (<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrHaveWord.html" target="_self">OrHaveWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Array(1, 2) should (have size (2) and have size (3 - 1))
+                                       ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.BeWord%29" target="_self">or</a></em>
+        (<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrBeWord.html" target="_self">OrBeWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     isFileMock should (be a ('file) or be a ('directory))
+                                     ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.StartWithWord%29" target="_self">or</a></em>
+        (<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrStartWithWord.html" target="_self">OrStartWithWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (startWith regex ("hello") or startWith regex ("1.7"))
+                                                ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.EndWithWord%29" target="_self">or</a></em>
+        (<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrEndWithWord.html" target="_self">OrEndWithWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "1.7b" should (endWith regex ("hello") or endWith regex ("7b"))
+                                               ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.ContainWord%29" target="_self">or</a></em>
+        (<em>containWord</em> : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrContainWord.html" target="_self">OrContainWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (contain value (7) or contain value (1))
+                                                           ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.NotWord%29" target="_self">or</a></em>
+        (<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html" target="_self">OrNotWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (not contain value (2) or not contain value (3))
+                                                               ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28Matchers.this.IncludeWord%29" target="_self">or</a></em>
+        (<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrIncludeWord.html" target="_self">OrIncludeWord</a>
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     "a1.7b" should (include regex ("1.7") or include regex ("1.7"))
+                                              ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28org.scalatest.matchers.Matcher%5BU%5D%29" target="_self">or</a></em>
+        [<em>U</em> &lt;: <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>](<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]
+        
+        <div>Returns a matcher whose <code>apply</code> method returns a <code>MatchResult</code>
+     that represents the logical-or of the results of this and the passed matcher applied to
+     the same value.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Class Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndBeWord.html" target="_self">AndBeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndContainWord.html" target="_self">AndContainWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndEndWithWord.html" target="_self">AndEndWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndFullyMatchWord.html" target="_self">AndFullyMatchWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndHaveWord.html" target="_self">AndHaveWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndIncludeWord.html" target="_self">AndIncludeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndNotWord.html" target="_self">AndNotWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndStartWithWord.html" target="_self">AndStartWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrBeWord.html" target="_self">OrBeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrContainWord.html" target="_self">OrContainWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrEndWithWord.html" target="_self">OrEndWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrFullyMatchWord.html" target="_self">OrFullyMatchWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrHaveWord.html" target="_self">OrHaveWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrIncludeWord.html" target="_self">OrIncludeWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html" target="_self">OrNotWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrStartWithWord.html" target="_self">OrStartWithWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</div>
+      </td>
+    </tr>
+      </table>
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="and%28org.scalatest.matchers.Matcher%5BU%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>[<em>U</em> &lt;: <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>](<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#and%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a matcher whose <code>apply</code> method returns a <code>MatchResult</code>
+     that represents the logical-and of the results of the wrapped and the passed matcher applied to
+     the same value.
+    
+     <p>
+     The reason <code>and</code> has an upper bound on its type parameter is so that the <code>Matcher</code>
+     resulting from an invocation of <code>and</code> will have the correct type parameter. If you call
+     <code>and</code> on a <code>Matcher[Orange]</code>, passing in a <code>Matcher[Valencia]</code>,
+     the result will have type <code>Matcher[Valencia]</code>. This is correct because both a
+     <code>Matcher[Orange]</code> and a <code>Matcher[Valencia]</code> know how to match a
+     <code>Valencia</code> (but a <code>Matcher[Valencia]</code> doesn't know how to
+     match any old <code>Orange</code>).  If you call
+     <code>and</code> on a <code>Matcher[Orange]</code>, passing in a <code>Matcher[Fruit]</code>,
+     the result will have type <code>Matcher[Orange]</code>. This is also correct because both a
+     <code>Matcher[Orange]</code> and a <code>Matcher[Fruit]</code> know how to match an
+     <code>Orange</code> (but a <code>Matcher[Orange]</code> doesn't know how to
+     match any old <code>Fruit</code>).
+     </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>the - </code>matcher to logical-and with this matcher</dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a matcher that performs the logical-and of this and the passed matcher</dd></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.HaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndHaveWord.html" target="_self">AndHaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Array(1, 2) should (have size (2) and have size (3 - 1))
+                                       ^ 
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.ContainWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>containWord</em> : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndContainWord.html" target="_self">AndContainWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (contain key ("two") and contain key ("one"))
+                                                             ^ 
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.BeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndBeWord.html" target="_self">AndBeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     isFileMock should (be a ('file) and be a ('file))
+                                     ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.FullyMatchWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndFullyMatchWord.html" target="_self">AndFullyMatchWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (fullyMatch regex (decimalRegex) and fullyMatch regex (decimalRegex))
+                                                   ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.IncludeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndIncludeWord.html" target="_self">AndIncludeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "hello, world" should (include regex ("hel*o") and include regex ("wor.d"))
+                                               ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.StartWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndStartWithWord.html" target="_self">AndStartWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.78" should (have length (4) and startWith regex ("1.7"))
+                                    ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.EndWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndEndWithWord.html" target="_self">AndEndWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (endWith regex (decimalRegex) and endWith regex (decimalRegex))
+                                                ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="and%28Matchers.this.NotWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.AndNotWord.html" target="_self">AndNotWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (not contain value (5) and not contain value (3))
+                                                               ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28org.scalatest.matchers.Matcher%5BU%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>[<em>U</em> &lt;: <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>](<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#or%28org.scalatest.matchers.Matcher%5BU%5D%29#U" target="_self">U</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a matcher whose <code>apply</code> method returns a <code>MatchResult</code>
+     that represents the logical-or of the results of this and the passed matcher applied to
+     the same value.
+    
+     <p>
+     The reason <code>or</code> has an upper bound on its type parameter is so that the <code>Matcher</code>
+     resulting from an invocation of <code>or</code> will have the correct type parameter. If you call
+     <code>or</code> on a <code>Matcher[Orange]</code>, passing in a <code>Matcher[Valencia]</code>,
+     the result will have type <code>Matcher[Valencia]</code>. This is correct because both a
+     <code>Matcher[Orange]</code> and a <code>Matcher[Valencia]</code> know how to match a
+     <code>Valencia</code> (but a <code>Matcher[Valencia]</code> doesn't know how to
+     match any old <code>Orange</code>).  If you call
+     <code>or</code> on a <code>Matcher[Orange]</code>, passing in a <code>Matcher[Fruit]</code>,
+     the result will have type <code>Matcher[Orange]</code>. This is also correct because both a
+     <code>Matcher[Orange]</code> and a <code>Matcher[Fruit]</code> know how to match an
+     <code>Orange</code> (but a <code>Matcher[Orange]</code> doesn't know how to
+     match any old <code>Fruit</code>).
+     </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>the - </code>matcher to logical-or with this matcher</dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a matcher that performs the logical-or of this and the passed matcher</dd></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.HaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrHaveWord.html" target="_self">OrHaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Array(1, 2) should (have size (2) and have size (3 - 1))
+                                       ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.ContainWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>containWord</em> : <a href="../../../org/scalatest/matchers/Matchers.ContainWord.html" target="_self">ContainWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrContainWord.html" target="_self">OrContainWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (contain value (7) or contain value (1))
+                                                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.BeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrBeWord.html" target="_self">OrBeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     isFileMock should (be a ('file) or be a ('directory))
+                                     ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.FullyMatchWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrFullyMatchWord.html" target="_self">OrFullyMatchWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (fullyMatch regex ("hello") or fullyMatch regex (decimal))
+                                              ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.IncludeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrIncludeWord.html" target="_self">OrIncludeWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "a1.7b" should (include regex ("1.7") or include regex ("1.7"))
+                                              ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.StartWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrStartWithWord.html" target="_self">OrStartWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.7" should (startWith regex ("hello") or startWith regex ("1.7"))
+                                                ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.EndWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrEndWithWord.html" target="_self">OrEndWithWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     "1.7b" should (endWith regex ("hello") or endWith regex ("7b"))
+                                               ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="or%28Matchers.this.NotWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>or</em>(<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html" target="_self">OrNotWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     Map("one" -> 1, "two" -> 2) should (not contain value (2) or not contain value (3))
+                                                               ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

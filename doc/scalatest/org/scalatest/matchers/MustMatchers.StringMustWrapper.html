@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class StringMustWrapper in org.scalatest.matchers.MustMatchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers/MustMatchers.html" target="_self">org.scalatest.matchers.MustMatchers</a>
+        <br></br>
+        <span class="entity">class  StringMustWrapper</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/MustMatchers"><code>org/scalatest/matchers/MustMatchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="StringMustWrapper"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>StringMustWrapper</em>(<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html" target="_self">StringMustWrapperForVerb</a></dd>
+    </dl>
+      <dl><dd>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.
+  
+   <p>
+   This class is used in conjunction with an implicit conversion to enable <code>must</code> methods to
+   be invoked on <code>String</code>s.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.EndWithWord%29" target="_self">must</a></em>
+        (<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEndWithWordForString.html" target="_self">ResultOfEndWithWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must endWith regex ("world")
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.StartWithWord%29" target="_self">must</a></em>
+        (<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfStartWithWordForString.html" target="_self">ResultOfStartWithWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must startWith regex ("hello")
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.NotWord%29" target="_self">must</a></em>
+        (<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForString.html" target="_self">ResultOfNotWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must not have length (3)
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.HaveWord%29" target="_self">must</a></em>
+        (<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForString.html" target="_self">ResultOfHaveWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must have length (3)
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.IncludeWord%29" target="_self">must</a></em>
+        (<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfIncludeWordForString.html" target="_self">ResultOfIncludeWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must include regex ("hi")
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.FullyMatchWord%29" target="_self">must</a></em>
+        (<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfFullyMatchWordForString.html" target="_self">ResultOfFullyMatchWordForString</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must fullyMatch regex ("""(-)?(\d+)(\.\d*)?""")
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28org.scalatest.matchers.Matcher%5BString%5D%29" target="_self">must</a></em>
+        (<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must equal ("hi")
+            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html#must%28MustMatchers.this.BeWord%29" target="_self">must</a></em>
+        (<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfBeWordForAnyRef.html" target="_self">ResultOfBeWordForAnyRef</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     string must be theSameInstanceAs anotherObject
+            ^
+     </pre></div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html" target="_self">StringMustWrapperForVerb</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html#must%28String%29" target="_self">must</a>, <a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html#must%28org.scalatest.verb.BehaveWord%29" target="_self">must</a>, <a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html#must%28%3D%3EUnit%29" target="_self">must</a>, <a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html#must%28org.scalatest.verb.ResultOfAfterWordApplication%29" target="_self">must</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="must%28org.scalatest.matchers.Matcher%5BString%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must equal ("hi")
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.BeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>beWord</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html" target="_self">BeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfBeWordForAnyRef.html" target="_self">ResultOfBeWordForAnyRef</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must be theSameInstanceAs anotherObject
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.HaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForString.html" target="_self">ResultOfHaveWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must have length (3)
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.IncludeWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>includeWord</em> : <a href="../../../org/scalatest/matchers/Matchers.IncludeWord.html" target="_self">IncludeWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfIncludeWordForString.html" target="_self">ResultOfIncludeWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must include regex ("hi")
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.StartWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>startWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.StartWithWord.html" target="_self">StartWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfStartWithWordForString.html" target="_self">ResultOfStartWithWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must startWith regex ("hello")
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.EndWithWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>endWithWord</em> : <a href="../../../org/scalatest/matchers/Matchers.EndWithWord.html" target="_self">EndWithWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEndWithWordForString.html" target="_self">ResultOfEndWithWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must endWith regex ("world")
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.FullyMatchWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>fullyMatchWord</em> : <a href="../../../org/scalatest/matchers/Matchers.FullyMatchWord.html" target="_self">FullyMatchWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfFullyMatchWordForString.html" target="_self">ResultOfFullyMatchWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must fullyMatch regex ("""(-)?(\d+)(\.\d*)?""")
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28MustMatchers.this.NotWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForString.html" target="_self">ResultOfNotWordForString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     string must not have length (3)
+            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

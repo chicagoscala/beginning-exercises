@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait BeMatcher in org.scalatest.matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers$package.html" target="_self">org.scalatest.matchers</a>
+        <br></br>
+        <span class="entity">trait  BeMatcher</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/BeMatcher"><code>org/scalatest/matchers/BeMatcher.scala</code></a>]
+      </div><hr></hr>
+      <a name="BeMatcher"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>BeMatcher</em>[-<em>T</em>]
+      </dt>
+      <dd><code> extends </code>(<a href="../../../org/scalatest/matchers/BeMatcher.html#T" target="_self">T</a>) =&gt; <a href="../../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a></dd>
+    </dl>
+      <dl><dd>Trait extended by matcher objects, which may appear after the word <code>be</code>, that can match a value of the specified type.
+ The value to match is passed to the <code>BeMatcher</code>'s <code>apply</code> method. The result is a <code>MatchResult</code>.
+ A <code>BeMatcher</code> is, therefore, a function from the specified type, <code>T</code>, to a <code>MatchResult</code>.
+
+ <p>
+ Although <code>BeMatcher</code>
+ and <code>Matcher</code> represent very similar concepts, they have no inheritance relationship
+ because <code>Matcher</code> is intended for use right after <code>should</code> or <code>must</code>
+ whereas <code>BeMatcher</code> is intended for use right after <code>be</code>.
+ </p>
+
+ <p>
+ As an example, you could create <code>BeMatcher[Int]</code>
+ called <code>odd</code> that would match any odd <code>Int</code>, and one called <code>even</code> that would match
+ any even <code>Int</code>. 
+ Given this pair of <code>BeMatcher</code>s, you could check whether an <code>Int</code> was odd or even with expressions like:
+ </p>
+
+ <pre class="indent">
+ num should be (odd)
+ num should not be (even)
+ </pre>
+
+ <p>
+ Here's is how you might define the odd and even <code>BeMatchers</code>:
+ </p>
+ 
+ <pre>
+ trait CustomMatchers {
+
+   class OddMatcher extends BeMatcher[Int] {
+     def apply(left: Int) =
+       MatchResult(
+         left % 2 == 1,
+         left.toString + " was even",
+         left.toString + " was odd"
+       )
+   }
+   val odd = new OddMatcher
+   val even = not (odd)
+ }
+
+ // Make them easy to import with:
+ // import CustomMatchers._
+ object CustomMatchers extends CustomMatchers
+ </pre>
+
+ <p>
+ These <code>BeMatcher</code>s are defined inside a trait to make them easy to mix into any
+ suite or spec that needs them.
+ The <code>CustomMatchers</code> companion object exists to make it easy to bring the
+ <code>BeMatcher</code>s defined in this trait into scope via importing, instead of mixing in the trait. The ability
+ to import them is useful, for example, when you want to use the matchers defined in a trait in the Scala interpreter console.
+ </p>
+
+ <p>
+ Here's an rather contrived example of how you might use <code>odd</code> and <code>even</code>: 
+ </p>
+
+ <pre>
+ class DoubleYourPleasureSuite extends FunSuite with MustMatchers with CustomMatchers {
+
+   def doubleYourPleasure(i: Int): Int = i * 2
+
+   test("The doubleYourPleasure method must return proper odd or even values")
+
+     val evenNum = 2
+     evenNum must be (even)
+     doubleYourPleasure(evenNum) must be (even)
+
+     val oddNum = 3
+     oddNum must be (odd)
+     doubleYourPleasure(oddNum) must be (odd) // This will fail
+   }
+ }
+ </pre>
+
+ <p>
+ The last assertion in the above test will fail with this failure message:
+ </p>
+
+ <pre>
+ 6 was even
+ </pre>
+
+ <p>
+ For more information on <code>MatchResult</code> and the meaning of its fields, please
+ see the documentation for <a href="MatchResult.html"><code>MatchResult</code></a>. To understand why <code>BeMatcher</code>
+ is contravariant in its type parameter, see the section entitled "Matcher's variance" in the
+ documentation for <a href="Matcher.html"><code>Matcher</code></a>.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/BeMatcher.html#apply%28T%29" target="_self">apply</a></em>
+        (<em>left</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a>
+        
+        <div>Check to see if the specified object, <code>left</code>, matches, and report the result in
+   the returned <code>MatchResult</code>. The parameter is named <code>left</code>, because it is
+   usually the value to the left of a <code>should</code> or <code>must</code> invocation. For example,
+   in:
+  
+   <pre>
+   num should be (odd)
+   </pre>
+  
+   The <code>be (odd)</code> expression results in a regular <a href="Matcher.html"><code>Matcher</code></a> that holds
+   a reference to <code>odd</code>, the
+   <code>BeMatcher</code> passed to <code>be</code>. The <code>should</code> method invokes <code>apply</code>
+   on this matcher, passing in <code>num</code>, which is therefore the "<code>left</code>" value. The
+   matcher will pass <code>num</code> (the <code>left</code> value) to the <code>BeMatcher</code>'s <code>apply</code>
+   method.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="scala/Function1">scala.Function1</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#toString" target="contentFrame" class="scala/Function1">scala.Function1.toString</a>, <a href="#compose" target="contentFrame" class="scala/Function1">scala.Function1.compose</a>, <a href="#andThen" target="contentFrame" class="scala/Function1">scala.Function1.andThen</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="apply%28T%29"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>apply</em>(<em>left</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Check to see if the specified object, <code>left</code>, matches, and report the result in
+   the returned <code>MatchResult</code>. The parameter is named <code>left</code>, because it is
+   usually the value to the left of a <code>should</code> or <code>must</code> invocation. For example,
+   in:
+  
+   <pre>
+   num should be (odd)
+   </pre>
+  
+   The <code>be (odd)</code> expression results in a regular <a href="Matcher.html"><code>Matcher</code></a> that holds
+   a reference to <code>odd</code>, the
+   <code>BeMatcher</code> passed to <code>be</code>. The <code>should</code> method invokes <code>apply</code>
+   on this matcher, passing in <code>num</code>, which is therefore the "<code>left</code>" value. The
+   matcher will pass <code>num</code> (the <code>left</code> value) to the <code>BeMatcher</code>'s <code>apply</code>
+   method.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>left - </code>the value against which to match</dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>the <code>MatchResult</code> that represents the result of the match</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Function1">scala.Function1</a>.<a href="#apply" target="contentFrame" class="scala/Function1">scala.Function1.apply</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

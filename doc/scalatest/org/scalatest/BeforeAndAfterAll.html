@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait BeforeAndAfterAll in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  BeforeAndAfterAll</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/BeforeAndAfterAll"><code>org/scalatest/BeforeAndAfterAll.scala</code></a>]
+      </div><hr></hr>
+      <a name="BeforeAndAfterAll"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>BeforeAndAfterAll</em>
+      </dt>
+      <dd><code> extends </code><a href="../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that can be mixed into suites that need methods invoked before and after executing the
+ suite. This trait allows code to be executed before and/or after all the tests and nested suites of a
+ suite are run. This trait overrides <code>run</code> (the main <code>run</code> method that
+ takes seven parameters, an optional test name, reporter, stopper, filter, configMap, optional distributor,
+ and tracker) and calls the
+ <code>beforeAll</code> method, then calls <code>super.run</code>. After the <code>super.run</code>
+ invocation completes, whether it returns normally or completes abruptly with an exception,
+ this trait's <code>run</code> method will invoke <code>afterAll</code>.
+
+ <p>
+ Trait <code>BeforeAndAfterEach</code> defines two overloaded variants  each of <code>beforeAll</code>
+ and <code>afterAll</code>, one which takes a <code>configMap</code> and another that takes no
+ arguments. This traits implemention of the variant that takes the <code>configMap</code>
+ simply invokes the variant that takes no parameters, which does nothing. Thus you can override
+ whichever variant you want. If you need something from the <code>configMap</code> before
+ all tests and nested suites are run, override <code>beforeAll(Map[String, Any])</code>. Otherwise,
+ override <code>beforeAll()</code>.
+ </p>
+
+ <p>
+ For example, the following <code>MasterSuite</code> mixes in <code>BeforeAndAfterAll</code> and
+ in <code>beforeAll</code>, creates and writes to a temp file, taking the name of the temp file
+ from the <code>configMap</code>. This same <code>configMap</code> is then passed to the <code>run</code>
+ methods of the nested suites, <code>OneSuite</code>, <code>TwoSuite</code>, <code>RedSuite</code>,
+ and <code>BlueSuite</code>, so those suites can access the filename and, therefore, the file's
+ contents. After all of the nested suites have executed, <code>afterAll</code> is invoked, which
+ again grabs the file name from the <code>configMap</code> and deletes the file:
+ </p>
+ 
+ <pre>
+ import org.scalatest.SuperSuite
+ import org.scalatest.BeforeAndAfterEach
+ import java.io.FileReader
+ import java.io.FileWriter
+ import java.io.File
+
+ class MasterSuite extends Suite with BeforeAndAfterAll {
+
+   private val FileNameKeyInGoodies = "tempFileName"
+
+   // Set up the temp file needed by the test, taking
+   // a file name from the configMap
+   override def beforeAll(configMap: Map[String, Any]) {
+
+     require(
+       configMap.isDefinedAt(FileNameKeyInGoodies),
+       "must place a temp file name in the configMap under the key: " + FileNameKeyInGoodies
+     )
+
+     val fileName = configMap(tempFileName))
+
+     val writer = new FileWriter(fileName)
+     try {
+       writer.write("Hello, suite of tests!")
+     }
+     finally {
+       writer.close()
+     }
+   }
+
+   override def nestedSuites =
+     List(new OneSuite, new TwoSuite, new RedSuite, new BlueSuite)
+ 
+   // Delete the temp file
+   override def afterAll(configMap: Map[String, Any]) {
+     // No need to require that configMap contains the key again because it won't get
+     // here if it didn't contain the key in beforeAll 
+     val fileName = configMap(tempFileName))
+     val file = new File(fileName)
+     file.delete()
+   }
+ }
+ </pre>
+
+ <p>
+ Because the <code>BeforeAndAfterAll</code> trait invokes <code>super.run</code> to run the suite, you may need to
+ mix this trait in last to get the desired behavior. For example, this won't
+ work, because <code>BeforeAndAfterAll</code> is "super" to </code>FunSuite</code>:
+ </p>
+ <pre>
+ class MySuite extends BeforeAndAfterAll with FunSuite
+ </pre>
+ <p>
+ You'd need to turn it around, so that <code>FunSuite</code> is "super" to <code>BeforeAndAfterAll</code>, like this:
+ </p>
+ <pre>
+ class MySuite extends FunSuite with BeforeAndAfterAll
+ </pre>
+
+ <strong>Note: This trait does not currently ensure that the code in <code>afterAll</code> is executed after
+ all the tests and nested suites are executed if a <code>Distributor</code> is passed. The
+ plan is to do that eventually, but in the meantime, be aware that <code>afterAll</code> is
+ guaranteed to be run after all the tests and nested suites only when they are run
+ sequentially.</strong></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/BeforeAndAfter.html" target="_self">BeforeAndAfter</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/BeforeAndAfterAll.html#afterAll%28%29" target="_self">afterAll</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Defines a method to be run after all of this suite's tests and nested suites have
+   been run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/BeforeAndAfterAll.html#afterAll%28Map%5BString%2CAny%5D%29" target="_self">afterAll</a></em>
+        (<em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Defines a method (that takes a <code>configMap</code>) to be run after
+   all of this suite's tests and nested suites have been run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/BeforeAndAfterAll.html#beforeAll%28%29" target="_self">beforeAll</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Defines a method to be run before any of this suite's tests or nested suites are run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/BeforeAndAfterAll.html#beforeAll%28Map%5BString%2CAny%5D%29" target="_self">beforeAll</a></em>
+        (<em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Defines a method (that takes a <code>configMap</code>) to be run before any
+   of this suite's tests or nested suites are run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/BeforeAndAfterAll.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Execute a suite surrounded by calls to <code>beforeAll</code> and <code>afterAll</code>.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../org/scalatest/AbstractSuite.html#withFixture%28AbstractSuite.this.NoArgTest%29" target="_self">withFixture</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#testNames" target="_self">testNames</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#nestedSuites" target="_self">nestedSuites</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#tags" target="_self">tags</a> (abstract), <a href="../../org/scalatest/AbstractSuite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a> (abstract)
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="beforeAll%28%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>beforeAll</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Defines a method to be run before any of this suite's tests or nested suites are run.
+  
+   <p>
+   This trait's implementation
+   of <code>run</code> invokes the overloaded form of this method that
+   takes a <code>configMap</code> before executing
+   any tests or nested suites. This trait's implementation of that <code>beforeAll(Map[String, Any])</code>
+   method simply invokes this <code>beforeAll()</code>
+   method. Thus this method can be used to set up a test fixture
+   needed by the entire suite, when you don't need anything from the <code>configMap</code>.
+   This trait's implementation of this method does nothing.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="beforeAll%28Map%5BString%2CAny%5D%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>beforeAll</em>(<em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Defines a method (that takes a <code>configMap</code>) to be run before any
+   of this suite's tests or nested suites are run.
+  
+   <p>
+   This trait's implementation
+   of <code>run</code> invokes this method before executing
+   any tests or nested suites (passing in the <code>configMap</code> passed to it), thus this
+   method can be used to set up a test fixture
+   needed by the entire suite. This trait's implementation of this method invokes the
+   overloaded form of <code>beforeAll</code> that takes no <code>configMap</code>.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="afterAll%28%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>afterAll</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Defines a method to be run after all of this suite's tests and nested suites have
+   been run.
+  
+   <p>
+   This trait's implementation
+   of <code>run</code> invokes the overloaded form of this method that
+   takes a <code>configMap</code> after executing
+   all tests and nested suites. This trait's implementation of that <code>afterAll(Map[String, Any])</code> method simply invokes this
+   <code>afterAll()</code> method. Thus this method can be used to tear down a test fixture
+   needed by the entire suite, when you don't need anything from the <code>configMap</code>.
+   This trait's implementation of this method does nothing.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="afterAll%28Map%5BString%2CAny%5D%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>afterAll</em>(<em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Defines a method (that takes a <code>configMap</code>) to be run after
+   all of this suite's tests and nested suites have been run.
+  
+   <p>
+   This trait's implementation
+   of <code>run</code> invokes this method after executing all tests
+   and nested suites (passing in the <code>configMap</code> passed to it), thus this
+   method can be used to tear down a test fixture
+   needed by the entire suite. This trait's implementation of this method invokes the
+   overloaded form of <code>afterAll</code> that takes no <code>configMap</code>.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>run</em>(<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Execute a suite surrounded by calls to <code>beforeAll</code> and <code>afterAll</code>.
+  
+   <p>
+   This trait's implementation of this method ("this method") invokes <code>beforeAll(Map[String, Any])</code>
+   before executing any tests or nested suites and <code>afterAll(Map[String, Any])</code>
+   after executing all tests and nested suites. It runs the suite by invoking <code>super.run</code>, passing along
+   the seven parameters passed to it.
+   </p>
+  
+   <p>
+   If any invocation of <code>beforeAll</code> completes abruptly with an exception, this
+   method will complete abruptly with the same exception. If any call to
+   <code>super.run</code> completes abruptly with an exception, this method
+   will complete abruptly with the same exception, however, before doing so, it will
+   invoke <code>afterAll</code>. If <cod>afterAll</code> <em>also</em> completes abruptly with an exception, this
+   method will nevertheless complete abruptly with the exception previously thrown by <code>super.run</code>.
+   If <code>super.run</code> returns normally, but <code>afterAll</code> completes abruptly with an
+   exception, this method will complete abruptly with the same exception.
+   </p></dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a>.<a href="../../org/scalatest/AbstractSuite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

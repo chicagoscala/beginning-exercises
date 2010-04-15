@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait StackDepth in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  StackDepth</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/StackDepth"><code>org/scalatest/StackDepth.scala</code></a>]
+      </div><hr></hr>
+      <a name="StackDepth"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>StackDepth</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that encapsulates the information required of an exception thrown by ScalaTest's assertions
+ and matchers, which includes a stack depth at which the failing line of test code resides.
+
+ <p>
+ This trait exists so that it can be mixed into two exception superclasses, <code>StackDepthException</code>,
+ from which extend several exceptions that do not depend on JUnit, and <code>JUnitTestFailedError</code>, which
+ does depend on JUnit. The latter, which requires JUnit be in the classpath, ensures failed ScalaTest assertions are
+ reported as "failures," not "errors," by JUnit.
+ </p></dd></dl>
+      <dl></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/StackDepthException.html" target="_self">StackDepthException</a>, <a href="../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a></dd>
+      </dl><hr></hr>
+      
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Value Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/StackDepth.html#cause" target="_self">cause</a></em>
+         : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>]
+        
+        <div>An optional cause, the <code>Throwable</code> that caused this <code>StackDepth</code> exception to be thrown.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/StackDepth.html#failedCodeFileNameAndLineNumberString" target="_self">failedCodeFileNameAndLineNumberString</a></em>
+         : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>A string that provides the filename and line number of the line of code that failed, suitable
+   for presenting to a user, which is taken from this exception's <code>StackTraceElement</code> at the depth specified
+   by <code>failedCodeStackDepth</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/StackDepth.html#failedCodeStackDepth" target="_self">failedCodeStackDepth</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>The depth in the stack trace of this exception at which the line of test code that failed resides.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract val</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/StackDepth.html#message" target="_self">message</a></em>
+         : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>An optional detail message for this <code>StackDepth</code> exception.</div>
+      </td>
+    </tr>
+      </table>
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Value Details</td></tr>
+        </table><div><a name="message"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>val</code>
+        <em>message</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>An optional detail message for this <code>StackDepth</code> exception.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="cause"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>val</code>
+        <em>cause</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>An optional cause, the <code>Throwable</code> that caused this <code>StackDepth</code> exception to be thrown.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="failedCodeStackDepth"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>val</code>
+        <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>The depth in the stack trace of this exception at which the line of test code that failed resides.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="failedCodeFileNameAndLineNumberString"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>val</code>
+        <em>failedCodeFileNameAndLineNumberString</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>A string that provides the filename and line number of the line of code that failed, suitable
+   for presenting to a user, which is taken from this exception's <code>StackTraceElement</code> at the depth specified
+   by <code>failedCodeStackDepth</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a user-presentable string containing the filename and line number that caused the failed test</dd></dl>
+    <hr></hr></div>
+
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

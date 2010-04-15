@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait ShouldVerb in org.scalatest.verb</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/verb$package.html" target="_self">org.scalatest.verb</a>
+        <br></br>
+        <span class="entity">trait  ShouldVerb</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/verb/ShouldVerb"><code>org/scalatest/verb/ShouldVerb.scala</code></a>]
+      </div><hr></hr>
+      <a name="ShouldVerb"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>ShouldVerb</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Provides an implicit conversion that adds <code>should</code> methods to <code>String</code>
+ to support the syntax of <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>,
+ and <code>FixtureWordSpec</code>.
+
+ <p>
+ For example, this trait enables syntax such as the following test registration in <code>FlatSpec</code>
+ and <code>FixtureFlatSpec</code>:
+ </p>
+
+ <pre>
+ "A Stack (when empty)" should "be empty" in { ... }
+                        ^
+ </pre>
+
+ <p>
+ It also enables syntax such as the following shared test registration in <code>FlatSpec</code>
+ and <code>FixtureFlatSpec</code>:
+ </p>
+
+ <pre>
+ "A Stack (with one item)" should behave like nonEmptyStack(stackWithOneItem, lastValuePushed)
+                           ^
+ </pre>
+
+ <p>
+ In addition, it supports the registration of subject descriptions in <code>WordSpec</code>
+ and <code>FixtureWordSpec</code>, such as:
+ </p>
+
+ <pre>
+ "A Stack (when empty)" should { ...
+                        ^
+ </pre>
+
+ <p>
+ And finally, it also supportds the registration of subject descriptions with after words
+ in <code>WordSpec</code> and <code>FixtureWordSpec</code>. For example:
+ </p>
+
+ <pre>
+    def provide = afterWord("provide")
+
+   "The ScalaTest Matchers DSL" should provide {
+                                ^
+ </pre>
+
+ <p>
+ The reason this implicit conversion is provided in a separate trait, instead of being provided
+ directly in <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>, and
+ <code>FixtureWordSpec</code>, is because an implicit conversion provided directly would conflict
+ with the implicit conversion that provides <code>should</code> methods on <code>String</code>
+ in the <code>ShouldMatchers</code> trait. By contrast, there is no conflict with
+ the separate <code>ShouldVerb</code> trait approach, because:
+ </p>
+
+ <ol>
+ <li><code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>, and <code>FixtureWordSpec</code>
+ mix in <code>ShouldVerb</code> directly, and</li>
+ <li><code>ShouldMatchers</code> extends <code>ShouldVerb</code>, overriding the
+ <code>convertToStringShouldWrapper</code> implicit conversion function.</li>
+ </ol>
+
+ <p>
+ So whether or not
+ a <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>, or <code>FixtureWordSpec</code>
+ mixes in <code>ShouldMatchers</code>, there will only be one
+ implicit conversion in scope that adds <code>should</code> methods to <code>String</code>s.
+ </p>
+
+ </p>
+ Also, because the class of the result of the overriding <code>convertToStringShouldWrapper</code>
+ implicit conversion method provided in <code>ShouldMatchers</code> extends this trait's
+ <code>StringShouldWrapperForVerb</code> class, the four uses of <code>should</code> provided here
+ are still available. These four <code>should</code> are in fact available to any class
+ that mixes in <code>ShouldMatchers</code>, but each takes an implicit parameter that is provided
+ only in <code>FlatSpec</code> and <code>FixtureFlatSpec</code>, or <code>WordSpec</code> and
+ <code>FixtureWordSpec</code>.  
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../../org/scalatest/FlatSpec.html" target="_self">FlatSpec</a>, <a href="../../../org/scalatest/WordSpec.html" target="_self">WordSpec</a>, <a href="../../../org/scalatest/fixture/FixtureFlatSpec.html" target="_self">FixtureFlatSpec</a>, <a href="../../../org/scalatest/fixture/FixtureWordSpec.html" target="_self">FixtureWordSpec</a>, <a href="../../../org/scalatest/matchers/ShouldMatchers.html" target="_self">ShouldMatchers</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/verb/ShouldVerb.html#convertToStringShouldWrapper%28String%29" target="_self">convertToStringShouldWrapper</a></em>
+        (<em>o</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/verb/ShouldVerb.StringShouldWrapperForVerb.html" target="_self">StringShouldWrapperForVerb</a>
+        
+        <div>Implicitly converts an object of type <code>String</code> to a <code>StringShouldWrapperForVerb</code>,
+   to enable <code>should</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Class Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/verb/ShouldVerb.StringShouldWrapperForVerb.html" target="_self">StringShouldWrapperForVerb</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class supports the syntax of <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>,
+   and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+      </table>
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="convertToStringShouldWrapper%28String%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToStringShouldWrapper</em>(<em>o</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/verb/ShouldVerb.StringShouldWrapperForVerb.html" target="_self">StringShouldWrapperForVerb</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>String</code> to a <code>StringShouldWrapperForVerb</code>,
+   to enable <code>should</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait EasyMockSugar in org.scalatest.mock</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/mock$package.html" target="_self">org.scalatest.mock</a>
+        <br></br>
+        <span class="entity">trait  EasyMockSugar</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/mock/EasyMockSugar"><code>org/scalatest/mock/EasyMockSugar.scala</code></a>]
+      </div><hr></hr>
+      <a name="EasyMockSugar"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>EasyMockSugar</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that provides some basic syntax sugar for <a href="http://easymock.org/" target="_blank">EasyMock</a>.
+
+ <p>
+ Using the EasyMock API directly, you create a mock with:
+ </p>
+
+ <pre>
+ val mockCollaborator = createMock(classOf[Collaborator])
+ </pre>
+
+ <p>
+ With this trait, you can shorten that to:
+ </p>
+
+ <pre>
+ val mockCollaborator = mock[Collaborator]
+ </pre>
+
+ <p>
+ After creating mocks, you set expectations on them, using syntax like this:
+ </p>
+
+ <pre>
+ mockCollaborator.documentAdded("Document")
+ mockCollaborator.documentChanged("Document")
+ expectLastCall().times(3)
+ </pre>
+
+ <p>
+ If you wish to highlight which statements are setting expectations on the mock (versus
+ which ones are actually using the mock), you can place them in an <code>expecting</code>
+ clause, provided by this trait, like this:
+ </p>
+
+ <pre>
+ expecting {
+   mockCollaborator.documentAdded("Document")
+   mockCollaborator.documentChanged("Document")
+   lastCall.times(3)
+ }
+ </pre>
+
+ <p>
+ Using an <code>expecting</code> clause is optional, because it does nothing but visually indicate
+ which statements are setting expectations on mocks. (Note: this trait also provides the <code>lastCall</code>
+ method, which just calls <code>expectLastCall</code>.)
+ </p>
+
+ <p>
+ Once you've set expectations on the mock objects, you must invoke <code>replay</code> on
+ the mocks to indicate you are done setting expectations, and will start using the mock.
+ After using the mock, you must invoke <code>verify</code> to check to make sure the mock
+ was used in accordance with the expectations you set on it. Here's how that looks when you
+ use the EasyMock API directly:
+ </p>
+
+ <pre>
+ replay(mockCollaborator)
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ verify(mockCollaborator)
+ </pre>
+
+ <p>
+ This trait enables you to use the following, more declarative syntax instead:
+ </p>
+
+ <pre>
+ whenExecuting(mockCollaborator) {
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+ }
+ </pre>
+
+ <p>
+ The <code>whenExecuting</code> method will pass the <code>mockCollaborator</code> to
+ <code>replay</code>, execute the passed function (your code that uses the mock), and
+ call <code>verify</code>, passing in the <code>mockCollaborator</code>. If you want to
+ use multiple mocks, you can pass multiple mocks to <code>whenExecuting</code>.
+ </p>
+
+ <p>
+ To summarize, here's what a typical test using <code>EasyMockSugar</code> looks like:
+ </p>
+
+ <pre>
+ val mockCollaborator = mock[Collaborator]
+
+ expecting {
+   mockCollaborator.documentAdded("Document")
+   mockCollaborator.documentChanged("Document")
+   lastCall.times(3)
+ }
+
+ whenExecuting(mockCollaborator) {
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+ }
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd><dd>George Berger</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#call%28T%29" target="_self">call</a></em>
+        [<em>T</em>](<em>value</em> : <a href="../../../org/scalatest/mock/EasyMockSugar.html#call%28T%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="org/easymock/IExpectationSetters">org.easymock.IExpectationSetters</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#call%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicit conversion that invokes the <code>expect</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>expect</code> method in Java class <code>org.easymock.EasyMock</code>).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#expecting%28Any%29" target="_self">expecting</a></em>
+        (<em>unused</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Provides a visual clue to readers of the code that a set of statements are expectations being
+   set on mocks.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#lastCall" target="_self">lastCall</a></em>
+        [<em>T</em>] : <a href="" target="contentFrame" class="org/easymock/IExpectationSetters">org.easymock.IExpectationSetters</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#lastCall#T" target="_self">T</a>]
+        
+        <div>Invokes the <code>expectLastCall</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>expect</code> method in Java class <code>org.easymock.EasyMock</code>).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#mock%28scala.reflect.Manifest%5BT%5D%29" target="_self">mock</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+        
+        <div>Invokes the <code>createMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#niceMock%28scala.reflect.Manifest%5BT%5D%29" target="_self">niceMock</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#niceMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#niceMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+        
+        <div>Invokes the <code>createNiceMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createNiceMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#strictMock%28scala.reflect.Manifest%5BT%5D%29" target="_self">strictMock</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#strictMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#strictMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+        
+        <div>Invokes the <code>createStrictMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createStrictMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/EasyMockSugar.html#whenExecuting%28AnyRef%2CAnyRef*%29" target="_self">whenExecuting</a></em>
+        (<em>mock</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>, <em>moreMocks</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>*)(<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Invokes <code>replay</code> on the passed mock object or objects, executes the passed function, then invokes
+   <code>verify</code> on the passed mock object or objects.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="call%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>call</em>[<em>T</em>](<em>value</em> : <a href="../../../org/scalatest/mock/EasyMockSugar.html#call%28T%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="org/easymock/IExpectationSetters">org.easymock.IExpectationSetters</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#call%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicit conversion that invokes the <code>expect</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>expect</code> method in Java class <code>org.easymock.EasyMock</code>).
+  
+   <p>
+   In a ScalaTest <code>Suite</code>, the <code>expect</code> method defined in <code>Assertions</code>, and inherited by <code>Suite</code>,
+   interferes with the <code>expect</code> method if imported from <code>EasyMock</code>. You can invoke it by qualifying it, <em>i.e.</em>,
+   <code>EasyMock.expect</code>, or by changing its name on import, like this:
+  
+   <pre>
+   import org.easymock.EasyMock.{expect => easyMockExpect, _}
+   </pre>
+  
+   <p>
+   But if you mix in this trait, you can just invoke <code>call</code> instead.
+   </p>
+  
+   <p>
+   You can use this method, for example, to chain expectations like this:
+   </p>
+  
+   <pre>
+   expecting {
+     call(mock.getName).andReturn("Ben Franklin")
+   }
+   </pre>
+  
+   <p>
+   Note: the name of this methods is <code>call</code>, not <code>expectCall</code> because
+   "expect" appears in the surrounding <code>expecting</code> clause provided by this trait.
+   </p>
+  
+   <p>
+   Moreover, because this method is marked <code>implicit</code>, you will usually be able to simply
+   leave it off. So long as the result of the method call you are expecting doesn't have
+   a method that satisfies the subsequent invocation (such as <code>andReturn</code> in this
+   example), the Scala compiler will invoke <code>call</code> for you
+   implicitly. Here's how that looks:
+   </p>
+  
+   <pre>
+   expecting {
+     mock.getName.andReturn("Ben Franklin")
+   }
+   </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>value - </code>- the result of invoking a method on mock prior to invoking <code>replay</code>.</dd></dl>
+    <hr></hr>
+<a name="lastCall"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>lastCall</em>[<em>T</em>] : <a href="" target="contentFrame" class="org/easymock/IExpectationSetters">org.easymock.IExpectationSetters</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#lastCall#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes the <code>expectLastCall</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>expect</code> method in Java class <code>org.easymock.EasyMock</code>).
+  
+   <p>
+   This method is provided simply to allow you to avoid repeating "expect" inside an
+   <code>expecting</code> clause. Here's an example that uses the <code>expectLastCall</code> directly
+   to express the expectation that the <code>getName</code> method will be invoked three times
+   on a mock, each time returning <code>"Ben Franklin"</code>:
+   </p>
+  
+   <pre>
+   expecting {
+     mock.getName.andReturn("Ben Franklin")
+     expectLastCall.times(3)
+   }
+   </pre>
+  
+   <p>
+   Using this method, you can compress this to:
+   </p>
+  
+   <pre>
+   expecting {
+     mock.getName.andReturn("Ben Franklin")
+     lastCall.times(3)
+   }
+   </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>value - </code>- the result of invoking a method on mock prior to invoking <code>replay</code>.</dd></dl>
+    <hr></hr>
+<a name="mock%28scala.reflect.Manifest%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>mock</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes the <code>createMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).
+  
+   <p>
+   Using the EasyMock API directly, you create a mock with:
+   </p>
+  
+   <pre>
+   val mockCollaborator = createMock(classOf[Collaborator])
+   </pre>
+  
+   <p>
+   Using this method, you can shorten that to:
+   </p>
+  
+   <pre>
+   val mockCollaborator = mock[Collaborator]
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="strictMock%28scala.reflect.Manifest%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>strictMock</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#strictMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#strictMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes the <code>createStrictMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createStrictMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).
+  
+   <p>
+   Using the EasyMock API directly, you create a strict mock with:
+   </p>
+  
+   <pre>
+   val mockCollaborator = createStrictMock(classOf[Collaborator])
+   </pre>
+  
+   <p>
+   Using this trait, you can shorten that to:
+   </p>
+  
+   <pre>
+   val mockCollaborator = strictMock[Collaborator]
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="niceMock%28scala.reflect.Manifest%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>niceMock</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/EasyMockSugar.html#niceMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/EasyMockSugar.html#niceMock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes the <code>createNiceMock</code> method on the <code>EasyMock</code> companion object (<em>i.e.</em>, the
+   static <code>createNiceMock</code> method in Java class <code>org.easymock.classextension.EasyMock</code>).
+  
+   <p>
+   Using the EasyMock API directly, you create a nice mock with:
+   </p>
+  
+   <pre>
+   val mockCollaborator = createNiceMock(classOf[Collaborator])
+   </pre>
+  
+   <p>
+   Using this trait, you can shorten that to:
+   </p>
+  
+   <pre>
+   val mockCollaborator = niceMock[Collaborator]
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="expecting%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>expecting</em>(<em>unused</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Provides a visual clue to readers of the code that a set of statements are expectations being
+   set on mocks.
+  
+   <p>
+   Using the EasyMock API directly, you set expectations on a mock object with syntax like:
+   </p>
+  
+   <pre>
+   mockCollaborator.documentAdded("Document")
+   mockCollaborator.documentChanged("Document")
+   expectLastCall().times(3)
+   </pre>
+  
+   <p>
+   This <code>expecting</code> method can make it more obvious which portion of your test code
+   is devoted to setting expectations on mock objects. For example:
+   </p>
+  
+   <pre>
+   expecting {
+     mockCollaborator.documentAdded("Document")
+     mockCollaborator.documentChanged("Document")
+     lastCall.times(3)
+   }
+   </pre>
+  
+   <p>
+   Using an <code>expecting</code> clause is optional, because it does nothing besides visually indicate
+   which statements are setting expectations on mocks. Note: this trait also provides the <code>lastCall</code>
+   method, which just calls <code>expectLastCall</code>. This allows you to avoid writing "expect" twice.
+   Also, the reason <code>expecting</code> doesn't take a by-name parameter, execute that, then call
+   <code>replay</code> is because you would then need to pass your mock object or objects into
+   <code>expecting</code>. Since you already need to pass the mocks into <code>whenExecuting</code> so
+   that <code>verify</code> can be invoked on them, it yields more concise client code to have
+   <code>whenExecuting</code> invoke <code>replay</code> on the mocks first rather than having
+   <code>expecting</code> invoke <code>replay</code> last.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="whenExecuting%28AnyRef%2CAnyRef*%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>whenExecuting</em>(<em>mock</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>, <em>moreMocks</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>*)(<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes <code>replay</code> on the passed mock object or objects, executes the passed function, then invokes
+   <code>verify</code> on the passed mock object or objects.
+  
+   <p>
+   Once you've set expectations on some mock objects, you must invoke <code>replay</code> on
+   the mocks to indicate you are done setting expectations, and will start using the mocks.
+   After using the mocks, you must invoke <code>verify</code> to check to make sure the mocks
+   were used in accordance with the expectations you set on it. Here's how that looks when you
+   use the EasyMock API directly:
+   </p>
+  
+  
+   <pre>
+   replay(mock)
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   verify(mock)
+   </pre>
+  
+   <p>
+   This trait enables you to use the following, more declarative syntax instead:
+   </p>
+   
+   <pre>
+   whenExecuting(mockCollaborator) {
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+   }
+   </pre>
+  
+   <p>
+   If you are working with multiple mock objects at once, you simply pass
+   them all to <code>whenExecuting</code>, like this:
+   </p>
+  
+   <pre>
+   whenExecuting(mock1, mock2, mock3) {
+     // ...
+   }
+   </pre>
+  
+   <p>
+   The <code>whenExecuting</code> method will first invoke <code>EasyMock.reply</code>
+   once for each mock you supplied, execute the passed function, then
+   invoke <code>EasyMock.verify</code> once for each mock you supplied.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

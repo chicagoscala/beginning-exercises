@@ -1,0 +1,938 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class BeWord in org.scalatest.matchers.Matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">org.scalatest.matchers.Matchers</a>
+        <br></br>
+        <span class="entity">class  BeWord</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/Matchers"><code>org/scalatest/matchers/Matchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="BeWord"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>BeWord</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.
+  
+   <p>
+   Class <code>BeWord</code> contains an <code>apply</code> method that takes a <code>Symbol</code>, which uses reflection
+   to find and access a <code>Boolean</code> property and determine if it is <code>true</code>.
+   If the symbol passed is <code>'empty</code>, for example, the <code>apply</code> method
+   will use reflection to look for a public Java field named
+   "empty", a public method named "empty", or a public method named "isEmpty". If a field, it must be of type <code>Boolean</code>.
+   If a method, it must take no parameters and return <code>Boolean</code>. If multiple candidates are found,
+   the <code>apply</code> method will select based on the following algorithm:
+   </p>
+   
+   <table cellpadding="2" border="1">
+   <tr><th>Field</th><th>Method</th><th>"is" Method</th><th>Result</th></tr>
+   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Throws <code>TestFailedException</code>, because no candidates found</td></tr>
+   <tr><td>&nbsp;</td><td>&nbsp;</td><td><code>isEmpty()</code></td><td>Invokes <code>isEmpty()</code></td></tr>
+   <tr><td>&nbsp;</td><td><code>empty()</code></td><td>&nbsp;</td><td>Invokes <code>empty()</code></td></tr>
+   <tr><td>&nbsp;</td><td><code>empty()</code></td><td><code>isEmpty()</code></td><td>Invokes <code>empty()</code> (this can occur when <code>BeanProperty</code> annotation is used)</td></tr>
+   <tr><td><code>empty</code></td><td>&nbsp;</td><td>&nbsp;</td><td>Accesses field <code>empty</code></td></tr>
+   <tr><td><code>empty</code></td><td>&nbsp;</td><td><code>isEmpty()</code></td><td>Invokes <code>isEmpty()</code></td></tr>
+   <tr><td><code>empty</code></td><td><code>empty()</code></td><td>&nbsp;</td><td>Invokes <code>empty()</code></td></tr>
+   <tr><td><code>empty</code></td><td><code>empty()</code></td><td><code>isEmpty()</code></td><td>Invokes <code>empty()</code> (this can occur when <code>BeanProperty</code> annotation is used)</td></tr>
+   </table></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29" target="_self">&lt;</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$1</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     result should be &lt; (7)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29" target="_self">&lt;=</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$3</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     result should be &lt;= (7)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3D%3D%3D%28Any%29" target="_self">===</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+        
+        <div>This method enables the following syntax:
+    
+     <pre>
+     result should be === (7)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29" target="_self">&gt;</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$2</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     result should be &gt; (7)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29" target="_self">&gt;=</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$4</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     result should be &gt;= (7)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28Symbol%29" target="_self">a</a></em>
+        [<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28Symbol%29#S" target="_self">S</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     fileMock should not { be a ('file) }
+                              ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29" target="_self">a</a></em>
+        [<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]
+        
+        <div>This method enables the following syntax, where <code>fileMock</code> is, for example, of type <code>File</code> and
+     <code>file</code> refers to a <code>BePropertyMatcher[File]</code>:
+    
+     <pre>
+     fileMock should not { be a (file) }
+                              ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28Symbol%29" target="_self">an</a></em>
+        [<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28Symbol%29#S" target="_self">S</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     animal should not { be an ('elephant) }
+                            ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29" target="_self">an</a></em>
+        [<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]
+        
+        <div>This method enables the following syntax, where <code>keyEvent</code> is, for example, of type <code>KeyEvent</code> and
+     <code>actionKey</code> refers to a <code>BePropertyMatcher[KeyEvent]</code>:
+    
+     <pre>
+     keyEvent should not { be an (actionKey) }
+                              ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Symbol%29" target="_self">apply</a></em>
+        [<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Symbol%29#S" target="_self">S</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     set should be ('empty)
+                   ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.FloatTolerance%29" target="_self">apply</a></em>
+        (<em>floatTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.FloatTolerance.html" target="_self">FloatTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenDotOhFloat should be (7.1f plusOrMinus 0.2f)
+                               ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Any%29" target="_self">apply</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+        
+        <div>This method enables <code>be</code> to be used for equality comparison. Here are some examples: 
+    
+     <pre>
+     object should be (None)
+                      ^
+     object should be (Some(1))
+                      ^
+     result should be (true)
+                      ^
+     result should be (false)
+                      ^
+     sum should be (19)
+                   ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.ShortTolerance%29" target="_self">apply</a></em>
+        (<em>shortTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ShortTolerance.html" target="_self">ShortTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenShort should be (7.toShort plusOrMinus 2.toShort)
+                         ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.IntTolerance%29" target="_self">apply</a></em>
+        (<em>intTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.IntTolerance.html" target="_self">IntTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenInt should be (7 plusOrMinus 2)
+                         ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Null%29" target="_self">apply</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Null.html" target="_self">Null</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     object should be (null)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Boolean%29" target="_self">apply</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     result should be (true)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29" target="_self">apply</a></em>
+        [<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html" target="_self">BeMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax, where <code>num</code> is, for example, of type <code>Int</code> and
+     <code>odd</code> refers to a <code>BeMatcher[Int]</code>:
+    
+     <pre>
+     num should be (odd)
+                   ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.LongTolerance%29" target="_self">apply</a></em>
+        (<em>longTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.LongTolerance.html" target="_self">LongTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenLong should be (7L plusOrMinus 2L)
+                         ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.ByteTolerance%29" target="_self">apply</a></em>
+        (<em>byteTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ByteTolerance.html" target="_self">ByteTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenByte should be (7.toByte plusOrMinus 2.toByte)
+                         ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29" target="_self">apply</a></em>
+        [<em>T</em>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax, where <code>open</code> refers to a <code>BePropertyMatcher</code>:
+    
+     <pre>
+     door should be (open)
+                    ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Matchers.this.DoubleTolerance%29" target="_self">apply</a></em>
+        (<em>doubleTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.DoubleTolerance.html" target="_self">DoubleTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     sevenDotOh should be (7.1 plusOrMinus 0.2)
+                          ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.BeWord.html#theSameInstanceAs%28AnyRef%29" target="_self">theSameInstanceAs</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax: 
+    
+     <pre>
+     object should be theSameInstancreAs (anotherObject)
+                      ^
+     </pre></div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="%3C%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&lt;</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$1</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     result should be &lt; (7)
+                      ^
+     </pre>
+    
+     <p>
+     Note that the less than operator will be invoked on <code>be</code> in this expression, not
+     on a result of passing <code>be</code> to <code>should</code>, as with most other operators
+     in the matchers DSL, because the less than operator has a higher precedence than <code>should</code>.
+     Thus in the above case the first expression evaluated will be <code>be &lt; (7)</code>, which results
+     in a matcher that is passed to <code>should</code>.
+     </p>
+    
+     <p>
+     This method also enables the following syntax:
+     </p>
+    
+     <pre>
+     result should not (be &lt; (7))
+                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3E%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&gt;</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$2</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     result should be &gt; (7)
+                      ^
+     </pre>
+    
+     <p>
+     Note that the greater than operator will be invoked on <code>be</code> in this expression, not
+     on a result of passing <code>be</code> to <code>should</code>, as with most other operators
+     in the matchers DSL, because the greater than operator has a higher precedence than <code>should</code>.
+     Thus in the above case the first expression evaluated will be <code>be &gt; (7)</code>, which results
+     in a matcher that is passed to <code>should</code>.
+     </p>
+    
+     <p>
+     This method also enables the following syntax:
+     </p>
+    
+     <pre>
+     result should not (be &gt; (7))
+                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3C%3D%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&lt;=</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$3</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3C%3D%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     result should be &lt;= (7)
+                      ^
+     </pre>
+    
+     <p>
+     Note that the less than or equal to operator will be invoked on <code>be</code> in this expression, not
+     on a result of passing <code>be</code> to <code>should</code>, as with most other operators
+     in the matchers DSL, because the less than or equal to operator has a higher precedence than <code>should</code>.
+     Thus in the above case the first expression evaluated will be <code>be &lt;= (7)</code>, which results
+     in a matcher that is passed to <code>should</code>.
+     </p>
+    
+     <p>
+     This method also enables the following syntax:
+     </p>
+    
+     <pre>
+     result should not (be &lt;= (7))
+                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3E%3D%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>&gt;=</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>)(<code>implicit </code><em>view$4</em> : (<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>) =&gt; <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#%3E%3D%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     result should be &gt;= (7)
+                      ^
+     </pre>
+    
+     <p>
+     Note that the greater than or equal to operator will be invoked on <code>be</code> in this expression, not
+     on a result of passing <code>be</code> to <code>should</code>, as with most other operators
+     in the matchers DSL, because the greater than or equal to operator has a higher precedence than <code>should</code>.
+     Thus in the above case the first expression evaluated will be <code>be &gt;= (7)</code>, which results
+     in a matcher that is passed to <code>should</code>.
+     </p>
+    
+     <p>
+     This method also enables the following syntax:
+     </p>
+    
+     <pre>
+     result should not (be &gt;= (7))
+                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="%3D%3D%3D%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>===</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+    
+     <pre>
+     result should be === (7)
+                      ^
+     </pre>
+    
+     <p>
+     Note that the === operator will be invoked on <code>be</code> in this expression, not
+     on a result of passing <code>be</code> to <code>should</code>, as with most other operators
+     in the matchers DSL, because the ===n operator has a higher precedence than <code>should</code>.
+     Thus in the above case the first expression evaluated will be <code>be === (7)</code>, which results
+     in a matcher that is passed to <code>should</code>.
+     </p>
+    
+     <p>
+     This method also enables the following syntax:
+     </p>
+    
+     <pre>
+     result should not (be === (7))
+                           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="a%28Symbol%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>a</em>[<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28Symbol%29#S" target="_self">S</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     fileMock should not { be a ('file) }
+                              ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>a</em>[<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#a%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax, where <code>fileMock</code> is, for example, of type <code>File</code> and
+     <code>file</code> refers to a <code>BePropertyMatcher[File]</code>:
+    
+     <pre>
+     fileMock should not { be a (file) }
+                              ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="an%28Symbol%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>an</em>[<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28Symbol%29#S" target="_self">S</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     animal should not { be an ('elephant) }
+                            ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>an</em>[<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#an%28org.scalatest.matchers.BePropertyMatcher%5BS%5D%29#S" target="_self">S</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax, where <code>keyEvent</code> is, for example, of type <code>KeyEvent</code> and
+     <code>actionKey</code> refers to a <code>BePropertyMatcher[KeyEvent]</code>:
+    
+     <pre>
+     keyEvent should not { be an (actionKey) }
+                              ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.DoubleTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>doubleTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.DoubleTolerance.html" target="_self">DoubleTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenDotOh should be (7.1 plusOrMinus 0.2)
+                          ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.FloatTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>floatTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.FloatTolerance.html" target="_self">FloatTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenDotOhFloat should be (7.1f plusOrMinus 0.2f)
+                               ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.LongTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>longTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.LongTolerance.html" target="_self">LongTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenLong should be (7L plusOrMinus 2L)
+                         ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.IntTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>intTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.IntTolerance.html" target="_self">IntTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenInt should be (7 plusOrMinus 2)
+                         ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.ShortTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>shortTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ShortTolerance.html" target="_self">ShortTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenShort should be (7.toShort plusOrMinus 2.toShort)
+                         ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Matchers.this.ByteTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>byteTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ByteTolerance.html" target="_self">ByteTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     sevenByte should be (7.toByte plusOrMinus 2.toByte)
+                         ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="theSameInstanceAs%28AnyRef%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>theSameInstanceAs</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     object should be theSameInstancreAs (anotherObject)
+                      ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Boolean%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     result should be (true)
+                      ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Null%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Null.html" target="_self">Null</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     object should be (null)
+                      ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Symbol%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>[<em>S</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>right</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28Symbol%29#S" target="_self">S</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax: 
+    
+     <pre>
+     set should be ('empty)
+                   ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>[<em>T</em>](<em>right</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html" target="_self">BeMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax, where <code>num</code> is, for example, of type <code>Int</code> and
+     <code>odd</code> refers to a <code>BeMatcher[Int]</code>:
+    
+     <pre>
+     num should be (odd)
+                   ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>[<em>T</em>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.BeWord.html#apply%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax, where <code>open</code> refers to a <code>BePropertyMatcher</code>:
+    
+     <pre>
+     door should be (open)
+                    ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="apply%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables <code>be</code> to be used for equality comparison. Here are some examples: 
+    
+     <pre>
+     object should be (None)
+                      ^
+     object should be (Some(1))
+                      ^
+     result should be (true)
+                      ^
+     result should be (false)
+                      ^
+     sum should be (19)
+                   ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

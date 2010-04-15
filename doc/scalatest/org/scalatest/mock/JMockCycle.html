@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class JMockCycle in org.scalatest.mock</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/mock$package.html" target="_self">org.scalatest.mock</a>
+        <br></br>
+        <span class="entity">class  JMockCycle</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/mock/JMockCycle"><code>org/scalatest/mock/JMockCycle.scala</code></a>]
+      </div><hr></hr>
+      <a name="JMockCycle"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>JMockCycle</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Class that wraps and manages the lifecycle of a single <code>org.jmock.Mockery</code> context object,
+ provides some basic syntax sugar for using <a href="http://www.jmock.org/" target="_blank">JMock</a>
+ in Scala.
+
+ <p>
+ Using the JMock API directly, you first need a <code>Mockery</code> context object:
+ </p>
+
+ <pre>
+ val context = new Mockery
+ </pre>
+
+ <p>
+ JMockCycle uses jMock's ClassImposterizer to support mocking of classes, so the following line
+ would also be needed if you wanted that functionality as well:
+ </p>
+
+ <pre>
+ context.setImposteriser(ClassImposteriser.INSTANCE)
+ </pre>
+
+ <p>
+ When using this class, you would instead create an instance of this class (which will create and
+ wrap a <code>Mockery</code> object) and import its members, like this:
+ </p>
+
+ <pre>
+ val cycle = new JMockCycle
+ import cycle._
+ </pre>
+
+ <p>
+ Using the JMock API directly, you would create a mock object like this:
+ </p>
+
+ <pre>
+ val mockCollaborator = context.mock(classOf[Collaborator])
+ </pre>
+
+ <p>
+ Having imported the members of an instance of this class, you can shorten that to:
+ </p>
+
+ <pre>
+ val mockCollaborator = mock[Collaborator]
+ </pre>
+
+ <p>
+ After creating mocks, you set expectations on them, using syntax like this:
+ </p>
+
+ <pre>
+ context.checking(
+   new Expectations() {
+     oneOf (mockCollaborator).documentAdded("Document")
+     exactly(3).of (mockCollaborator).documentChanged("Document")
+    }
+  )
+ </pre>
+
+ <p>
+ Having imported the members of an instance of this class, you can shorten this step to:
+ </p>
+
+ <pre>
+ expecting { e => import e._
+   oneOf (mockCollaborator).documentAdded("Document")
+   exactly(3).of (mockCollaborator).documentChanged("Document")
+ }
+ </pre>
+
+ <p>
+ The <code>expecting</code> method will create a new <code>Expectations</code> object, pass it into
+ the function you provide, which sets the expectations. After the function returns, the <code>expecting</code>
+ method will pass the <code>Expectations</code> object to the <code>checking</code>
+ method of its internal <code>Mockery</code> context.
+ </p>
+
+ <p>
+ The <code>expecting</code> method passes an instance of class
+ <code>org.scalatest.mock.JMockExpectations</code> to the function you pass into
+ <code>expectations</code>. <code>JMockExpectations</code> extends <code>org.jmock.Expectations</code> and
+ adds several overloaded <code>withArg</code> methods. These <code>withArg</code> methods simply
+ invoke corresponding <code>with</code> methods on themselves. Because <code>with</code> is
+ a keyword in Scala, to invoke these directly you must surround them in back ticks, like this:
+ </p>
+
+ <pre>
+ oneOf (mockCollaborator).documentAdded(`with`("Document"))
+ </pre>
+
+ <p>
+ By importing the members of the passed <code>JMockExpectations</code> object, you can
+ instead call <code>withArg</code> with no back ticks needed:
+ </p>
+
+ <pre>
+ oneOf (mockCollaborator).documentAdded(withArg("Document"))
+ </pre>
+
+ <p>
+ Once you've set expectations on the mock objects, when using the JMock API directly, you use the mock, then invoke
+ <code>assertIsSatisfied</code> on the <code>Mockery</code> context to make sure the mock
+ was used in accordance with the expectations you set on it. Here's how that looks:
+ </p>
+
+ <pre>
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ classUnderTest.addDocument("Document", new Array[Byte](0))
+ context.assertIsSatisfied()
+ </pre>
+
+ <p>
+ This class enables you to use the following, more declarative syntax instead:
+ </p>
+
+ <pre>
+ whenExecuting {
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+ }
+ </pre>
+
+ <p>
+ The <code>whenExecuting</code> method will execute the passed function, then
+ invoke <code>assertIsSatisfied</code> on its internal <code>Mockery</code>
+ context object.
+ </p>
+
+ <p>
+ To summarize, here's what a typical test using <code>JMockCycle</code> looks like:
+ </p>
+
+ <pre>
+ val cycle = new JMockCycle
+ import cycle._
+
+ val mockCollaborator = mock[Collaborator]
+
+ expecting { e => import e._
+   oneOf (mockCollaborator).documentAdded("Document")
+   exactly(3).of (mockCollaborator).documentChanged("Document")
+ }
+
+ whenExecuting {
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+ }
+ </pre>
+
+ <p>
+ ScalaTest also provides a <a href="JMockCycleFixture.html"><code>JMockCycleFixture</code></a> trait, which
+ will pass a new <code>JMockCycle</code> into each test that needs one.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/JMockCycle.html#expecting%28%28org.scalatest.mock.JMockExpectations%29%3D%3EUnit%29" target="_self">expecting</a></em>
+        (<em>fun</em> : (<a href="../../../org/scalatest/mock/JMockExpectations.html" target="_self">JMockExpectations</a>) =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets expectations on mock objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/JMockCycle.html#mock%28scala.reflect.Manifest%5BT%5D%29" target="_self">mock</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/JMockCycle.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/JMockCycle.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+        
+        <div>Invokes the <code>mock</code> method on this <code>JMockCycle</code>'s internal
+   <code>Mockery</code> context object, passing in a class instance for the
+   specified type parameter.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/mock/JMockCycle.html#whenExecuting%28%3D%3EUnit%29" target="_self">whenExecuting</a></em>
+        (<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Executes code using mocks with expectations set.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="mock%28scala.reflect.Manifest%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>mock</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<code>implicit </code><em>manifest</em> : <a href="" target="contentFrame" class="scala/reflect/Manifest">scala.reflect.Manifest</a>[<a href="../../../org/scalatest/mock/JMockCycle.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/mock/JMockCycle.html#mock%28scala.reflect.Manifest%5BT%5D%29#T" target="_self">T</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invokes the <code>mock</code> method on this <code>JMockCycle</code>'s internal
+   <code>Mockery</code> context object, passing in a class instance for the
+   specified type parameter.
+  
+   <p>
+   Using the JMock API directly, you create a mock with:
+   </p>
+  
+   <pre>
+   val mockCollaborator = context.mock(classOf[Collaborator])
+   </pre>
+  
+   <p>
+   Having imported the members of an instance of this class, you can shorten that to:
+   </p>
+  
+   <pre>
+   val mockCollaborator = mock[Collaborator]
+   </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="expecting%28%28org.scalatest.mock.JMockExpectations%29%3D%3EUnit%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>expecting</em>(<em>fun</em> : (<a href="../../../org/scalatest/mock/JMockExpectations.html" target="_self">JMockExpectations</a>) =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets expectations on mock objects.
+  
+   <p>
+   After creating mocks, you set expectations on them, using syntax like this:
+   </p>
+  
+   <pre>
+   context.checking(
+     new Expectations() {
+       oneOf (mockCollaborator).documentAdded("Document")
+       exactly(3).of (mockCollaborator).documentChanged("Document")
+      }
+    )
+   </pre>
+  
+   <p>
+   Having imported the members of an instance of this class, you can shorten this step to:
+   </p>
+  
+   <pre>
+   expecting { e => import e._
+     oneOf (mockCollaborator).documentAdded("Document")
+     exactly(3).of (mockCollaborator).documentChanged("Document")
+   }
+   </pre>
+  
+   <p>
+   The <code>expecting</code> method will create a new <code>Expectations</code> object, pass it into
+   the function you provide, which sets the expectations. After the function returns, the <code>expecting</code>
+   method will pass the <code>Expectations</code> object to the <code>checking</code>
+   method of its internal <code>Mockery</code> context.
+   </p>
+  
+   <p>
+   This method passes an instance of class <code>org.scalatest.mock.JMockExpectations</code> to the
+   passed function. <code>JMockExpectations</code> extends <code>org.jmock.Expectations</code> and
+   adds several overloaded <code>withArg</code> methods. These <code>withArg</code> methods simply
+   invoke corresponding <code>with</code> methods on themselves. Because <code>with</code> is
+   a keyword in Scala, to invoke these directly you must surround them in back ticks, like this:
+   </p>
+  
+   <pre>
+   oneOf (mockCollaborator).documentAdded(`with`("Document"))
+   </pre>
+  
+   <p>
+   By importing the members of the passed <code>JMockExpectations</code> object, you can
+   instead call <code>withArg</code> with no back ticks needed:
+   </p>
+  
+   <pre>
+   oneOf (mockCollaborator).documentAdded(withArg("Document"))
+   </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>fun - </code>a function that sets expectations on the passed <code>JMockExpectations</code>      object</dd></dl>
+    <hr></hr>
+<a name="whenExecuting%28%3D%3EUnit%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>whenExecuting</em>(<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Executes code using mocks with expectations set.
+   
+   <p>
+   Once you've set expectations on the mock objects, when using the JMock API directly, you use the mock, then invoke
+   <code>assertIsSatisfied</code> on the <code>Mockery</code> context to make sure the mock
+   was used in accordance with the expectations you set on it. Here's how that looks:
+   </p>
+  
+   <pre>
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   classUnderTest.addDocument("Document", new Array[Byte](0))
+   context.assertIsSatisfied()
+   </pre>
+  
+   <p>
+   This class enables you to use the following, more declarative syntax instead:
+   </p>
+  
+   <pre>
+   whenExecuting {
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+     classUnderTest.addDocument("Document", new Array[Byte](0))
+   }
+   </pre>
+  
+   <p>
+   The <code>whenExecuting</code> method will execute the passed function, then
+   invoke <code>assertIsSatisfied</code> on its internal <code>Mockery</code>
+   context object.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>fun - </code>the code to execute under previously set expectations</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>org.mock.ExpectationError - </code>if an expectation is not met</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

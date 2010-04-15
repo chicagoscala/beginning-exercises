@@ -21,6 +21,8 @@ body {
     background-color: #fff; 
     color: #333;
     counter-reset: chapter;      /* Create a chapter counter scope */
+    padding: 10px;
+    margin:  10px;
 }
 
 div.content {
@@ -39,7 +41,7 @@ div.content {
     margin: 1em 0em 0.6em 0em;    
 }
 h1:before {
-    content: "Day " counter(chapter) ". ";
+    content: "" counter(chapter) ". ";
     counter-increment: chapter;  /* Add 1 to chapter */
 }
 h1.appendix:before {
@@ -168,7 +170,7 @@ p.sidenote {
 }
        
 p.figure {
-    text-align: center;
+    text-align: left;
     margin: 1.5em;
 }
 p.figure > img {
@@ -267,7 +269,7 @@ div.caption {
     font-family: "Book Antiqua", "Palatino Linotype", "Palatino", "Georgia", "Times", "Times New Roman", serif;
     margin: 1em auto 1em auto;
     font-size: 1.0em;
-    text-align: center;
+    text-align: left;
     letter-spacing: 0.02em;
 }
 div.caption span {
@@ -434,7 +436,7 @@ span.new {
     font-size: 0.8em;
     line-height: 1.4em;
     margin: 5.0em 20.0em 5.0em 0em;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #C0Af8a;
 }
 

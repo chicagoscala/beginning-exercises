@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/BeMatcher.html" target="_self">BeMatcher</a></em>
+        [-<em>T</em>]<code> extends </code>(<a href="../../org/scalatest/matchers/BeMatcher.html#T" target="_self">T</a>) =&gt; <a href="../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a>
+        
+        <div>Trait extended by matcher objects, which may appear after the word <code>be</code>, that can match a value of the specified type.
+ The value to match is passed to the <code>BeMatcher</code>'s <code>apply</code> method. The result is a <code>MatchResult</code>.
+ A <code>BeMatcher</code> is, therefore, a function from the specified type, <code>T</code>, to a <code>MatchResult</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/BePropertyMatchResult.html" target="_self">BePropertyMatchResult</a></em>
+        (<code>val </code><em>matches</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>val </code><em>propertyName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>The result of a <code>Boolean</code> property match operation, such as one performed by a
+ <a href="BePropertyMatcher.html"><code>BePropertyMatcher</code></a>,
+ which contains one field that indicates whether the match succeeded (<em>i.e.</em>, the <code>Boolean</code>
+ property was <code>true</code>) and one field that provides
+ the name of the property.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a></em>
+        [-<em>T</em>]<code> extends </code>(<a href="../../org/scalatest/matchers/BePropertyMatcher.html#T" target="_self">T</a>) =&gt; <a href="../../org/scalatest/matchers/BePropertyMatchResult.html" target="_self">BePropertyMatchResult</a>
+        
+        <div>Trait extended by matcher objects, which may appear after the word <code>be</code>, that can match against a <code>Boolean</code>
+ property. The match will succeed if and only if the <code>Boolean</code> property equals <code>true</code>.
+ The object containing the property, which must be of the type specified by the <code>BePropertyMatcher</code>'s type
+ parameter <code>T</code>, is passed to the <code>BePropertyMatcher</code>'s
+ <code>apply</code> method. The result is a <code>BePropertyMatchResult</code>.
+ A <code>BePropertyMatcher</code> is, therefore, a function from the specified type, <code>T</code>, to
+ a <code>BePropertyMatchResult</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/HavePropertyMatchResult.html" target="_self">HavePropertyMatchResult</a></em>
+        [<em>P</em>](<code>val </code><em>matches</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>val </code><em>propertyName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>expectedValue</em> : <a href="../../org/scalatest/matchers/HavePropertyMatchResult.html#P" target="_self">P</a>, <code>val </code><em>actualValue</em> : <a href="../../org/scalatest/matchers/HavePropertyMatchResult.html#P" target="_self">P</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>The result of a property match operation such as one performed by a
+ <a href="HavePropertyMatcher.html"><code>HavePropertyMatcher</code></a>,
+ which contains one field that indicates whether the match succeeded (<em>i.e.</em>, the 
+ property had its expected value), one field that provides
+ the name of the property, and two fields giving the expected and actual values.
+ <code>HavePropertyMatchResult</code>'s type parameter, <code>P</code>, specifies the type of the property.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a></em>
+        [-<em>T</em>, <em>P</em>]<code> extends </code>(<a href="../../org/scalatest/matchers/HavePropertyMatcher.html#T" target="_self">T</a>) =&gt; <a href="../../org/scalatest/matchers/HavePropertyMatchResult.html" target="_self">HavePropertyMatchResult</a>[<a href="../../org/scalatest/matchers/HavePropertyMatcher.html#P" target="_self">P</a>]
+        
+        <div>Trait extended by matcher objects, which may appear after the word <code>have</code>, that can match against a 
+ property of the type specified by the <code>HavePropertyMatcher</code>'s second type parameter <code>P</code>.
+ <code>HavePropertyMatcher</code>'s first type parameter, <code>T</code>, specifies the type that declares the property. The match will succeed if and
+ only if the value of the property equals the specified value.
+ The object containing the property
+ is passed to the <code>HavePropertyMatcher</code>'s
+ <code>apply</code> method. The result is a <code>HavePropertyMatchResult[P]</code>.
+ A <code>HavePropertyMatcher</code> is, therefore, a function from the specified type, <code>T</code>, to
+ a <code>HavePropertyMatchResult[P]</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a></em>
+        (<code>val </code><em>matches</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <code>val </code><em>failureMessage</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>negatedFailureMessage</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>midSentenceFailureMessage</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>midSentenceNegatedFailureMessage</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>The result of a match operation, such as one performed by a <a href="Matcher.html"><code>Matcher</code></a> or
+ <a href="BeMatcher.html"><code>BeMatcher</code></a>, which 
+ contains one field that indicates whether the match succeeded and four fields that provide
+ failure messages to report under different circumstances.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a></em>
+        [-<em>T</em>]<code> extends </code>(<a href="../../org/scalatest/matchers/Matcher.html#T" target="_self">T</a>) =&gt; <a href="../../org/scalatest/matchers/MatchResult.html" target="_self">MatchResult</a>
+        
+        <div>Trait extended by objects that can match a value of the specified type. The value to match is
+ passed to the matcher's <code>apply</code> method. The result is a <code>MatchResult</code>.
+ A matcher is, therefore, a function from the specified type, <code>T</code>, to a <code>MatchResult</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a></em>
+        <code> extends </code><a href="../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        
+        <div>This trait is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html">ShouldMatchers</a> or
+ <a href="MustMatchers.html">MustMatchers</a> for an overview of the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/MustMatchers.html" target="_self">MustMatchers</a></em>
+        <code> extends </code><a href="../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a><code> with </code><a href="../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a>
+        
+        <div>Trait that provides a domain specific language (DSL) for expressing assertions in tests
+ using the word <code>must</code>. (If you prefer the word <code>should</code>, you can alternatively
+ mix in trait <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a>.) For example, if you mix <code>MustMatchers</code> into
+ a suite class, you can write an equality assertion in that suite like this:
+ 
+ <pre class="indent">
+ object must equal (3)
+ </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/ShouldMatchers.html" target="_self">ShouldMatchers</a></em>
+        <code> extends </code><a href="../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a><code> with </code><a href="../../org/scalatest/verb/ShouldVerb.html" target="_self">ShouldVerb</a>
+        
+        <div>Trait that provides a domain specific language (DSL) for expressing assertions in tests
+ using the word <code>should</code>. (If you prefer the word <code>must</code>, you can alternatively
+ mix in trait <a href="MustMatchers.html"><code>MustMatchers</code></a>.) For example, if you mix <code>ShouldMatchers</code> into
+ a suite class, you can write an equality assertion in that suite like this:
+ 
+ <pre class="indent">
+ object should equal (3)
+ </pre></div>
+      </td>
+    </tr>        
+        </table>
+<table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Object Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/BePropertyMatchResult$object.html" target="_self">BePropertyMatchResult</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <code>BePropertyMatchResult</code> case class.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/HavePropertyMatchResult$object.html" target="_self">HavePropertyMatchResult</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <code>HavePropertyMatchResult</code> case class.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/MatchResult$object.html" target="_self">MatchResult</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <code>MatchResult</code> case class.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/MustMatchers$object.html" target="_self">MustMatchers</a></em>
+        <code> extends </code><a href="../../org/scalatest/matchers/MustMatchers.html" target="_self">MustMatchers</a>
+        
+        <div>Companion object that facilitates the importing of <code>MustMatchers</code> members as 
+ an alternative to mixing it the trait. One use case is to import <code>MustMatchers</code> members so you can use
+ them in the Scala interpreter:
+
+ <pre>
+ $scala -classpath scalatest.jar
+ Welcome to Scala version 2.7.3.final (Java HotSpot(TM) Client VM, Java 1.5.0_16).
+ Type in expressions to have them evaluated.
+ Type :help for more information.
+ 
+ scala> import org.scalatest.matchers.MustMatchers._
+ import org.scalatest.matchers.MustMatchers._
+ 
+ scala> 1 must equal (2)
+ org.scalatest.TestFailedException: 1 did not equal 2
+ 	at org.scalatest.matchers.Helper$.newTestFailedException(Matchers.scala:40)
+ 	at org.scalatest.matchers.MustMatchers$MustMethodHelper$.mustMatcher(MustMatchers.scala:826)
+ 	at org.scalatest.matchers.MustMatchers$IntMustWrapper.must(MustMatchers.scala:1123)
+ 	at .<init>(<console>:9)
+ 	at .<clinit>(<console>)
+ 	at RequestR...
+
+ scala> "hello, world" must startWith ("hello")
+ 
+ scala> 7 must (be >= (3) and not be <= (7))
+ org.scalatest.TestFailedException: 7 was greater than or equal to 3, but 7 was less than or equal to 7
+ 	at org.scalatest.matchers.Helper$.newTestFailedException(Matchers.scala:40)
+ 	at org.scalatest.matchers.MustMatchers$MustMethodHelper$.mustMatcher(MustMatchers.scala:826)
+ 	at org.scalatest.matchers.MustMatchers$IntMustWrapper.must(MustMatchers.scala:1123)
+ 	at .<init>(...
+ <pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/matchers/ShouldMatchers$object.html" target="_self">ShouldMatchers</a></em>
+        <code> extends </code><a href="../../org/scalatest/matchers/ShouldMatchers.html" target="_self">ShouldMatchers</a>
+        
+        <div>Companion object that facilitates the importing of <code>ShouldMatchers</code> members as 
+ an alternative to mixing it the trait. One use case is to import <code>ShouldMatchers</code> members so you can use
+ them in the Scala interpreter:
+
+ <pre>
+ $scala -classpath scalatest.jar
+ Welcome to Scala version 2.7.3.final (Java HotSpot(TM) Client VM, Java 1.5.0_16).
+ Type in expressions to have them evaluated.
+ Type :help for more information.
+ 
+ scala> import org.scalatest.matchers.ShouldMatchers._
+ import org.scalatest.matchers.ShouldMatchers._
+ 
+ scala> 1 should equal (2)
+ org.scalatest.TestFailedException: 1 did not equal 2
+ 	at org.scalatest.matchers.Helper$.newTestFailedException(Matchers.scala:40)
+ 	at org.scalatest.matchers.ShouldMatchers$ShouldMethodHelper$.shouldMatcher(ShouldMatchers.scala:826)
+ 	at org.scalatest.matchers.ShouldMatchers$IntShouldWrapper.should(ShouldMatchers.scala:1123)
+ 	at .<init>(<console>:9)
+ 	at .<clinit>(<console>)
+ 	at RequestR...
+
+ scala> "hello, world" should startWith ("hello")
+ 
+ scala> 7 should (be >= (3) and not be <= (7))
+ org.scalatest.TestFailedException: 7 was greater than or equal to 3, but 7 was less than or equal to 7
+ 	at org.scalatest.matchers.Helper$.newTestFailedException(Matchers.scala:40)
+ 	at org.scalatest.matchers.ShouldMatchers$ShouldMethodHelper$.shouldMatcher(ShouldMatchers.scala:826)
+ 	at org.scalatest.matchers.ShouldMatchers$IntShouldWrapper.should(ShouldMatchers.scala:1123)
+ 	at .<init>(...
+ <pre></div>
+      </td>
+    </tr>        
+        </table></body>
+      </html>

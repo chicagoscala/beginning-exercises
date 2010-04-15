@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>object AssertionsForJUnit in org.scalatest.junit</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/junit$package.html" target="_self">org.scalatest.junit</a>
+        <br></br>
+        <span class="entity">object  AssertionsForJUnit</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/junit/AssertionsForJUnit"><code>org/scalatest/junit/AssertionsForJUnit.scala</code></a>]
+      </div><hr></hr>
+      <a name="AssertionsForJUnit"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>object</code>
+        <em>AssertionsForJUnit</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/junit/AssertionsForJUnit.html" target="_self">AssertionsForJUnit</a></dd>
+    </dl>
+      <dl><dd>Companion object that facilitates the importing of <code>AssertionsForJUnit</code> members as 
+ an alternative to mixing it in. One use case is to import <code>AssertionsForJUnit</code> members so you can use
+ them in the Scala interpreter:
+
+ <pre>
+ $ scala -cp junit3.8.2/junit.jar:../target/jar_contents 
+ Welcome to Scala version 2.7.5.final (Java HotSpot(TM) Client VM, Java 1.5.0_16).
+ Type in expressions to have them evaluated.
+ Type :help for more information.
+
+ scala> import org.scalatest.junit.AssertionsForJUnit._
+ import org.scalatest.junit.AssertionsForJUnit._
+
+ scala> assert(1 === 2)
+ junit.framework.AssertionFailedError: 1 did not equal 2
+ 	at org.scalatest.junit.AssertionsForJUnit$class.assert(AssertionsForJUnit.scala:353)
+ 	at org.scalatest.junit.AssertionsForJUnit$.assert(AssertionsForJUnit.scala:672)
+ 	at .<init>(<console>:7)
+ 	at .<clinit>(<console>)
+ 	at RequestResult$.<init>(<console>:3)
+ 	at RequestResult$.<clinit>(<console>)
+ 	at RequestResult$result(<consol...
+ scala> expect(3) { 1 + 3 }
+ junit.framework.AssertionFailedError: Expected 3, but got 4
+ 	at org.scalatest.junit.AssertionsForJUnit$class.expect(AssertionsForJUnit.scala:563)
+ 	at org.scalatest.junit.AssertionsForJUnit$.expect(AssertionsForJUnit.scala:672)
+ 	at .<init>(<console>:7)
+ 	at .<clinit>(<console>)
+ 	at RequestResult$.<init>(<console>:3)
+ 	at RequestResult$.<clinit>(<console>)
+ 	at RequestResult$result(<co...
+ scala> val caught = intercept[StringIndexOutOfBoundsException] { "hi".charAt(-1) }
+ caught: StringIndexOutOfBoundsException = java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+ <pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait Reporter in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  Reporter</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/Reporter"><code>org/scalatest/Reporter.scala</code></a>]
+      </div><hr></hr>
+      <a name="Reporter"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>Reporter</em>
+      </dt>
+      <dd><code> extends </code>(<a href="../../org/scalatest/events/Event.html" target="_self">Event</a>) =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a></dd>
+    </dl>
+      <dl><dd>Trait whose instances collect the results of a running
+ suite of tests and presents those results in some way to the user. Instances of this trait can
+ be called "report functions" or "reporters."
+
+ <p>
+ Reporters receive test results via thirteen events.
+ Each event is fired to pass a particular kind of information to
+ the reporter. The events are:
+ </p>
+
+ <ul>
+ <li><code>RunStarting</code>
+ <li><code>TestStarting</code>
+ <li><code>TestSucceeded</code>
+ <li><code>TestFailed</code>
+ <li><code>TestIgnored</code>
+ <li><code>TestPending</code>
+ <li><code>SuiteStarting</code>
+ <li><code>SuiteCompleted</code>
+ <li><code>SuiteAborted</code>
+ <li><code>InfoProvided</code>
+ <li><code>RunStopped</code>
+ <li><code>RunAborted</code>
+ <li><code>RunCompleted</code>
+ </ul>
+
+ <p>
+ Reporters may be implemented such that they only present some of the reported events to the user. For example, you could
+ define a reporter class that doesn nothing in response to <code>SuiteStarting</code> events.
+ Such a class would always ignore <code>SuiteStarting</code> events.
+ </p>
+
+ <p>
+ The term <em>test</em> as used in the <code>TestStarting</code>, <code>TestSucceeded</code>,
+ and <code>TestFailed</code> event names
+ is defined abstractly to enable a wide range of test implementations.
+ Trait <code>Suite</code> fires <code>TestStarting</code> to indicate it is about to invoke one
+ of its test methods, <code>TestSucceeded</code> to indicate a test method returned normally,
+ and <code>TestFailed</code> to indicate a test method completed abruptly with an exception.
+ Although the execution of a <code>Suite</code>'s test methods will likely be a common event
+ reported via the
+ <code>TestStarting</code>, <code>TestSucceeded</code>, and <code>TestFailed</code> methods, because
+ of the abstract definition of &#8220;test&#8221; used by the
+ the event classes, these events are not limited to this use. Information about any conceptual test
+ may be reported via the <code>TestStarting</code>, <code>TestSucceeded</code>, and
+ <code>TestFailed</code> events.
+
+ <p>
+ Likewise, the term <em>suite</em> as used in the <code>SuiteStarting</code>, <code>SuiteAborted</code>,
+ and <code>SuiteCompleted</code> event names
+ is defined abstractly to enable a wide range of suite implementations.
+ Object <code>Runner</code> fires <code>SuiteStarting</code> to indicate it is about to invoke
+ <code>run</code> on a
+ <code>Suite</code>, <code>SuiteCompleted</code> to indicate a <code>Suite</code>'s
+ <code>run</code> method returned normally,
+ and <code>SuiteAborted</code> to indicate a <code>Suite</code>'s <code>run</code>
+ method completed abruptly with an exception.
+ Similarly, class <code>Suite</code> fires <code>SuiteStarting</code> to indicate it is about to invoke
+ <code>run</code> on a
+ nested <code>Suite</code>, <code>SuiteCompleted</code> to indicate a nested <code>Suite</code>'s
+ <code>run</code> method returned normally,
+ and <code>SuiteAborted</code> to indicate a nested <code>Suite</code>'s <code>run</code>
+ method completed abruptly with an exception.
+ Although the execution of a <code>Suite</code>'s <code>run</code> method will likely be a
+ common event reported via the
+ <code>SuiteStarting</code>, <code>SuiteAborted</code>, and <code>SuiteCompleted</code> events, because
+ of the abstract definition of "suite" used by the
+ event classes, these events are not limited to this use. Information about any conceptual suite
+ may be reported via the <code>SuiteStarting</code>, <code>SuiteAborted</code>, and
+ <code>SuiteCompleted</code> events.
+
+ <p>
+ <strong>Extensibility</strong>
+ </p>
+
+ <p>
+ You can create classes that extend <code>ReportFunction</code> to report test results in custom ways, and to
+ report custom information passed as an event "payload." For more information on the latter
+ use case, see the <em>Extensibility</em> section of the <a href="Event.html"><code>Event</code> documentation</a>.
+ </p>
+
+ <p>
+ Reporter classes can handle events in any manner, including doing nothing.
+ For convenience, trait <code>ReporterFunction</code> includes a default implentation of <code>apply</code> that does nothing.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/ResourcefulReporter.html" target="_self">ResourcefulReporter</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/Reporter.html#apply%28org.scalatest.events.Event%29" target="_self">apply</a></em>
+        (<em>event</em> : <a href="../../org/scalatest/events/Event.html" target="_self">Event</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Invoked to report an event that subclasses may wish to report in some way to the user.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="scala/Function1">scala.Function1</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#toString" target="contentFrame" class="scala/Function1">scala.Function1.toString</a>, <a href="#compose" target="contentFrame" class="scala/Function1">scala.Function1.compose</a>, <a href="#andThen" target="contentFrame" class="scala/Function1">scala.Function1.andThen</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="apply%28org.scalatest.events.Event%29"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>apply</em>(<em>event</em> : <a href="../../org/scalatest/events/Event.html" target="_self">Event</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Invoked to report an event that subclasses may wish to report in some way to the user.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>event - </code>the event being reported</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Function1">scala.Function1</a>.<a href="#apply" target="contentFrame" class="scala/Function1">scala.Function1.apply</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

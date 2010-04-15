@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class TestStarting in org.scalatest.events</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/events$package.html" target="_self">org.scalatest.events</a>
+        <br></br>
+        <span class="entity">class  TestStarting</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/events/TestStarting"><code>org/scalatest/events/TestStarting.scala</code></a>]
+      </div><hr></hr>
+      <a name="TestStarting"></a><dl>
+      <dt>
+        
+        <code>case final</code>
+        <code>class</code>
+        <em>TestStarting</em>(<code>val </code><em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a></dd>
+    </dl>
+      <dl><dd>Event that indicates a suite (or other entity) is about to start running a test.
+
+ <p>
+ For example, trait <code>Suite</code> uses <code>TestStarting</code> to report
+ that a test method of a <code>Suite</code> is about to be invoked.
+ </p>
+
+ <p>
+ To create instances of this class you may
+ use one of the factory methods provided in its <a href="TestStarting$object.html">companion object</a>. For example, given a
+ report function named <code>report</code>, you could fire a <code>TestStarting</code> event like this:
+ </p>
+
+ <pre>
+ report(TestStarting(ordinal, userFriendlyName, suiteName, Some(thisSuite.getClass.getName), testName))
+ </pre>
+
+ <p>
+ The suite class name parameter is optional, because suites in ScalaTest are an abstraction that
+ need not necessarily correspond to one class. Nevertheless, it most cases each suite will correspond
+ to a class, and when it does, the fully qualified name of that class should be reported by passing a
+ <code>Some</code> for <code>suiteClassName</code>. One use for this bit of information is JUnit integration,
+ because the "name" provided to a JUnit <code>org.junit.runner.Description</code> appears to usually include
+ a fully qualified class name by convention.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of        other events reported during the same run</dd><dd><code>suiteName - </code>the name of the suite containing the test that is starting</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the test that is starting</dd><dd><code>testName - </code>the name of the test that is starting</dd><dd><code>formatter - </code>an optional formatter that provides extra information that can be used by reporters in determining        how to present this event to the user</dd><dd><code>rerunner - </code>an optional <code>Rerunner</code> that can be used to rerun the test that is starting (if <code>None</code>        is passed, the test cannot be rerun)</dd><dd><code>payload - </code>an optional object that can be used to pass custom information to the reporter about the <code>TestStarting</code> event</dd><dd><code>threadName - </code>a name for the <code>Thread</code> about whose activity this event was reported</dd><dd><code>timeStamp - </code>a <code>Long</code> indicating the time this event was reported, expressed in terms of the        number of milliseconds since the standard base time known as "the epoch":  January 1, 1970, 00:00:00 GMT</dd><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#equals%28Any%29" target="_self">equals</a></em>
+        (<em>arg0</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+        
+        <div>This method is used to compare the receiver object (<code>this</code>)
+    with the argument object (<code>arg0</code>) for equivalence.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#hashCode%28%29" target="_self">hashCode</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Returns a hash code value for the object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#productArity" target="_self">productArity</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#productElement%28Int%29" target="_self">productElement</a></em>
+        (<em>arg0</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        
+        
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#productPrefix" target="_self">productPrefix</a></em>
+         : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>
+        
+        
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/TestStarting.html#toString%28%29" target="_self">toString</a></em>
+         : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>
+        
+        <div>Returns a string representation of the object.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/events/Event.html" target="_self">Event</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/events/Event.html#compare%28org.scalatest.events.Event%29" target="_self">compare</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#&amp;lt;" target="contentFrame" class="scala/Ordered">scala.Ordered.&lt;</a>, <a href="#&amp;gt;" target="contentFrame" class="scala/Ordered">scala.Ordered.&gt;</a>, <a href="#&amp;lt;=" target="contentFrame" class="scala/Ordered">scala.Ordered.&lt;=</a>, <a href="#&amp;gt;=" target="contentFrame" class="scala/Ordered">scala.Ordered.&gt;=</a>, <a href="#compareTo" target="contentFrame" class="scala/Ordered">scala.Ordered.compareTo</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="hashCode%28%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>hashCode</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a hash code value for the object.  
+    <p>
+    The default hashing algorithm is platform dependent.  
+    Note that it is allowed for two objects to have identical hash
+    codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+    equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+    degenerate implementation could always return <code>0</code>.
+    However, it is required that if two objects are equal
+    (<code>o1.equals(o2)</code> returns <code>true</code>) that they
+    have identical hash codes
+    (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+    overriding this method, be sure to verify that the behavior is
+    consistent with the <code>equals</code> method.
+    </p>
+    <p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>the hash code value for the object.      </p></dd></dl>
+    <hr></hr>
+<a name="toString%28%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>toString</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns a string representation of the object.  
+    <p>
+    The default representation is platform dependent.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a string representation of the object.     </p></dd></dl>
+    <hr></hr>
+<a name="equals%28Any%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>equals</em>(<em>arg0</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method is used to compare the receiver object (<code>this</code>)
+    with the argument object (<code>arg0</code>) for equivalence.  
+    
+    <p>
+    The default implementations of this method is an <a
+    href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+    relation</a>:
+      <ul>
+      <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>, 
+      <code>x.equals(x)</code> should return <code>true</code>.</li>
+      <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type 
+      <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only 
+      if <code>y.equals(x)</code> returns <code>true</code>.</li>
+      <li>It is transitive: for any instances 
+      <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+      if <code>x.equals(y)</code> returns <code>true</code> and 
+      <code>y.equals(z)</code> returns 
+      <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+    </ul>
+    </p>
+    <p>
+    If you override this method, you should verify that
+    your implementation remains an equivalence relation.
+    Additionally, when overriding this method it is often necessary to
+    override <code>hashCode</code> to ensure that objects that are
+    "equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+    hash to the same <a href="Int.html"><code>Int</code></a>
+    (<code>o1.hashCode.equals(o2.hashCode)</code>).</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>arg0 - </code>the object to compare against this object for equality.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.    </p></dd></dl>
+    <hr></hr>
+<a name="productPrefix"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>productPrefix</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>
+      </dt>
+      <dd></dd>
+    </dl><dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Product">scala.Product</a>.<a href="#productPrefix" target="contentFrame" class="scala/Product">scala.Product.productPrefix</a>
+        </dd>
+      </dl><hr></hr>
+<a name="productArity"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>productArity</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl><dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Product">scala.Product</a>.<a href="#productArity" target="contentFrame" class="scala/Product">scala.Product.productArity</a>
+        </dd>
+      </dl><hr></hr>
+<a name="productElement%28Int%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>productElement</em>(<em>arg0</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+      </dt>
+      <dd></dd>
+    </dl><dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Product">scala.Product</a>.<a href="#productElement" target="contentFrame" class="scala/Product">scala.Product.productElement</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

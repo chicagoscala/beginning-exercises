@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait AbstractSuite in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  AbstractSuite</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/AbstractSuite"><code>org/scalatest/AbstractSuite.scala</code></a>]
+      </div><hr></hr>
+      <a name="AbstractSuite"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>AbstractSuite</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that defines abstract methods that are implemented in <code>Suite</code> that can
+ be overriden in stackable modification traits.
+
+ <p>
+ The main purpose of <code>AbstractSuite</code> is to differentiate core <code>Suite</code>
+ traits, such as <code>Suite</code>, <code>FunSuite</code>, and <code>Spec</code> from stackable
+ modification traits for <code>Suite</code>s such as <code>BeforeAndAfterEach</code>, <code>OneInstancePerTest</code>,
+ and <code>ParallelNestedSuiteExecution</code>. Because these stackable traits extend <code>AbstractSuite</code> 
+ instead of <code>Suite</code>, you can't define a suite by simply extending one of the stackable traits:
+ </p>
+
+ <pre>
+ class MySuite extends BeforeAndAfterEach // Won't compile
+ </pre>
+
+ <p>
+ Instead, you need to extend a core <code>Suite</code> trait and mix the stackable <code>BeforeAndAfterEach</code> trait
+ into that, like this:
+ </p>
+
+ <pre>
+ class MySuite extends FunSuite with BeforeAndAfterEach // Compiles fine
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/BeforeAndAfterAll.html" target="_self">BeforeAndAfterAll</a>, <a href="../../org/scalatest/BeforeAndAfterEach.html" target="_self">BeforeAndAfterEach</a>, <a href="../../org/scalatest/OneInstancePerTest.html" target="_self">OneInstancePerTest</a>, <a href="../../org/scalatest/SequentialNestedSuiteExecution.html" target="_self">SequentialNestedSuiteExecution</a>, <a href="../../org/scalatest/Suite.html" target="_self">Suite</a>, <a href="../../org/scalatest/concurrent/ConductorMethods.html" target="_self">ConductorMethods</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a></em>
+        (<em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>The total number of tests that are expected to run when this <code>Suite</code>'s <code>run</code> method is invoked.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#nestedSuites" target="_self">nestedSuites</a></em>
+         : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../org/scalatest/Suite.html" target="_self">Suite</a>]
+        
+        <div>A <code>List</code> of this <code>Suite</code> object's nested <code>Suite</code>s. If this <code>Suite</code> contains no nested <code>Suite</code>s,
+  this method returns an empty <code>List</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs this suite of tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a></em>
+        (<em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs zero to many of this suite's nested suites.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs a test.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs zero to many of this suite's tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#tags" target="_self">tags</a></em>
+         : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]
+        
+        <div>A <code>Map</code> whose keys are <code>String</code> tag names with which tests in this <code>Suite</code> are marked, and
+   whose values are the <code>Set</code> of test names marked with each tag.  If this <code>Suite</code> contains no tags, this
+   method returns an empty <code>Map</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#testNames" target="_self">testNames</a></em>
+         : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>An <code>Set</code> of test names. If this <code>Suite</code> contains no tests, this method returns an empty <code>Set</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected abstract def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/AbstractSuite.html#withFixture%28AbstractSuite.this.NoArgTest%29" target="_self">withFixture</a></em>
+        (<em>test</em> : <a href="../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs the passed test function with a fixture established by this method.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="withFixture%28AbstractSuite.this.NoArgTest%29"></a><dl>
+      <dt>
+        
+        <code>protected abstract</code>
+        <code>def</code>
+        <em>withFixture</em>(<em>test</em> : <a href="../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs the passed test function with a fixture established by this method.
+  
+   <p>
+   This method should set up the fixture needed by the tests of the
+   current suite, invoke the test function, and if needed, perform any clean
+   up needed after the test completes. Because the <code>NoArgTest</code> function
+   passed to this method takes no parameters, preparing the fixture will require
+   side effects, such as reassigning instance <code>var</code>s in this <code>Suite</code> or initializing
+   a globally accessible external database. If you want to avoid reassigning instance <code>var</code>s
+   you can use <a href="FixtureSuite.html">FixtureSuite</a>.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>test - </code>the no-arg test function to run with a fixture</dd></dl>
+    <hr></hr>
+<a name="run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>run</em>(<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs this suite of tests.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>an optional name of one test to execute. If <code>None</code>, all relevant tests should be executed.                   I.e., <code>None</code> acts like a wildcard that means execute all relevant tests in this <code>Suite</code>.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which to put nested <code>Suite</code>s to be executed                by another entity, such as concurrently by a pool of threads. If <code>None</code>, nested <code>Suite</code>s will be executed sequentially.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any passed parameter is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected abstract</code>
+        <code>def</code>
+        <em>runNestedSuites</em>(<em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs zero to many of this suite's nested suites.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which to put nested <code>Suite</code>s to be run                by another entity, such as concurrently by a pool of threads. If <code>None</code>, nested <code>Suite</code>s will be run sequentially.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any passed parameter is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected abstract</code>
+        <code>def</code>
+        <em>runTests</em>(<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs zero to many of this suite's tests.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>an optional name of one test to run. If <code>None</code>, all relevant tests should be run.                   I.e., <code>None</code> acts like a wildcard that means run all relevant tests in this <code>Suite</code>.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which instances of this <code>Suite</code> class                that are responsible for executing individual tests contained in this </code>Suite</code>, or groups of this <code>Suite</code>'s
+                tests, may be placed so as to be run
+                by another entity, such as concurrently by a pool of threads.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of <code>testName</code>, <code>reporter</code>, <code>stopper</code>, <code>groupsToInclude</code>,       <code>groupsToExclude</code>, or <code>configMap</code> is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected abstract</code>
+        <code>def</code>
+        <em>runTest</em>(<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>reporter</em> : <a href="../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>tracker</em> : <a href="../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs a test.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>the name of one test to execute.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of <code>testName</code>, <code>reporter</code>, <code>stopper</code>, <code>configMap</code>,       or <code>tracker</code> is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="testNames"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>An <code>Set</code> of test names. If this <code>Suite</code> contains no tests, this method returns an empty <code>Set</code>.
+ 
+  <p>
+  Although subclass and subtrait implementations of this method may return a <code>Set</code> whose iterator produces <code>String</code>
+  test names in a well-defined order, the contract of this method does not required a defined order. Subclasses are free to
+  implement this method and return test names in either a defined or undefined order.
+  </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="nestedSuites"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>nestedSuites</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../org/scalatest/Suite.html" target="_self">Suite</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>A <code>List</code> of this <code>Suite</code> object's nested <code>Suite</code>s. If this <code>Suite</code> contains no nested <code>Suite</code>s,
+  this method returns an empty <code>List</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="tags"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>A <code>Map</code> whose keys are <code>String</code> tag names with which tests in this <code>Suite</code> are marked, and
+   whose values are the <code>Set</code> of test names marked with each tag.  If this <code>Suite</code> contains no tags, this
+   method returns an empty <code>Map</code>.
+  
+   <p>
+   Subclasses may implement this method to define and/or discover tags in a custom manner, but overriding method implementations
+   should never return an empty <code>Set</code> as a value. If a tag has no tests, its name should not appear as a key in the
+   returned <code>Map</code>.
+   </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="expectedTestCount%28org.scalatest.Filter%29"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>def</code>
+        <em>expectedTestCount</em>(<em>filter</em> : <a href="../../org/scalatest/Filter.html" target="_self">Filter</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>The total number of tests that are expected to run when this <code>Suite</code>'s <code>run</code> method is invoked.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>filter - </code>a <code>Filter</code> with which to filter tests to count based on their tags</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

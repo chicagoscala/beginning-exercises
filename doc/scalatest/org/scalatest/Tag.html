@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class Tag in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">class  Tag</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/Tag"><code>org/scalatest/Tag.scala</code></a>]
+      </div><hr></hr>
+      <a name="Tag"></a><dl>
+      <dt>
+        
+        <code>abstract</code>
+        <code>class</code>
+        <em>Tag</em>(<code>val </code><em>name</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Abstract class whose subclasses can be used to tag tests in types <code>FunSuite</code>,
+ <code>Spec</code>, <code>FlatSpec</code>, <code>WordSpec</code>, <code>FeatureSpec</code>, and their
+ sister traits in the <code>org.scalatest.fixture</code> package. For example, if you define:
+
+ <pre>
+ object SlowTest extends Tag("SlowTest")
+ </pre>
+
+ then you can tag a test as a <code>SlowTest</code> in a <code>FunSuite</code> or <code>FixtureFunSuite</code> like this:
+ <pre>
+ import org.scalatest.FunSuite
+
+ class MySuite extends FunSuite {
+
+   test("my test", SlowTest) {
+     Thread.sleep(1000)
+   }
+ }
+ </pre>
+
+ <p>
+ or in a <code>Spec</code> or <code>FixtureSpec</code> like this:
+ </p>
+
+ <pre>
+ import org.scalatest.Spec
+
+ class MySpec extends Spec {
+
+   it("should sleep for a second", SlowTest) {
+     Thread.sleep(1000)
+   }
+ }
+ </pre>
+
+ <p>
+ or in a <code>FlatSpec</code> or <code>FixtureFlatSpec</code> like this:
+ </p>
+
+ <pre>
+ import org.scalatest.FlatSpec
+
+ class MySpec extends FlatSpec {
+
+   it should "sleep for a second" taggedAs(SlowTest) in {
+     Thread.sleep(1000)
+   }
+ }
+ </pre>
+
+ <p>
+ or in a <code>WordSpec</code> or <code>FixtureWordSpec</code> like this:
+ </p>
+
+ <pre>
+ import org.scalatest.WordSpec
+
+ class MySpec extends WordSpec {
+
+   "should sleep for a second" taggedAs(SlowTest) in {
+     Thread.sleep(1000)
+   }
+ }
+ </pre>
+
+ <p>
+ or in a <code>FeatureSpec</code> or <code>FixtureFeatureSpec</code> like this:
+ </p>
+
+ <pre>
+ import org.scalatest.FeatureSpec
+
+ class MySpec extends FeatureSpec {
+
+   scenario("should sleep for a second", SlowTest) {
+     Thread.sleep(1000)
+   }
+ }
+ </pre>
+
+ If you have created Java annotation interfaces for use as tag names in direct subclasses of <code>org.scalatest.Suite</code>,
+ then you may want to use group names on your <code>FunSuite</code>s and <code>Spec</code>s that match. To do so, simply 
+ pass the fully qualified names of the Java interface to the <code>Tag</code> constructor. For example, if you've
+ defined a Java annotation interface with fully qualified name, <code>com.mycompany.testtags.SlowTest</code>, then you could
+ create a matching group for <code>FunSuite</code>s like this:
+
+ <pre>
+ object SlowTest extends Tag("com.mycompany.testtags.SlowTest")
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/Group.html" target="_self">Group</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

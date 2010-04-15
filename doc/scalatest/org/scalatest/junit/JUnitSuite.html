@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait JUnitSuite in org.scalatest.junit</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/junit$package.html" target="_self">org.scalatest.junit</a>
+        <br></br>
+        <span class="entity">trait  JUnitSuite</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/junit/JUnitSuite"><code>org/scalatest/junit/JUnitSuite.scala</code></a>]
+      </div><hr></hr>
+      <a name="JUnitSuite"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>JUnitSuite</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/Suite.html" target="_self">Suite</a><code> with </code><a href="../../../org/scalatest/junit/AssertionsForJUnit.html" target="_self">AssertionsForJUnit</a></dd>
+    </dl>
+      <dl><dd>A suite of tests that can be run with either JUnit or ScalaTest. This trait allows you to write JUnit 4 tests
+ with ScalaTest's more concise assertion syntax as well as JUnit's assertions (<code>assertEquals</code>, etc.).
+ You create tests by defining methods that are annotated with <code>Test</code>, and can create fixtures with
+ methods annotated with <code>Before</code> and <code>After</code>. For example:
+
+ <pre>
+ import org.scalatest.junit.JUnitSuite
+ import scala.collection.mutable.ListBuffer
+ import _root_.org.junit.Test
+ import _root_.org.junit.Before
+
+ class TwoSuite extends JUnitSuite {
+
+   var sb: StringBuilder = _
+   var lb: ListBuffer[String] = _
+
+   @Before override def initialize() {
+     sb = new StringBuilder("ScalaTest is ")
+     lb = new ListBuffer[String]
+   }
+
+   @Test def verifyEasy() {
+     sb.append("easy!")
+     assert(sb.toString === "ScalaTest is easy!")
+     assert(lb.isEmpty)
+     lb += "sweet"
+   }
+
+   @Test def verifyFun() {
+     sb.append("fun!")
+     assert(sb.toString === "ScalaTest is fun!")
+     assert(lb.isEmpty)
+   }
+ }
+ </pre>
+
+ <p>
+ To execute <code>JUnitSuite</code>s with ScalaTest's <code>Runner</code>, you must include JUnit's jar file on the class path or runpath.
+ This version of <code>JUnitSuite</code> was tested with JUnit version 4.4.
+ </p>
+
+ <p>
+ Instances of this trait are not thread safe.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd><dd>Daniel Watson</dd><dd>Joel Neely</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a></em>
+        (<em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Returns the number of tests expected to be run by JUnit when <code>run</code> is invoked
+   on this <code>JUnitSuite</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>report</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Runs this suite of tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected override final def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a></em>
+        (<em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this trait's <code>run</code> method delegates to JUnit to run
+   its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected override final def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this traits's <code>run</code> method delegates to JUnit to run
+   its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected override final def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this trait's <code>run</code> method delegates to JUnit to run
+   its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#tags" target="_self">tags</a></em>
+         : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]
+        
+        <div>A <code>Map</code> whose keys are <code>String</code> tag names with which tests in this <code>Suite</code> are marked, and
+   whose values are the <code>Set</code> of test names marked with each tag.  If this <code>Suite</code> contains no tags, this
+   method returns an empty <code>Map</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#testNames" target="_self">testNames</a></em>
+         : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>Returns the set of test names that will be executed by JUnit when <code>run</code> is invoked
+   on an instance of this class, or the instance is passed directly to JUnit for running.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected override final def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitSuite.html#withFixture%28JUnitSuite.this.NoArgTest%29" target="_self">withFixture</a></em>
+        (<em>test</em> : <a href="../../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   class, given this class's <code>run</code> method delegates to JUnit to run
+   its tests.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Suite.html#nestedSuites" target="_self">nestedSuites</a>, <a href="../../../org/scalatest/Suite.html#execute%28%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28Map%5BString%2CAny%5D%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28String%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28String%2CMap%5BString%2CAny%5D%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#groups" target="_self">groups</a>, <a href="../../../org/scalatest/Suite.html#suiteName" target="_self">suiteName</a>, <a href="../../../org/scalatest/Suite.html#pending" target="_self">pending</a>, <a href="../../../org/scalatest/Suite.html#pendingUntilFixed%28%3D%3EUnit%29" target="_self">pendingUntilFixed</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="withFixture%28JUnitSuite.this.NoArgTest%29"></a><dl>
+      <dt>
+        
+        <code>protected override final</code>
+        <code>def</code>
+        <em>withFixture</em>(<em>test</em> : <a href="../../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   class, given this class's <code>run</code> method delegates to JUnit to run
+   its tests.
+  
+   <p>
+   The main purpose of this method implementation is to render a compiler error an attempt
+   to mix in a trait that overrides <code>withFixture</code>. Because this
+   trait does not actually use <code>withFixture</code>, the attempt to mix
+   in behavior would very likely not work.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>test - </code>the no-arg test function to run with a fixture</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#withFixture%28Suite.this.NoArgTest%29" target="_self">withFixture</a>
+        </dd>
+      </dl><hr></hr>
+<a name="runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected override final</code>
+        <code>def</code>
+        <em>runNestedSuites</em>(<em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this trait's <code>run</code> method delegates to JUnit to run
+   its tests.
+  
+   <p>
+   The main purpose of this method implementation is to render a compiler error an attempt
+   to mix in a trait that overrides <code>runNestedSuites</code>. Because this
+   trait does not actually use <code>runNestedSuites</code>, the attempt to mix
+   in behavior would very likely not work.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which to put nested <code>Suite</code>s to be run                by another entity, such as concurrently by a pool of threads. If <code>None</code>, nested <code>Suite</code>s will be run sequentially.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>UnsupportedOperationException - </code>always.</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a>
+        </dd>
+      </dl><hr></hr>
+<a name="runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected override final</code>
+        <code>def</code>
+        <em>runTests</em>(<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this trait's <code>run</code> method delegates to JUnit to run
+   its tests.
+  
+   <p>
+   The main purpose of this method implementation is to render a compiler error an attempt
+   to mix in a trait that overrides <code>runTests</code>. Because this
+   trait does not actually use <code>runTests</code>, the attempt to mix
+   in behavior would very likely not work.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>an optional name of one test to run. If <code>None</code>, all relevant tests should be run.                   I.e., <code>None</code> acts like a wildcard that means run all relevant tests in this <code>Suite</code>.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which to put nested <code>Suite</code>s to be run                by another entity, such as concurrently by a pool of threads. If <code>None</code>, nested <code>Suite</code>s will be run sequentially.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>UnsupportedOperationException - </code>always.</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a>
+        </dd>
+      </dl><hr></hr>
+<a name="runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>protected override final</code>
+        <code>def</code>
+        <em>runTest</em>(<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>reporter</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Throws <code>UnsupportedOperationException</code>, because this method is unused by this
+   trait, given this traits's <code>run</code> method delegates to JUnit to run
+   its tests.
+  
+   <p>
+   The main purpose of this method implementation is to render a compiler error an attempt
+   to mix in a trait that overrides <code>runTest</code>. Because this
+   trait does not actually use <code>runTest</code>, the attempt to mix
+   in behavior would very likely not work.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>the name of one test to run.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>UnsupportedOperationException - </code>always.</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a>
+        </dd>
+      </dl><hr></hr>
+<a name="testNames"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns the set of test names that will be executed by JUnit when <code>run</code> is invoked
+   on an instance of this class, or the instance is passed directly to JUnit for running.
+  
+   <p>
+   The iterator obtained by invoking <code>elements</code> on this
+   returned <code>Set</code> will produce the test names in their <em>natural order</em>, as determined by <code>String</code>'s
+   <code>compareTo</code> method. Nevertheless, this method is not consulted by JUnit when it
+   runs the tests, and JUnit may run the tests in any order.
+   </p></dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#testNames" target="_self">testNames</a>
+        </dd>
+      </dl><hr></hr>
+<a name="expectedTestCount%28org.scalatest.Filter%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>expectedTestCount</em>(<em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns the number of tests expected to be run by JUnit when <code>run</code> is invoked
+   on this <code>JUnitSuite</code>.
+  
+   <p>
+   If <code>tagsToInclude</code> in the passed <code>Filter</code> is defined, this class's
+   implementation of this method returns 0. Else this class's implementation of this method
+   returns the size of the set returned by <code>testNames</code> on the current instance,
+   less the number of tests that were annotated with <code>org.junit.Ignore</code>.
+   </p></dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a>
+        </dd>
+      </dl><hr></hr>
+<a name="tags"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>A <code>Map</code> whose keys are <code>String</code> tag names with which tests in this <code>Suite</code> are marked, and
+   whose values are the <code>Set</code> of test names marked with each tag.  If this <code>Suite</code> contains no tags, this
+   method returns an empty <code>Map</code>.
+  
+   <p>
+   This trait's implementation of this method uses Java reflection to discover any Java annotations attached to its test methods. The
+   fully qualified name of each unique annotation that extends <code>TagAnnotation</code> is considered a tag. This trait's
+   implementation of this method, therefore, places one key/value pair into to the
+   <code>Map</code> for each unique tag annotation name discovered through reflection. The mapped value for each tag name key will contain
+   the test method name, as provided via the <code>testNames</code> method. 
+   </p>
+  
+   <p>
+   Subclasses may override this method to define and/or discover tags in a custom manner, but overriding method implementations
+   should never return an empty <code>Set</code> as a value. If a tag has no tests, its name should not appear as a key in the
+   returned <code>Map</code>.
+   </p>
+   
+   <p>
+   <strong>Note, the <code>TagAnnotation</code> annotation was introduced in ScalaTest 1.0, when "groups" were renamed
+   to "tags." In 1.0 and 1.1, the <code>TagAnnotation</code> will continue to not be required by an annotation on a <code>Suite</code>
+   method. Any annotation on a <code>Suite</code> method will be considered a tag until 1.2, to give users time to add
+   <code>TagAnnotation</code>s on any tag annotations they made prior to the 1.0 release. From 1.2 onward, only annotations
+   themselves annotated by <code>TagAnnotation</code> will be considered tag annotations.</strong>
+   </p></dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#tags" target="_self">tags</a>
+        </dd>
+      </dl><hr></hr>
+<a name="run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>run</em>(<em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>report</em> : <a href="../../../org/scalatest/Reporter.html" target="_self">Reporter</a>, <em>stopper</em> : <a href="../../../org/scalatest/Stopper.html" target="_self">Stopper</a>, <em>filter</em> : <a href="../../../org/scalatest/Filter.html" target="_self">Filter</a>, <em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>distributor</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Distributor.html" target="_self">Distributor</a>], <em>tracker</em> : <a href="../../../org/scalatest/Tracker.html" target="_self">Tracker</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Runs this suite of tests.
+  
+   <p>If <code>testName</code> is <code>None</code>, this trait's implementation of this method
+   calls these two methods on this object in this order:</p>
+  
+   <ol>
+   <li><code>runNestedSuites(report, stopper, tagsToInclude, tagsToExclude, configMap, distributor)</code></li>
+   <li><code>runTests(testName, report, stopper, tagsToInclude, tagsToExclude, configMap)</code></li>
+   </ol>
+  
+   <p>
+   If <code>testName</code> is defined, then this trait's implementation of this method
+   calls <code>runTests</code>, but does not call <code>runNestedSuites</code>. This behavior
+   is part of the contract of this method. Subclasses that override <code>run</code> must take
+   care not to call <code>runNestedSuites</code> if <code>testName</code> is defined. (The
+   <code>OneInstancePerTest</code> trait depends on this behavior, for example.)
+   </p>
+  
+   <p>
+   Subclasses and subtraits that override this <code>run</code> method can implement them without
+   invoking either the <code>runTests</code> or <code>runNestedSuites</code> methods, which
+   are invoked by this trait's implementation of this method. It is recommended, but not required,
+   that subclasses and subtraits that override <code>run</code> in a way that does not
+   invoke <code>runNestedSuites</code> also override <code>runNestedSuites</code> and make it
+   final. Similarly it is recommended, but not required,
+   that subclasses and subtraits that override <code>run</code> in a way that does not
+   invoke <code>runTests</code> also override <code>runTests</code> (and <code>runTest</code>,
+   which this trait's implementation of <code>runTests</code> calls) and make it
+   final. The implementation of these final methods can either invoke the superclass implementation
+   of the method, or throw an <code>UnsupportedOperationException</code> if appropriate. The
+   reason for this recommendation is that ScalaTest includes several traits that override
+   these methods to allow behavior to be mixed into a <code>Suite</code>. For example, trait
+   <code>BeforeAndAfterEach</code> overrides <code>runTests</code>s. In a <code>Suite</code>
+   subclass that no longer invokes <code>runTests</code> from <code>run</code>, the
+   <code>BeforeAndAfterEach</code> trait is not applicable. Mixing it in would have no effect.
+   By making <code>runTests</code> final in such a <code>Suite</code> subtrait, you make
+   the attempt to mix <code>BeforeAndAfterEach</code> into a subclass of your subtrait
+   a compiler error. (It would fail to compile with a complaint that <code>BeforeAndAfterEach</code>
+   is trying to override <code>runTests</code>, which is a final method in your trait.) 
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>an optional name of one test to run. If <code>None</code>, all relevant tests should be run.                   I.e., <code>None</code> acts like a wildcard that means run all relevant tests in this <code>Suite</code>.</dd><dd><code>reporter - </code>the <code>Reporter</code> to which results will be reported</dd><dd><code>stopper - </code>the <code>Stopper</code> that will be consulted to determine whether to stop execution early.</dd><dd><code>filter - </code>a <code>Filter</code> with which to filter tests based on their tags</dd><dd><code>configMap - </code>a <code>Map</code> of key-value pairs that can be used by the executing <code>Suite</code> of tests.</dd><dd><code>distributor - </code>an optional <code>Distributor</code>, into which to put nested <code>Suite</code>s to be run                by another entity, such as concurrently by a pool of threads. If <code>None</code>, nested <code>Suite</code>s will be run sequentially.</dd><dd><code>tracker - </code>a <code>Tracker</code> tracking <code>Ordinal</code>s being fired by the current thread.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any passed parameter is <code>null</code>.</dd><dd><code>IllegalArgumentException - </code>if <code>testName</code> is defined, but no test with the specified test name       exists in this <code>Suite</code></dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>.<a href="../../../org/scalatest/Suite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

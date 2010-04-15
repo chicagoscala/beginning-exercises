@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait GivenWhenThen in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  GivenWhenThen</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/GivenWhenThen"><code>org/scalatest/GivenWhenThen.scala</code></a>]
+      </div><hr></hr>
+      <a name="GivenWhenThen"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>GivenWhenThen</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that contains methods named <code>given</code>, <code>when</code>, <code>then</code>, and <code>and</code>,
+ which take a string message and implicit <code>Informer</code>, and forward the message to the informer.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/GivenWhenThen$object.html" target="_self">GivenWhenThen</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/GivenWhenThen.html#and%28String%29" target="_self">and</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Forwards a message to an implicit <code>Informer</code>, preceded by "And ".</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/GivenWhenThen.html#given%28String%29" target="_self">given</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Forwards a message to an implicit <code>Informer</code>, preceded by "Given."</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/GivenWhenThen.html#then%28String%29" target="_self">then</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Forwards a message to an implicit <code>Informer</code>, preceded by "Then ".</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/GivenWhenThen.html#when%28String%29" target="_self">when</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Forwards a message to an implicit <code>Informer</code>, preceded by "When ".</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="given%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>given</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Forwards a message to an implicit <code>Informer</code>, preceded by "Given."</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>the message to forward to the passed informer</dd><dd><code>info - </code>the <code>Informer</code> to which to forward the message</dd></dl>
+    <hr></hr>
+<a name="when%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>when</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Forwards a message to an implicit <code>Informer</code>, preceded by "When ".</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>the message to forward to the passed informer</dd><dd><code>info - </code>the <code>Informer</code> to which to forward the message</dd></dl>
+    <hr></hr>
+<a name="then%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>then</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Forwards a message to an implicit <code>Informer</code>, preceded by "Then ".</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>the message to forward to the passed informer</dd><dd><code>info - </code>the <code>Informer</code> to which to forward the message</dd></dl>
+    <hr></hr>
+<a name="and%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>and</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<code>implicit </code><em>info</em> : <a href="../../org/scalatest/Informer.html" target="_self">Informer</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Forwards a message to an implicit <code>Informer</code>, preceded by "And ".</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>the message to forward to the passed informer</dd><dd><code>info - </code>the <code>Informer</code> to which to forward the message</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait Checkers in org.scalatest.prop</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/prop$package.html" target="_self">org.scalatest.prop</a>
+        <br></br>
+        <span class="entity">trait  Checkers</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/prop/Checkers"><code>org/scalatest/prop/Checkers.scala</code></a>]
+      </div><hr></hr>
+      <a name="Checkers"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>Checkers</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that contains several &#8220;check&#8221; methods that perform ScalaCheck property checks.
+ If ScalaCheck finds a test case for which a property doesn't hold, the problem will be reported as a ScalaTest test failure.
+ 
+ <p>
+ To use ScalaCheck, you specify properties and, in some cases, generators that generate test data. You need not always
+ create generators, because ScalaCheck provides many default generators for you that can be used in many situations.
+ ScalaCheck will use the generators to generate test data and with that data run tests that check that the property holds.
+ Property-based tests can, therefore, give you a lot more testing for a lot less code than assertion-based tests.
+ Here's an example of using ScalaCheck from a <code>JUnitSuite</code>:
+ </p>
+ <pre>
+ import org.scalatest.junit.JUnitSuite
+ import org.scalatest.prop.Checkers
+ import org.scalacheck.Arbitrary._
+ import org.scalacheck.Prop._
+
+ class MySuite extends JUnitSuite with Checkers {
+   @Test
+   def testConcat() {
+     check((a: List[Int], b: List[Int]) => a.size + b.size == (a ::: b).size)
+   }
+ }
+ </pre>
+ <p>
+ The <code>check</code> method, defined in <code>Checkers</code>, makes it easy to write property-based tests inside
+ ScalaTest, JUnit, and TestNG test suites. This example specifies a property that <code>List</code>'s <code>:::</code> method
+ should obey. ScalaCheck properties are expressed as function values that take the required
+ test data as parameters. ScalaCheck will generate test data using generators and 
+repeatedly pass generated data to the function. In this case, the test data is composed of integer lists named <code>a</code> and <code>b</code>.
+ Inside the body of the function, you see:
+ </p>
+ <pre>
+ a.size + b.size == (a ::: b).size
+ </pre>
+ <p>
+ The property in this case is a <code>Boolean</code> expression that will yield true if the size of the concatenated list is equal
+ to the size of each individual list added together. With this small amount
+ of code, ScalaCheck will generate possibly hundreds of value pairs for <code>a</code> and <code>b</code> and test each pair, looking for
+ a pair of integers for which the property doesn't hold. If the property holds true for every value ScalaCheck tries,
+ <code>check</code> returns normally. Otherwise, <code>check</code> will complete abruptly with a <code>TestFailedException</code> that
+ contains information about the failure, including the values that cause the property to be false.
+ </p>
+
+ <p>
+ For more information on using ScalaCheck properties, see the documentation for ScalaCheck, which is available
+ from <a href="http://code.google.com/p/scalacheck/">http://code.google.com/p/scalacheck/</a>.
+ </p>
+
+ <p>
+ To execute a suite that mixes in <code>Checkers</code> with ScalaTest's <code>Runner</code>, you must include ScalaCheck's jar file on the class path or runpath.
+ This version of <code>Checkers</code> was tested with ScalaCheck version 1.1.1. This trait must
+ be mixed into a ScalaTest <code>Suite</code>, because its self type is <code>org.scalatest.Suite</code>.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28org.scalacheck.Prop%29" target="_self">check</a></em>
+        (<em>p</em> : <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Check a property.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 3-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>A5</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>a5</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>s5</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 5-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28org.scalacheck.Prop%2Corg.scalacheck.Test.Params%29" target="_self">check</a></em>
+        (<em>p</em> : <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <em>prms</em> : <a href="" target="contentFrame" class="org/scalacheck/Test/Params">org.scalacheck.Test.Params</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Check a property with the given testing parameters.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 4-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>A5</em>, <em>A6</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>a5</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>s5</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>a6</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>], <code>implicit </code><em>s6</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 6-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 1-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29" target="_self">check</a></em>
+        [<em>A1</em>, <em>A2</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Convert the passed 2-arg function into a property, and check it.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="check%28%28A1%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%29%3D%3EP%29#A1" target="_self">A1</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 1-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28%28A1%2CA2%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>A2</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%29%3D%3EP%29#A2" target="_self">A2</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 2-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28%28A1%2CA2%2CA3%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%29%3D%3EP%29#A3" target="_self">A3</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 3-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%29%3D%3EP%29#A4" target="_self">A4</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 4-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>A5</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>a5</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>s5</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%29%3D%3EP%29#A5" target="_self">A5</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 5-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>[<em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em>, <em>A5</em>, <em>A6</em>, <em>P</em>](<em>f</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>, <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>) =&gt; <a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#P" target="_self">P</a>)(<code>implicit </code><em>p</em> : (<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#P" target="_self">P</a>) =&gt; <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <code>implicit </code><em>a1</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>s1</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A1" target="_self">A1</a>], <code>implicit </code><em>a2</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>s2</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A2" target="_self">A2</a>], <code>implicit </code><em>a3</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>s3</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A3" target="_self">A3</a>], <code>implicit </code><em>a4</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>s4</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A4" target="_self">A4</a>], <code>implicit </code><em>a5</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>s5</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A5" target="_self">A5</a>], <code>implicit </code><em>a6</em> : <a href="" target="contentFrame" class="org/scalacheck/Arbitrary">org.scalacheck.Arbitrary</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>], <code>implicit </code><em>s6</em> : <a href="" target="contentFrame" class="org/scalacheck/Shrink">org.scalacheck.Shrink</a>[<a href="../../../org/scalatest/prop/Checkers.html#check%28%28A1%2CA2%2CA3%2CA4%2CA5%2CA6%29%3D%3EP%29#A6" target="_self">A6</a>]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Convert the passed 6-arg function into a property, and check it.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be converted into a property and checked</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28org.scalacheck.Prop%2Corg.scalacheck.Test.Params%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>(<em>p</em> : <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>, <em>prms</em> : <a href="" target="contentFrame" class="org/scalacheck/Test/Params">org.scalacheck.Test.Params</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Check a property with the given testing parameters.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>p - </code>the property to check</dd><dd><code>prms - </code>the test parameters</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr>
+<a name="check%28org.scalacheck.Prop%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>check</em>(<em>p</em> : <a href="" target="contentFrame" class="org/scalacheck/Prop">org.scalacheck.Prop</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Check a property.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>p - </code>the property to check</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>TestFailedException - </code>if a test case is discovered for which the property doesn't hold.</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

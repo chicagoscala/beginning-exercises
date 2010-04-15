@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.verb</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Class that supports shared test registration via instances referenced from the <code>behave</code> field of <code>Spec</code>s,
+ <code>FlatSpec</code>s, and <code>WordSpec</code>s as well as instance of their sister traits, 
+ <code>FixtureSpec</code>, <code>FixtureFlatSpec</code>, and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/CanVerb.html" target="_self">CanVerb</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Provides an implicit conversion that adds <code>can</code> methods to <code>String</code>
+ to support the syntax of <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>,
+ and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Provides an implicit conversion that adds <code>must</code> methods to <code>String</code>
+ to support the syntax of <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>,
+ and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/ResultOfAfterWordApplication.html" target="_self">ResultOfAfterWordApplication</a></em>
+        (<code>val </code><em>text</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>f</em> : () =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Class that supports the use of <em>after words</em> in <code>WordSpec</code>
+ and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/ResultOfStringPassedToVerb.html" target="_self">ResultOfStringPassedToVerb</a></em>
+        (<code>val </code><em>verb</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>rest</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Abstract class that supports test registration in <code>FlatSpec</code>
+ and <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/ResultOfTaggedAsInvocation.html" target="_self">ResultOfTaggedAsInvocation</a></em>
+        (<code>val </code><em>verb</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>rest</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>tags</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../org/scalatest/Tag.html" target="_self">Tag</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Supports the registration of tagged tests in shorthand form in <code>FlatSpec</code>
+ and <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/ShouldVerb.html" target="_self">ShouldVerb</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Provides an implicit conversion that adds <code>should</code> methods to <code>String</code>
+ to support the syntax of <code>FlatSpec</code>, <code>WordSpec</code>, <code>FixtureFlatSpec</code>,
+ and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/verb/StringVerbBlockRegistration.html" target="_self">StringVerbBlockRegistration</a></em>
+        <code> extends </code>(<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, () =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Class that provides a role-specific type for an implicit conversion used to support
+ the registration of subject descriptions in <code>WordSpec</code> and <code>FixtureWordSpec</code>.</div>
+      </td>
+    </tr>        
+        </table>
+</body>
+      </html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.events</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/Event.html" target="_self">Event</a></em>
+        <code> extends </code><a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../org/scalatest/events/Event.html" target="_self">Event</a>]
+        
+        <div>A base class for the events that can be passed to the report function passed
+ to the <code>execute</code> method of a <code>Suite</code>.
+
+ Will have a sealed abstract InfoProvided message with three final concrete subclasses,
+ RunInfoProvided, SuiteInfoProvided, TestInfoProvided. Anything that starts with Run just
+ has runStamp and ordinal; Suite has those plus suiteStamp; Test has those plus testStamp.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>sealed abstract class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Abstract class for the optional formatter objects that must be passed to the <code>Event</code>s reported
+ during a ScalaTest run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/IndentedText.html" target="_self">IndentedText</a></em>
+        (<code>val </code><em>formattedText</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>rawText</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>indentationLevel</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)<code> extends </code><a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>A <code>Formatter</code> providing information that enables reporters to create more stylized output.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/InfoProvided.html" target="_self">InfoProvided</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>nameInfo</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/NameInfo.html" target="_self">NameInfo</a>], <code>val </code><em>aboutAPendingTest</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>], <code>val </code><em>throwable</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event used to provide information that is not appropriate to report via any other <code>Event</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/NameInfo.html" target="_self">NameInfo</a></em>
+        (<code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>])<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Class that holds information about names for an <code>InfoProvided</code> event.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a></em>
+        (<code>val </code><em>runStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>private </code><em>stamps</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>])<code> extends </code><a href="" target="contentFrame" class="scala/Ordered">scala.Ordered</a>[<a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>]
+        
+        <div>Class used to specify a sequential order for events reported during a test run, so they
+ can be arranged in that order in a report even if the events were fired in some other order
+ during concurrent or distributed execution.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunAborted.html" target="_self">RunAborted</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>throwable</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>summary</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Summary.html" target="_self">Summary</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a runner encountered an error while attempting to run a suite of tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunCompleted.html" target="_self">RunCompleted</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>summary</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Summary.html" target="_self">Summary</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a runner has completed running a suite of tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunStarting.html" target="_self">RunStarting</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>testCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>configMap</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a runner is about run a suite of tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunStopped.html" target="_self">RunStopped</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>summary</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Summary.html" target="_self">Summary</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a runner has stopped running a suite of tests prior to completion, likely
+ because of a stop request.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteAborted.html" target="_self">SuiteAborted</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>throwable</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates the execution of a suite of tests has aborted, likely because of an error, prior
+ to completion.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite of tests has completed executing.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteStarting.html" target="_self">SuiteStarting</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite of tests is about to start executing.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/Summary.html" target="_self">Summary</a></em>
+        (<code>val </code><em>testsSucceededCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>testsFailedCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>testsIgnoredCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>testsPendingCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>suitesCompletedCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>suitesAbortedCount</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)<code> extends </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Class each of whose instances hold summary information about one ScalaTest run.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestFailed.html" target="_self">TestFailed</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>throwable</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite (or other entity) has completed running a test that failed.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestIgnored.html" target="_self">TestIgnored</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite (or other entity) has ignored a test.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestPending.html" target="_self">TestPending</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a test is pending, <em>i.e.</em>, it hasn't yet been implemented.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestStarting.html" target="_self">TestStarting</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite (or other entity) is about to start running a test.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestSucceeded.html" target="_self">TestSucceeded</a></em>
+        (<code>val </code><em>ordinal</em> : <a href="../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <code>val </code><em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <code>val </code><em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <code>val </code><em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <code>val </code><em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>threadName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>timeStamp</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="../../org/scalatest/events/Event.html" target="_self">Event</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>Event that indicates a suite (or other entity) has completed running a test that succeeded.</div>
+      </td>
+    </tr>        
+        </table>
+<table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Object Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/IndentedText$object.html" target="_self">IndentedText</a></em>
+        <code> extends </code>(<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) =&gt; <a href="../../org/scalatest/events/IndentedText.html" target="_self">IndentedText</a>
+        
+        
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/InfoProvided$object.html" target="_self">InfoProvided</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="InfoProvided.html"><code>InfoProvided</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>InfoProvided</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>case object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/MotionToSuppress$object.html" target="_self">MotionToSuppress</a></em>
+        <code> extends </code><a href="../../org/scalatest/events/Formatter.html" target="_self">Formatter</a><code> with </code><a href="" target="contentFrame" class="scala/Product">scala.Product</a>
+        
+        <div>A <code>Formatter</code> that indicates reporters may wish to suppress reporting of an <code>Event</code>.
+ "Suppress" means that the event won't be reported to the user.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/NameInfo$object.html" target="_self">NameInfo</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for case class <a href="NameInfo.html"><code>NameInfo</code></a>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunAborted$object.html" target="_self">RunAborted</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="RunAborted.html"><code>RunAborted</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>RunAborted</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunCompleted$object.html" target="_self">RunCompleted</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="RunCompleted.html"><code>RunCompleted</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>RunCompleted</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunStarting$object.html" target="_self">RunStarting</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="RunStarting.html"><code>RunStarting</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>RunStarting</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/RunStopped$object.html" target="_self">RunStopped</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="RunStopped.html"><code>RunStopped</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>RunStopped</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteAborted$object.html" target="_self">SuiteAborted</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="SuiteAborted.html"><code>SuiteAborted</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>SuiteAborted</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteCompleted$object.html" target="_self">SuiteCompleted</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="SuiteCompleted.html"><code>SuiteCompleted</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>SuiteCompleted</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/SuiteStarting$object.html" target="_self">SuiteStarting</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="SuiteStarting.html"><code>SuiteStarting</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>SuiteStarting</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/Summary$object.html" target="_self">Summary</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for case class <a href="Summary.html"><code>Summary</code></a>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestFailed$object.html" target="_self">TestFailed</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="TestFailed.html"><code>TestFailed</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>TestFailed</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestIgnored$object.html" target="_self">TestIgnored</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="TestIgnored.html"><code>TestIgnored</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>TestIgnored</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestPending$object.html" target="_self">TestPending</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="TestPending.html"><code>TestPending</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>TestPending</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestStarting$object.html" target="_self">TestStarting</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="TestStarting.html"><code>TestStarting</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>TestStarting</code> objects.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/events/TestSucceeded$object.html" target="_self">TestSucceeded</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Companion object for the <a href="TestSucceeded.html"><code>TestSucceeded</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>TestSucceeded</code> objects.</div>
+      </td>
+    </tr>        
+        </table></body>
+      </html>

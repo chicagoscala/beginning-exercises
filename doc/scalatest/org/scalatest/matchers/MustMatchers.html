@@ -1,0 +1,2079 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait MustMatchers in org.scalatest.matchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers$package.html" target="_self">org.scalatest.matchers</a>
+        <br></br>
+        <span class="entity">trait  MustMatchers</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/MustMatchers"><code>org/scalatest/matchers/MustMatchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="MustMatchers"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>MustMatchers</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a><code> with </code><a href="../../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a></dd>
+    </dl>
+      <dl><dd>Trait that provides a domain specific language (DSL) for expressing assertions in tests
+ using the word <code>must</code>. (If you prefer the word <code>should</code>, you can alternatively
+ mix in trait <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a>.) For example, if you mix <code>MustMatchers</code> into
+ a suite class, you can write an equality assertion in that suite like this:
+ 
+ <pre class="indent">
+ object must equal (3)
+ </pre>
+ 
+ <p>
+ Here <code>object</code> is a variable, and can be of any type. If the object is an
+ <code>Int</code> with the value 3, execution will continue (<em>i.e.</em>, the expression will result
+ in the unit value, <code>()</code>). Otherwise, a <code>TestFailedException</code>
+ will be thrown with a detail message that explains the problem, such as <code>"7 did not equal 3"</code>.
+ This <code>TestFailedException</code> will cause the test to fail.
+ </p>
+ 
+ <p>
+ The <code>left must equal (right)</code> syntax works by calling <code>==</code>  on the <code>left</code>
+ value, passing in the <code>right</code> value, on every type except arrays. If <code>left</code> is an array, <code>deepEquals</code>
+ will be invoked on <code>left</code>, passing in <code>right</code>. Thus, even though this expression
+ will yield false, because <code>Array</code>'s <code>equals</code> method compares object identity:
+ </p>
+ 
+ <pre class="indent">
+ Array(1, 2) == Array(1, 2) // yields false
+ </pre>
+
+ <p>
+ The following expression will <em>not</em> result in a <code>TestFailedException</code>, because <code>deepEquals</code> compares
+ the two arrays structurally, taking into consideration the equality of the array's contents:
+ </p>
+
+ <pre class="indent">
+ Array(1, 2) must equal (Array(1, 2)) // succeeds (i.e., does not throw TestFailedException)
+ </pre>
+
+ <p>
+ If you ever do want to verify that two arrays are actually the same object (have the same identity), you can use the
+ <code>be theSameInstanceAs</code> syntax, described below.
+ </p>
+
+ <h2>Checking size and length</h2>
+ 
+ <p>
+ You can check the size or length of just about any type of object for which it
+ would make sense. Here's how checking for length looks:
+ </p>
+ <pre class="indent">
+ object must have length (3)
+ </pre>
+ 
+ <p>
+Size is similar:
+ </p>
+ 
+ <pre class="indent">
+ object must have size (10)
+ </pre>
+ 
+ <p>
+ The <code>length</code> syntax can be used with any object that has a field or method named <code>length</code>
+ or a method named <code>getLength</code>.   Similarly, the <code>size</code> syntax can be used with any
+ object that has a field or method named <code>size</code> or a method named <code>getSize</code>.
+ The type of a <code>length</code> or <code>size</code> field, or return type of a method, must be either <code>Int</code>
+ or <code>Long</code>. Any such method must take no parameters. (The Scala compiler will ensure at compile time that
+ the object on which <code>must</code> is being invoked has the appropriate structure.)
+ </p>
+ 
+ <h2>Checking strings</h2>
+ 
+ <p>
+ You can check for whether a string starts with, ends with, or includes a substring like this:
+ </p>
+ 
+ <pre class="indent">
+ string must startWith ("Hello")
+ string must endWith ("world")
+ string must include ("seven")
+ </pre>
+ 
+ <p>
+ You can check for whether a string starts with, ends with, or includes a regular expression, like this:
+ </p>
+ 
+ <pre class="indent">
+ string must startWith regex ("Hel*o")
+ string must endWith regex ("wo.ld")
+ string must include regex ("wo.ld")
+ </pre>
+ 
+ <p>
+ And you can check whether a string fully matches a regular expression, like this:
+ </p>
+ 
+ <pre class="indent">
+ string must fullyMatch regex ("""(-)?(\d+)(\.\d*)?""")
+ </pre>
+ 
+ <p>
+ The regular expression passed following the <code>regex</code> token can be either a <code>String</code>
+ or a <code>scala.util.matching.Regex</code>.
+ </p>
+
+ <h2>Greater and less than</h2>
+ <p>
+ You can check whether any type that is, or can be implicitly converted to,
+ an <code>Ordered[T]</code> is greater than, less than, greater than or equal, or less
+ than or equal to a value of type <code>T</code>. The syntax is:
+ </p>
+ <pre class="indent">
+ one must be < (7)
+ one must be > (0)
+ one must be <= (7)
+ one must be >= (0)
+ </pre>
+ 
+ <h2>Checking equality with <code>be ===</code></h2>
+
+ <p>
+ An alternate way to check for equality of two objects is to use <code>be</code> with
+ <code>===</code>. Here's an example:
+ </p>
+
+ <pre>
+ object must be === (3)
+ </pre>
+
+ <p>
+ Here <code>object</code> is a variable, and can be of any type. If the object is an
+ <code>Int</code> with the value 3, execution will continue (<em>i.e.</em>, the expression will result
+ in the unit value, <code>()</code>). Otherwise, a <code>TestFailedException</code>
+ will be thrown with a detail message that explains the problem, such as <code>"7 was not equal to 3"</code>.
+ This <code>TestFailedException</code> will cause the test to fail.
+ </p>
+
+ <p>
+ The <code>left must be === (right)</code> syntax works by calling <code>==</code>  on the <code>left</code>
+ value, passing in the <code>right</code> value, on every type except arrays. If <code>left</code> is an array, <code>deepEquals</code>
+ will be invoked on <code>left</code>, passing in <code>right</code>. Thus, even though this expression
+ will yield false, because <code>Array</code>'s <code>equals</code> method compares object identity:
+ </p>
+
+ <pre class="indent">
+ Array(1, 2) == Array(1, 2) // yields false
+ </pre>
+
+ <p>
+ The following expression will <em>not</em> result in a <code>TestFailedException</code>, because <code>deepEquals</code> compares
+ the two arrays structurally, taking into consideration the equality of the array's contents:
+ </p>
+
+ <pre class="indent">
+ Array(1, 2) must be === (Array(1, 2)) // succeeds (i.e., does not throw TestFailedException)
+ </pre>
+
+ <p>
+ If you ever do want to verify that two arrays are actually the same object (have the same identity), you can use the
+ <code>be theSameInstanceAs</code> syntax, described below.
+ </p>
+
+ <h2>Checking <code>Boolean</code> properties with <code>be</code></h2>
+ 
+ <p>
+ If an object has a method that takes no parameters and returns boolean, you can check
+ it by placing a <code>Symbol</code> (after <code>be</code>) that specifies the name
+ of the method (excluding an optional prefix of "<code>is</code>"). A symbol literal
+ in Scala begins with a tick mark and ends at the first non-identifier character. Thus,
+ <code>'empty</code> results in a <code>Symbol</code> object at runtime, as does
+ <code>'defined</code> and <code>'file</code>. Here's an example:
+ </p>
+ 
+ <pre class="indent">
+ emptySet must be ('empty)
+ </pre>
+ 
+ Given this code, ScalaTest will use reflection to look on the object referenced from
+ <code>emptySet</code> for a method that takes no parameters and results in <code>Boolean</code>,
+ with either the name <code>empty</code> or <code>isEmpty</code>. If found, it will invoke
+ that method. If the method returns <code>true</code>, execution will continue. But if it returns
+ <code>false</code>, a <code>TestFailedException</code> will be thrown that will contain a detail message, such as:
+ 
+ <pre class="indent">
+ Set(1, 2, 3) was not empty
+ </pre>
+ 
+ <p>
+ This <code>be</code> syntax can be used with any type.  If the object does
+ not have an appropriately named predicate method, you'll get a <code>TestFailedException</code>
+ at runtime with a detail message that explains the problem.
+ (For the details on how a field or method is selected during this
+ process, see the documentation for <a href="Matchers.BeWord.html"><code>BeWord</code></a>.)
+ </p>
+ 
+ <p>
+ If you think it reads better, you can optionally put <code>a</code> or <code>an</code> after
+ <code>be</code>. For example, <code>java.io.File</code> has two predicate methods,
+ <code>isFile</code> and <code>isDirectory</code>. Thus with a <code>File</code> object
+ named <code>temp</code>, you could write:
+ </p>
+ 
+ <pre class="indent">
+ temp must be a ('file)
+ </pre>
+ 
+ <p>
+ Or, given <code>java.awt.event.KeyEvent</code> has a method <code>isActionKey</code> that takes
+ no arguments and returns <code>Boolean</code>, you could assert that a <code>KeyEvent</code> is
+ an action key with:
+</p>
+
+ <pre class="indent">
+ keyEvent must be an ('actionKey)
+ </pre>
+ 
+ <p>
+ If you prefer to check <code>Boolean</code> properties in a type-safe manner, you can use a <code>BePropertyMatcher</code>.
+ This would allow you to write expressions such as:
+ </p>
+
+ <pre class="indent">
+ emptySet must be (empty)
+ temp must be a (file)
+ keyEvent must be an (actionKey)
+ </pre>
+ 
+ <p>
+ These expressions would fail to compile if <code>must</code> is used on an inappropriate type, as determined
+ by the type parameter of the <code>BePropertyMatcher</code> being used. (For example, <code>file</code> in this example
+ would likely be of type <code>BePropertyMatcher[java.io.File]</code>. If used with an appropriate type, such an expression will compile
+ and at run time the <code>Boolean</code> property method or field will be accessed directly; <em>i.e.</em>, no reflection will be used.
+ See the documentation for <a href="BePropertyMatcher.html"><code>BePropertyMatcher</code></a> for more information.
+ </p>
+
+ <h2>Using custom <code>BeMatchers</code></h2>
+
+ If you want to create a new way of using <code>be</code>, which doesn't map to an actual property on the
+ type you care about, you can create a <code>BeMatcher</code>. You could use this, for example, to create <code>BeMatcher[Int]</code>
+ called <code>odd</code>, which would match any odd <code>Int</code>, and <code>even</code>, which would match
+ any even <code>Int</code>. 
+ Given this pair of <code>BeMatcher</code>s, you could check whether an <code>Int</code> was odd or even with expressions like:
+ </p>
+
+ <pre class="indent">
+ num must be (odd)
+ num must not be (even)
+ </pre>
+
+ For more information, see the documentation for <a href="BeMatcher.html"><code>BeMatcher</code></a>.
+
+ <h2>Checking object identity</h2>
+ 
+ <p>
+ If you need to check that two references refer to the exact same object, you can write:
+ </p>
+ 
+ <pre class="indent">
+ ref1 must be theSameInstanceAs (ref2)
+ </pre>
+ 
+ <h2>Checking numbers against a range</h2>
+ 
+ <p>
+ To check whether a floating point number has a value that exactly matches another, you
+ can use <code>must equal</code>:
+ </p>
+ 
+ <pre class="indent">
+ sevenDotOh must equal (7.0)
+ </pre>
+ 
+ <p>
+ Often, however, you may want to check whether a floating point number is within a
+ range. You can do that using <code>be</code> and <code>plusOrMinus</code>, like this:
+ </p>
+ 
+ <pre class="indent">
+ sevenDotOh must be (6.9 plusOrMinus 0.2)
+ </pre>
+ 
+ <p>
+ This expression will cause a <code>TestFailedException</code> to be thrown if the floating point
+ value, <code>sevenDotOh</code> is outside the range <code>6.7</code> to <code>7.1</code>.
+ You can also use <code>plusOrMinus</code> with integral types, for example:
+ </p>
+ 
+ <pre class="indent">
+ seven must be (6 plusOrMinus 2)
+ </pre>
+ 
+ <h2>Iterables, collections, sequences, and maps</h2>
+ 
+ <p>
+ You can use some of the syntax shown previously with <code>Iterable</code> and its
+ subtypes. For example, you can check whether an <code>Iterable</code> is <code>empty</code>,
+ like this:
+ </p>
+ 
+ <pre class="indent">
+ iterable must be ('empty)
+ </pre>
+ 
+ <p>
+ You can check the length of an <code>Seq</code> (<code>Array</code>, <code>List</code>, etc.),
+ like this:
+ </p>
+ 
+ <pre class="indent">
+ array must have length (3)
+ list must have length (9)
+ </pre>
+ 
+ <p>
+ You can check the size of any <code>Collection</code>, like this:
+ </p>
+ 
+ <pre class="indent">
+ map must have size (20)
+ set must have size (90)
+ </pre>
+ 
+ <p>
+ In addition, you can check whether an <code>Iterable</code> contains a particular
+ element, like this:
+ </p>
+ 
+ <pre class="indent">
+ iterable must contain ("five")
+ </pre>
+ 
+ <p>
+ You can also check whether a <code>Map</code> contains a particular key, or value, like this:
+ </p>
+ 
+ <pre class="indent">
+ map must contain key (1)
+ map must contain value ("Howdy")
+ </pre>
+ 
+ <h2>Java collections and maps</h2>
+ 
+ <p>
+ You can use similar syntax on Java collections (<code>java.util.Collection</code>) and maps (<code>java.util.Map</code>).
+ For example, you can check whether a Java <code>Collection</code> or <code>Map</code> is <code>empty</code>,
+ like this:
+ </p>
+ 
+ <pre class="indent">
+ javaCollection must be ('empty)
+ javaMap must be ('empty)
+ </pre>
+ 
+ <p>
+ Even though Java's <code>List</code> type doesn't actually have a <code>length</code> or <code>getLength</code> method,
+ you can nevertheless check the length of a Java <code>List</code> (<code>java.util.List</code>) like this:
+ </p>
+ 
+ <pre class="indent">
+ javaList must have length (9)
+ </pre>
+ 
+ <p>
+ You can check the size of any Java <code>Collection</code> or <code>Map</code>, like this:
+ </p>
+ 
+ <pre class="indent">
+ javaMap must have size (20)
+ javaSet must have size (90)
+ </pre>
+ 
+ <p>
+ In addition, you can check whether a Java <code>Collection</code> contains a particular
+ element, like this:
+ </p>
+ 
+ <pre class="indent">
+ javaCollection must contain ("five")
+ </pre>
+ 
+ <p>
+ One difference to note between the syntax supported on Java collections and that of Scala
+ iterables is that you can't use <code>contain (...)</code> syntax with a Java <code>Map</code>.
+ Java differs from Scala in that its <code>Map</code> is not a subtype of its <code>Collection</code> type.
+ If you want to check that a Java <code>Map</code> contains a specific key/value pair, the best approach is
+ to invoke <code>entrySet</code> on the Java <code>Map</code> and check that entry set for the appropriate
+ element (a <code>java.util.Map.Entry</code>) using <code>contain (...)</code>.
+ </p>
+
+ <p>
+ Despite this difference, the other (more commonly used) map matcher syntax works just fine on Java <code>Map</code>s.
+ You can, for example, check whether a Java <code>Map</code> contains a particular key, or value, like this:
+ </p>
+ 
+ <pre class="indent">
+ javaMap must contain key (1)
+ javaMap must contain value ("Howdy")
+ </pre>
+ 
+ <h2>Be as an equality comparison</h2>
+ 
+ <p>
+ All uses of <code>be</code> other than those shown previously perform an equality comparison. In other words, they work
+ the same as <code>equals</code>. This redundance between <code>be</code> and <code>equals</code> exists because it enables syntax
+ that sometimes sounds more natural. For example, instead of writing: 
+ </p>
+ 
+ <pre class="indent">
+ result must equal (null)
+ </pre>
+ 
+ <p>
+ You can write:
+ </p>
+ 
+ <pre class="indent">
+ result must be (null)
+ </pre>
+ 
+ <p>
+ (Hopefully you won't write that too much given <code>null</code> is error prone, and <code>Option</code>
+ is usually a better, well, option.) 
+ Here are some other examples of <code>be</code> used for equality comparison:
+ </p>
+ 
+ <pre class="indent">
+ sum must be (7.0)
+ boring must be (false)
+ fun must be (true)
+ list must be (Nil)
+ option must be (None)
+ option must be (Some(1))
+ </pre>
+ 
+ <p>
+ As with <code>equal</code>, using <code>be</code> on arrays results in <code>deepEquals</code> being called, not <code>equals</code>. As a result,
+ the following expression would <em>not</em> throw a <code>TestFailedException</code>:
+ </p>
+
+ <pre class="indent">
+ Array(1, 2) must be (Array(1, 2)) // succeeds (i.e., does not throw TestFailedException)
+ </pre>
+
+ <p>
+ Because <code>be</code> is used in several ways in ScalaTest matcher syntax, just as it is used in many ways in English, one
+ potential point of confusion in the event of a failure is determining whether <code>be</code> was being used as an equality comparison or
+ in some other way, such as a property assertion. To make it more obvious when <code>be</code> is being used for equality, the failure
+ messages generated for those equality checks will include the word <code>equal</code> in them. For example, if this expression fails with a
+ <code>TestFailedException</code>:
+ </p>
+
+ <pre class="indent">
+ option must be (Some(1))
+ </pre>
+
+ <p>
+ The detail message in that <code>TestFailedException</code> will include the words <code>"equal to"</code> to signify <code>be</code>
+ was in this case being used for equality comparison:
+ </p>
+
+ <pre class="indent">
+ Some(2) was not equal to Some(1)
+ </pre>
+
+ <h2>Being negative</h2>
+ 
+ <p>
+ If you wish to check the opposite of some condition, you can simply insert <code>not</code> in the expression.
+ Here are a few examples:
+ </p>
+ 
+ <pre class="indent">
+ object must not be (null)
+ sum must not be <= (10)
+ mylist must not equal (yourList)
+ string must not startWith ("Hello")
+ </pre>
+ 
+ <h2>Logical expressions with <code>and</code> and <code>or</code></h2>
+ 
+ <p>
+ You can also combine matcher expressions with <code>and</code> and/or <code>or</code>, however,
+ you must place parentheses or curly braces around the <code>and</code> or <code>or</code> expression. For example, 
+ this <code>and</code>-expression would not compile, because the parentheses are missing:
+ </p>
+ 
+ <pre class="indent">
+ map must contain key ("two") and not contain value (7) // ERROR, parentheses missing!
+ </pre>
+ 
+ <p>
+ Instead, you need to write:
+ </p>
+ 
+ <pre class="indent">
+ map must (contain key ("two") and not contain value (7))
+ </pre>
+ 
+ <p>
+ Here are some more examples:
+ </p>
+ 
+ <pre class="indent">
+ number must (be > (0) and be <= (10))
+ option must (equal (Some(List(1, 2, 3))) or be (None))
+ string must (
+   equal ("fee") or
+   equal ("fie") or
+   equal ("foe") or
+   equal ("fum")
+ )
+ </pre>
+ 
+ <p>
+ Two differences exist between expressions composed of these <code>and</code> and <code>or</code> operators and the expressions you can write
+ on regular <code>Boolean</code>s using its <code>&&</code> and <code>||</code> operators. First, expressions with <code>and</code>
+ and <code>or</code> do not short-circuit. The following contrived expression, for example, would print <code>"hello, world!"</code>:
+ </p>
+
+ <pre class="indent">
+ "yellow" must (equal ("blue") and equal { println("hello, world!"); "green" })
+ </pre>
+ 
+ <p>
+ In other words, the entire <code>and</code> or <code>or</code> expression is always evaluated, so you'll see any side effects
+ of the right-hand side even if evaluating
+ only the left-hand side is enough to determine the ultimate result of the larger expression. Failure messages produced by these
+ expressions will "short-circuit," however,
+ mentioning only the left-hand side if that's enough to determine the result of the entire expression. This "short-circuiting" behavior
+ of failure messages is intended
+ to make it easier and quicker for you to ascertain which part of the expression caused the failure. The failure message for the previous
+ expression, for example, would be:
+ </p>
+ 
+ <pre class="indent">
+ "yellow" did not equal "blue"
+ </pre>
+ 
+ <p>
+ Most likely this lack of short-circuiting would rarely be noticeable, because evaluating the right hand side will usually not
+ involve a side effect. One situation where it might show up, however, is if you attempt to <code>and</code> a <code>null</code> check on a variable with an expression
+ that uses the variable, like this:
+ </p>
+
+ <pre class="indent">
+ map must (not be (null) and contain key ("ouch"))
+ </pre>
+ 
+ <p>
+ If <code>map</code> is <code>null</code>, the test will indeed fail, but with a <code>NullPointerException</code>, not a
+ <code>TestFailedException</code>. Here, the <code>NullPointerException</code> is the visible right-hand side effect. To get a
+ <code>TestFailedException</code>, you would need to check each assertion separately:
+ </p>
+
+ <pre class="indent">
+ map must not be (null)
+ map must contain key ("ouch")
+ </pre>
+ 
+ <p>
+ If <code>map</code> is <code>null</code> in this case, the <code>null</code> check in the first expression will fail with
+ a <code>TestFailedException</code>, and the second expression will never be executed.
+ </p>
+
+ <p>
+ The other difference with <code>Boolean</code> operators is that although <code>&&</code> has a higher precedence than <code>||</code>,
+ <code>and</code> and <code>or</code>
+ have the same precedence. Thus although the <code>Boolean</code> expression <code>(a || b && c)</code> will evaluate the <code>&&</code> expression
+ before the <code>||</code> expression, like <code>(a || (b && c))</code>, the following expression:
+ </p>
+ 
+ <pre class="indent">
+ collection must (contain (7) or contain (8) and have size (9))
+ </pre>
+ 
+ <p>
+ Will evaluate left to right, as:
+ </p>
+ 
+ <pre class="indent">
+ collection must ((contain (7) or contain (8)) and have size (9))
+ </pre>
+ 
+ <p>
+ If you really want the <code>and</code> part to be evaluated first, you'll need to put in parentheses, like this:
+ </p>
+ 
+ <pre class="indent">
+ collection must (contain (7) or (contain (8) and have size (9)))
+ </pre>
+ 
+ <h2>Working with <code>Option</code>s</h2>
+ 
+ <p>
+ ScalaTest matchers has no special support for <code>Option</code>s, but you can 
+ work with them quite easily using syntax shown previously. For example, if you wish to check
+ whether an option is <code>None</code>, you can write any of:
+ </p>
+ 
+ <pre class="indent">
+ option must equal (None)
+ option must be (None)
+ option must not be ('defined)
+ option must be ('empty)
+ </pre>
+ 
+ <p>
+ If you wish to check an option is defined, and holds a specific value, you can write either of:
+ </p>
+ 
+ <pre class="indent">
+ option must equal (Some("hi"))
+ option must be (Some("hi"))
+ </pre>
+ 
+ <p>
+ If you only wish to check that an option is defined, but don't care what it's value is, you can write:
+ </p>
+ 
+ <pre class="indent">
+ option must be ('defined)
+ </pre>
+ 
+ <h2>Checking arbitrary properties with <code>have</code></h2>
+ 
+ <p>
+ Using <code>have</code>, you can check properties of any type, where a <em>property</em> is an attribute of any
+ object that can be retrieved either by a public field, method, or JavaBean-style <code>get</code>
+ or <code>is</code> method, like this:
+ </p>
+ 
+ <pre class="indent">
+ book must have (
+   'title ("Programming in Scala"),
+   'author (List("Odersky", "Spoon", "Venners")),
+   'pubYear (2008)
+ )
+ </pre>
+ 
+ <p>
+ This expression will use reflection to ensure the <code>title</code>, <code>author</code>, and <code>pubYear</code> properties of object <code>book</code>
+ are equal to the specified values. For example, it will ensure that <code>book</code> has either a public Java field or method
+ named <code>title</code>, or a public method named <code>getTitle</code>, that when invoked (or accessed in the field case) results
+ in a the string <code>"Programming in Scala"</code>. If all specified properties exist and have their expected values, respectively,
+ execution will continue. If one or more of the properties either does not exist, or exists but results in an unexpected value,
+ a <code>TestFailedException</code> will be thrown that explains the problem. (For the details on how a field or method is selected during this
+ process, see the documentation for <a href="Matchers.HavePropertyMatcherGenerator.html"><code>HavePropertyMatcherGenerator</code></a>.)
+ </p>
+ 
+ <p>
+ When you use this syntax, you must place one or more property values in parentheses after <code>have</code>, seperated by commas, where a <em>property
+ value</em> is a symbol indicating the name of the property followed by the expected value in parentheses. The only exceptions to this rule is the syntax
+ for checking size and length shown previously, which does not require parentheses. If you forget and put parentheses in, however, everything will
+ still work as you'd expect. Thus instead of writing:
+ </p>
+
+ <pre class="indent">
+ array must have length (3)
+ set must have size (90)
+ </pre>
+ 
+ <p>
+ You can alternatively, write:
+ </p>
+
+ <pre class="indent">
+ array must have (length (3))
+ set must have (size (90))
+ </pre>
+ 
+ <p>
+ If a property has a value different from the specified expected value, a <code>TestFailedError</code> will be thrown
+ with a detail message that explains the problem. For example, if you assert the following on
+ a <code>book</code> whose title is <code>Moby Dick</code>:
+ </p>
+
+ <pre class="indent">
+ book must have ('title ("A Tale of Two Cities"))
+ </pre>
+
+ <p>
+ You'll get a <code>TestFailedException</code> with this detail message:
+ </p>
+
+ <pre class="indent">
+ The title property had value "Moby Dick", instead of its expected value "A Tale of Two Cities",
+ on object Book("Moby Dick", "Melville", 1851)
+ </pre>
+ 
+ <p>
+ If you prefer to check properties in a type-safe manner, you can use a <code>HavePropertyMatcher</code>.
+ This would allow you to write expressions such as:
+ </p>
+
+ <pre class="indent">
+ book must have (
+   title ("Programming in Scala"),
+   author (List("Odersky", "Spoon", "Venners")),
+   pubYear (2008)
+ )
+ </pre>
+ 
+ <p>
+ These expressions would fail to compile if <code>must</code> is used on an inappropriate type, as determined
+ by the type parameter of the <code>HavePropertyMatcher</code> being used. (For example, <code>title</code> in this example
+ might be of type <code>HavePropertyMatcher[org.publiclibrary.Book]</code>. If used with an appropriate type, such an expression will compile
+ and at run time the property method or field will be accessed directly; <em>i.e.</em>, no reflection will be used.
+ See the documentation for <a href="HavePropertyMatcher.html"><code>HavePropertyMatcher</code></a> for more information.
+ </p>
+
+ <h2>Using custom matchers</h2>
+ 
+ <p>
+ If none of the built-in matcher syntax (or options shown so far for extending the syntax) satisfy a particular need you have, you can create
+ custom <code>Matcher</code>s that allow
+ you to place your own syntax directly after <code>must</code>. For example, class <code>java.io.File</code> has a method <code>exists</code>, which
+ indicates whether a file of a certain path and name exists. Because the <code>exists</code> method takes no parameters and returns <code>Boolean</code>,
+ you can call it using <code>be</code> with a symbol or <code>BePropertyMatcher</code>, yielding assertions like:
+ </p>
+ 
+ <pre class="indent">
+ file must be ('exists)  // using a symbol
+ file must be (inExistance)   // using a BePropertyMatcher
+ </pre>
+ 
+ <p>
+ Although these expressions will achieve your goal of throwing a <code>TestFailedException</code> if the file does not exist, they don't produce
+ the most readable code because the English is either incorrect or awkward. In this case, you might want to create a
+ custom <code>Matcher[java.io.File]</code>
+ named <code>exist</code>, which you could then use to write expressions like:
+ </p>
+
+ <pre class="indent">
+ // using a plain-old Matcher
+ file must exist
+ file must not (exist)
+ file must (exist and have ('name ("temp.txt")))
+ </pre>
+ 
+ <p>
+ Note that when you use custom <code>Matcher</code>s, you will need to put parentheses around the custom matcher in more cases than with
+ the built-in syntax. For example you will often need the parentheses after <code>not</code>, as shown above. (There's no penalty for
+ always surrounding custom matchers with parentheses, and if you ever leave them off when they are needed, you'll get a compiler error.)
+ For more information about how to create custom <code>Matcher</code>s, please see the documentation for the <a href="Matcher.html"><code>Matcher</code></a> trait.
+ </p>
+
+ <h2>Checking for expected exceptions</h2>
+
+ <p>
+ Sometimes you need to test whether a method throws an expected exception under certain circumstances, such
+ as when invalid arguments are passed to the method. With <code>MustMatchers</code> mixed in, you can
+ check for an expected exception like this:
+ </p>
+
+ <pre>
+ evaluating { s.charAt(-1) } must produce [IndexOutOfBoundsException]
+ </pre>
+
+ <p>
+ If <code>charAt</code> throws an instance of <code>StringIndexOutOfBoundsException</code>,
+ this expression will result in that exception. But if <code>charAt</code> completes normally, or throws a different
+ exception, this expression will complete abruptly with a <code>TestFailedException</code>.
+ This expression returns the caught exception so that you can inspect it further if you wish, for
+ example, to ensure that data contained inside the exception has the expected values. Here's an
+ example:
+ </p>
+
+ <pre>
+ val thrown = evaluating { s.charAt(-1) } must produce [IndexOutOfBoundsException]
+ thrown.getMessage must equal ("String index out of range: -1")
+ </pre>
+
+ <h2>Those pesky parens</h2>
+ 
+ <p>
+ Perhaps the most tricky part of writing assertions using ScalaTest matchers is remembering
+ when you need or don't need parentheses, but bearing in mind a few simple rules  should help.
+ It is also reassuring to know that if you ever leave off a set of parentheses when they are
+ required, your code will not compile. Thus the compiler will help you remember when you need the parens.
+ That said, the rules are:
+ </p>
+
+ <p>
+ 1. Although you don't always need them, it is recommended style to always put parentheses
+ around right-hand values, such as the <code>7</code> in <code>num must equal (7)</code>:
+ </p>
+
+ <pre class="indent">
+ result must equal <span style="color: #CC3300; font-weight: bold">(</span>4<span style="color: #CC3300; font-weight: bold">)</span>
+ array must have length <span style="color: #CC3300; font-weight: bold">(</span>3<span style="color: #CC3300; font-weight: bold">)</span>
+ book must have (
+   'title <span style="color: #CC3300; font-weight: bold">(</span>"Programming in Scala"<span style="color: #CC3300; font-weight: bold">)</span>,
+   'author <span style="color: #CC3300; font-weight: bold">(</span>List("Odersky", "Spoon", "Venners")<span style="color: #CC3300; font-weight: bold">)</span>,
+   'pubYear <span style="color: #CC3300; font-weight: bold">(</span>2008<span style="color: #CC3300; font-weight: bold">)</span>
+ )
+ option must be <span style="color: #CC3300; font-weight: bold">(</span>'defined<span style="color: #CC3300; font-weight: bold">)</span>
+ catMap must (contain key <span style="color: #CC3300; font-weight: bold">(</span>9<span style="color: #CC3300; font-weight: bold">)</span> and contain value <span style="color: #CC3300; font-weight: bold">(</span>"lives"<span style="color: #CC3300; font-weight: bold">)</span>)</span>
+ keyEvent must be an <span style="color: #CC3300; font-weight: bold">(</span>'actionKey<span style="color: #CC3300; font-weight: bold">)</span>
+ javaSet must have size <span style="color: #CC3300; font-weight: bold">(</span>90<span style="color: #CC3300; font-weight: bold">)</span>
+ </pre>
+
+ <p>
+ 2. Except for <code>length</code> and <code>size</code>, you must always put parentheses around
+ the list of one or more property values following a <code>have</code>:
+ </p>
+
+ <pre class="indent">
+ file must (exist and have <span style="color: #CC3300; font-weight: bold">(</span>'name ("temp.txt")<span style="color: #CC3300; font-weight: bold">)</span>)
+ book must have <span style="color: #CC3300; font-weight: bold">(</span>
+   title ("Programming in Scala"),
+   author (List("Odersky", "Spoon", "Venners")),
+   pubYear (2008)
+ <span style="color: #CC3300; font-weight: bold">)</span>
+ javaList must have length (9) // parens optional for length and size
+ </pre>
+
+ <p>
+ 3. You must always put parentheses around <code>and</code> and <code>or</code> expressions, as in:
+ </p>
+
+ <pre class="indent">
+ catMap must <span style="color: #CC3300; font-weight: bold">(</span>contain key (9) and contain value ("lives")<span style="color: #CC3300; font-weight: bold">)</span>
+ number must <span style="color: #CC3300; font-weight: bold">(</span>equal (2) or equal (4) or equal (8)<span style="color: #CC3300; font-weight: bold">)</span>
+ </pre>
+ 
+ <p>
+ 4. Although you don't always need them, it is recommended style to always put parentheses
+ around custom <code>Matcher</code>s when they appear directly after <code>not</code>:
+ </p>
+ 
+ <pre class="indent">
+ file must exist
+ file must not <span style="color: #CC3300; font-weight: bold">(</span>exist<span style="color: #CC3300; font-weight: bold">)</span>
+ file must (exist and have ('name ("temp.txt")))
+ file must (not <span style="color: #CC3300; font-weight: bold">(</span>exist<span style="color: #CC3300; font-weight: bold">)</span> and have ('name ("temp.txt"))
+ file must (have ('name ("temp.txt") or exist)
+ file must (have ('name ("temp.txt") or not <span style="color: #CC3300; font-weight: bold">(</span>exist<span style="color: #CC3300; font-weight: bold">)</span>)
+ </pre>
+
+ <p>
+ That's it. With a bit of practice it  should become natural to you, and the compiler will always be there to tell you if you
+ forget a set of needed parentheses.
+ </p></dd></dl>
+      <dl></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../../org/scalatest/junit/MustMatchersForJUnit.html" target="_self">MustMatchersForJUnit</a>, <a href="../../../org/scalatest/matchers/MustMatchers$object.html" target="_self">MustMatchers</a></dd>
+      </dl><hr></hr>
+      
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Values and Variables inherited from <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/matchers/Matchers.html#not" target="_self">not</a>, <a href="../../../org/scalatest/matchers/Matchers.html#be" target="_self">be</a>, <a href="../../../org/scalatest/matchers/Matchers.html#have" target="_self">have</a>, <a href="../../../org/scalatest/matchers/Matchers.html#contain" target="_self">contain</a>, <a href="../../../org/scalatest/matchers/Matchers.html#include" target="_self">include</a>, <a href="../../../org/scalatest/matchers/Matchers.html#fullyMatch" target="_self">fullyMatch</a>, <a href="../../../org/scalatest/matchers/Matchers.html#startWith" target="_self">startWith</a>, <a href="../../../org/scalatest/matchers/Matchers.html#endWith" target="_self">endWith</a>, <a href="../../../org/scalatest/matchers/Matchers.html#length" target="_self">length</a>, <a href="../../../org/scalatest/matchers/Matchers.html#size" target="_self">size</a>, <a href="../../../org/scalatest/matchers/Matchers.html#key" target="_self">key</a>, <a href="../../../org/scalatest/matchers/Matchers.html#value" target="_self">value</a>, <a href="../../../org/scalatest/matchers/Matchers.html#a" target="_self">a</a>, <a href="../../../org/scalatest/matchers/Matchers.html#an" target="_self">an</a>, <a href="../../../org/scalatest/matchers/Matchers.html#theSameInstanceAs" target="_self">theSameInstanceAs</a>, <a href="../../../org/scalatest/matchers/Matchers.html#regex" target="_self">regex</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasIntGetLengthFieldToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasIntGetLengthMethodToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasIntGetSizeFieldToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasIntGetSizeMethodToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasIntLengthFieldToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasIntLengthMethodToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasIntSizeFieldToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasIntSizeMethodToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasLongGetLengthFieldToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasLongGetLengthMethodToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasLongGetSizeFieldToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasLongGetSizeMethodToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasLongLengthFieldToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasLongLengthMethodToLengthMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasLongSizeFieldToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> <code>val</code> type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasLongSizeMethodToSizeMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29" target="_self">convertToAnyMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.AnyMustWrapper.html" target="_self">AnyMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>T</code> to a <code>AnyMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29" target="_self">convertToAnyRefMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.AnyRefMustWrapper.html" target="_self">AnyRefMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts a <code>scala.AnyRef</code> of type <code>T</code> to an <code>AnyRefMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29" target="_self">convertToArrayMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.ArrayMustWrapper.html" target="_self">ArrayMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>scala.Array[T]</code> to a <code>ArrayMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToByteMustWrapper%28Byte%29" target="_self">convertToByteMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.ByteMustWrapper.html" target="_self">ByteMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Byte</code> to a <code>ByteMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29" target="_self">convertToCollectionMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Collection">scala.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.CollectionMustWrapper.html" target="_self">CollectionMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>scala.Collection[T]</code> to a <code>CollectionMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToDoubleMustWrapper%28Double%29" target="_self">convertToDoubleMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.DoubleMustWrapper.html" target="_self">DoubleMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Double</code> to a <code>DoubleMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToEvaluatingApplicationMustWrapper%28MustMatchers.this.ResultOfEvaluatingApplication%29" target="_self">convertToEvaluatingApplicationMustWrapper</a></em>
+        (<em>o</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.EvaluatingApplicationMustWrapper.html" target="_self">EvaluatingApplicationMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>T</code> to a <code>EvaluatingApplicationMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToFloatMustWrapper%28Float%29" target="_self">convertToFloatMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.FloatMustWrapper.html" target="_self">FloatMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Float</code> to a <code>FloatMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToIntMustWrapper%28Int%29" target="_self">convertToIntMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.IntMustWrapper.html" target="_self">IntMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Int</code> to a <code>IntMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29" target="_self">convertToJavaCollectionMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaCollectionMustWrapper.html" target="_self">JavaCollectionMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>java.util.Collection[T]</code> to a <code>JavaCollectionMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29" target="_self">convertToJavaListMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/List">java.util.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaListMustWrapper.html" target="_self">JavaListMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>java.util.List[T]</code> to a <code>JavaListMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object. This conversion is necessary to enable
+   <code>length</code> to be used on Java <code>List</code>s.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29" target="_self">convertToJavaMapMustWrapper</a></em>
+        [<em>K</em>, <em>V</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#V" target="_self">V</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaMapMustWrapper.html" target="_self">JavaMapMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#V" target="_self">V</a>]
+        
+        <div>Implicitly converts an object of type <code>java.util.Map[K, V]</code> to a <code>JavaMapMustWrapper[K, V]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29" target="_self">convertToListMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.ListMustWrapper.html" target="_self">ListMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>scala.List[T]</code> to a <code>ListMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToLongMustWrapper%28Long%29" target="_self">convertToLongMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LongMustWrapper.html" target="_self">LongMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Long</code> to a <code>LongMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29" target="_self">convertToMapMustWrapper</a></em>
+        [<em>K</em>, <em>V</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#V" target="_self">V</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.MapMustWrapper.html" target="_self">MapMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#V" target="_self">V</a>]
+        
+        <div>Implicitly converts an object of type <code>scala.collection.Map[K, V]</code> to a <code>MapMustWrapper[K, V]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29" target="_self">convertToSeqMustWrapper</a></em>
+        [<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Seq">scala.Seq</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.SeqMustWrapper.html" target="_self">SeqMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>Implicitly converts an object of type <code>scala.Seq[T]</code> to a <code>SeqMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToShortMustWrapper%28Short%29" target="_self">convertToShortMustWrapper</a></em>
+        (<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.ShortMustWrapper.html" target="_self">ShortMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>scala.Short</code> to a <code>ShortMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.html#convertToStringMustWrapper%28String%29" target="_self">convertToStringMustWrapper</a></em>
+        (<em>o</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html" target="_self">StringMustWrapper</a>
+        
+        <div>Implicitly converts an object of type <code>java.lang.String</code> to a <code>StringMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29" target="_self">convertToMatcherWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29" target="_self">convertIterableMatcherToJavaCollectionMatcher</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29" target="_self">convertMapMatcherToJavaMapMatcher</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToIntLengthWrapper%28AnyRef%7Bdeflength%3AInt%7D%29" target="_self">convertLengthFieldToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToIntLengthWrapper%28AnyRef%7Bdeflength%28%29%3AInt%7D%29" target="_self">convertLengthMethodToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToIntLengthWrapper%28AnyRef%7BdefgetLength%3AInt%7D%29" target="_self">convertGetLengthFieldToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToIntLengthWrapper%28AnyRef%7BdefgetLength%28%29%3AInt%7D%29" target="_self">convertGetLengthMethodToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToLongLengthWrapper%28AnyRef%7Bdeflength%3ALong%7D%29" target="_self">convertLengthFieldToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToLongLengthWrapper%28AnyRef%7Bdeflength%28%29%3ALong%7D%29" target="_self">convertLengthMethodToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToLongLengthWrapper%28AnyRef%7BdefgetLength%3ALong%7D%29" target="_self">convertGetLengthFieldToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToLongLengthWrapper%28AnyRef%7BdefgetLength%28%29%3ALong%7D%29" target="_self">convertGetLengthMethodToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToIntSizeWrapper%28AnyRef%7Bdefsize%3AInt%7D%29" target="_self">convertSizeFieldToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToIntSizeWrapper%28AnyRef%7Bdefsize%28%29%3AInt%7D%29" target="_self">convertSizeMethodToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToIntSizeWrapper%28AnyRef%7BdefgetSize%3AInt%7D%29" target="_self">convertGetSizeFieldToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToIntSizeWrapper%28AnyRef%7BdefgetSize%28%29%3AInt%7D%29" target="_self">convertGetSizeMethodToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToLongSizeWrapper%28AnyRef%7Bdefsize%3ALong%7D%29" target="_self">convertSizeFieldToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToLongSizeWrapper%28AnyRef%7Bdefsize%28%29%3ALong%7D%29" target="_self">convertSizeMethodToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToLongSizeWrapper%28AnyRef%7BdefgetSize%3ALong%7D%29" target="_self">convertGetSizeFieldToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToLongSizeWrapper%28AnyRef%7BdefgetSize%28%29%3ALong%7D%29" target="_self">convertGetSizeMethodToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSymbolToHavePropertyMatcherGenerator%28Symbol%29" target="_self">convertSymbolToHavePropertyMatcherGenerator</a>, <a href="../../../org/scalatest/matchers/Matchers.html#equal%28Any%29" target="_self">equal</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertDoubleToPlusOrMinusWrapper%28Double%29" target="_self">convertDoubleToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertFloatToPlusOrMinusWrapper%28Float%29" target="_self">convertFloatToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLongToPlusOrMinusWrapper%28Long%29" target="_self">convertLongToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertIntToPlusOrMinusWrapper%28Int%29" target="_self">convertIntToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertShortToPlusOrMinusWrapper%28Short%29" target="_self">convertShortToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertByteToPlusOrMinusWrapper%28Byte%29" target="_self">convertByteToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29" target="_self">&lt;</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29" target="_self">&gt;</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29" target="_self">&lt;=</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29" target="_self">&gt;=</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3D%3D%3D%28Any%29" target="_self">===</a>, <a href="../../../org/scalatest/matchers/Matchers.html#evaluating%28%3D%3EAny%29" target="_self">evaluating</a>, <a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29" target="_self">produce</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Class Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.AnyMustWrapper.html" target="_self">AnyMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="../../../org/scalatest/matchers/MustMatchers.AnyMustWrapper.html#T" target="_self">T</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.AnyRefMustWrapper.html" target="_self">AnyRefMustWrapper</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/MustMatchers.AnyRefMustWrapper.html#T" target="_self">T</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.ArrayMustWrapper.html" target="_self">ArrayMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/MustMatchers.ArrayMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.ByteMustWrapper.html" target="_self">ByteMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.CollectionMustWrapper.html" target="_self">CollectionMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Collection">scala.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.CollectionMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.DoubleMustWrapper.html" target="_self">DoubleMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.EvaluatingApplicationMustWrapper.html" target="_self">EvaluatingApplicationMustWrapper</a></em>
+        (<em>left</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.FloatMustWrapper.html" target="_self">FloatMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.IntMustWrapper.html" target="_self">IntMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.JavaCollectionMustWrapper.html" target="_self">JavaCollectionMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.JavaCollectionMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.JavaListMustWrapper.html" target="_self">JavaListMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/List">java.util.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.JavaListMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.JavaMapMustWrapper.html" target="_self">JavaMapMustWrapper</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.JavaMapMustWrapper.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.JavaMapMustWrapper.html#V" target="_self">V</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a></em>
+        [<em>A</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html#A" target="_self">A</a>, <code>implicit </code><em>view$1</em> : (<a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.LengthWrapper.html" target="_self">LengthWrapper</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.ListMustWrapper.html" target="_self">ListMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.ListMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.LongMustWrapper.html" target="_self">LongMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.MapMustWrapper.html" target="_self">MapMustWrapper</a></em>
+        [<em>K</em>, <em>V</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.MapMustWrapper.html#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.MapMustWrapper.html#V" target="_self">V</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.SeqMustWrapper.html" target="_self">SeqMustWrapper</a></em>
+        [<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Seq">scala.Seq</a>[<a href="../../../org/scalatest/matchers/MustMatchers.SeqMustWrapper.html#T" target="_self">T</a>])<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.ShortMustWrapper.html" target="_self">ShortMustWrapper</a></em>
+        (<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a></em>
+        [<em>A</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>left</em> : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html#A" target="_self">A</a>, <code>implicit </code><em>view$2</em> : (<a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html#A" target="_self">A</a>) =&gt; <a href="../../../org/scalatest/matchers/Matchers.SizeWrapper.html" target="_self">SizeWrapper</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html" target="_self">StringMustWrapper</a></em>
+        (<em>left</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)<code> extends </code><a href="../../../org/scalatest/verb/MustVerb.StringMustWrapperForVerb.html" target="_self">StringMustWrapperForVerb</a>
+        
+        <div>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="MustMatchers.html"><code>MustMatchers</code></a> or <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> for an overview of
+   the matchers DSL.</div>
+      </td>
+    </tr>
+      </table>
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="convertToEvaluatingApplicationMustWrapper%28MustMatchers.this.ResultOfEvaluatingApplication%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToEvaluatingApplicationMustWrapper</em>(<em>o</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfEvaluatingApplication.html" target="_self">ResultOfEvaluatingApplication</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.EvaluatingApplicationMustWrapper.html" target="_self">EvaluatingApplicationMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>T</code> to a <code>EvaluatingApplicationMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToAnyMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToAnyMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.AnyMustWrapper.html" target="_self">AnyMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>T</code> to a <code>AnyMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToDoubleMustWrapper%28Double%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToDoubleMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.DoubleMustWrapper.html" target="_self">DoubleMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Double</code> to a <code>DoubleMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToFloatMustWrapper%28Float%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToFloatMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.FloatMustWrapper.html" target="_self">FloatMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Float</code> to a <code>FloatMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToLongMustWrapper%28Long%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToLongMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LongMustWrapper.html" target="_self">LongMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Long</code> to a <code>LongMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToIntMustWrapper%28Int%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToIntMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.IntMustWrapper.html" target="_self">IntMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Int</code> to a <code>IntMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToShortMustWrapper%28Short%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToShortMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.ShortMustWrapper.html" target="_self">ShortMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Short</code> to a <code>ShortMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToByteMustWrapper%28Byte%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToByteMustWrapper</em>(<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.ByteMustWrapper.html" target="_self">ByteMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Byte</code> to a <code>ByteMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToAnyRefMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToAnyRefMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.AnyRefMustWrapper.html" target="_self">AnyRefMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts a <code>scala.AnyRef</code> of type <code>T</code> to an <code>AnyRefMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToCollectionMustWrapper%28Collection%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToCollectionMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Collection">scala.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.CollectionMustWrapper.html" target="_self">CollectionMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Collection[T]</code> to a <code>CollectionMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToSeqMustWrapper%28Seq%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToSeqMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Seq">scala.Seq</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.SeqMustWrapper.html" target="_self">SeqMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Seq[T]</code> to a <code>SeqMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToArrayMustWrapper%28Array%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToArrayMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.ArrayMustWrapper.html" target="_self">ArrayMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.Array[T]</code> to a <code>ArrayMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToListMustWrapper%28List%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToListMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.ListMustWrapper.html" target="_self">ListMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.List[T]</code> to a <code>ListMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToMapMustWrapper</em>[<em>K</em>, <em>V</em>](<em>o</em> : <a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#V" target="_self">V</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.MapMustWrapper.html" target="_self">MapMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29#V" target="_self">V</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>scala.collection.Map[K, V]</code> to a <code>MapMustWrapper[K, V]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToStringMustWrapper%28String%29"></a><dl>
+      <dt>
+        
+        <code>implicit override</code>
+        <code>def</code>
+        <em>convertToStringMustWrapper</em>(<em>o</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.StringMustWrapper.html" target="_self">StringMustWrapper</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>java.lang.String</code> to a <code>StringMustWrapper</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a>.<a href="../../../org/scalatest/verb/MustVerb.html#convertToStringMustWrapper%28String%29" target="_self">convertToStringMustWrapper</a>
+        </dd>
+      </dl><hr></hr>
+<a name="convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToJavaCollectionMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/Collection">java.util.Collection</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaCollectionMustWrapper.html" target="_self">JavaCollectionMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>java.util.Collection[T]</code> to a <code>JavaCollectionMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToJavaListMustWrapper%28java.util.List%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToJavaListMustWrapper</em>[<em>T</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/List">java.util.List</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaListMustWrapper.html" target="_self">JavaListMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>java.util.List[T]</code> to a <code>JavaListMustWrapper[T]</code>,
+   to enable <code>must</code> methods to be invokable on that object. This conversion is necessary to enable
+   <code>length</code> to be used on Java <code>List</code>s.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertToJavaMapMustWrapper</em>[<em>K</em>, <em>V</em>](<em>o</em> : <a href="" target="contentFrame" class="java/util/Map">java.util.Map</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#V" target="_self">V</a>]) : <a href="../../../org/scalatest/matchers/MustMatchers.JavaMapMustWrapper.html" target="_self">JavaMapMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#K" target="_self">K</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29#V" target="_self">V</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an object of type <code>java.util.Map[K, V]</code> to a <code>JavaMapMustWrapper[K, V]</code>,
+   to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntGetLengthMethodToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntGetLengthMethodToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntGetLengthFieldToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntGetLengthFieldToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntLengthFieldToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntLengthFieldToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntLengthMethodToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntLengthMethodToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongGetLengthMethodToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongGetLengthMethodToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongGetLengthFieldToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongGetLengthFieldToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getLength</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongLengthFieldToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongLengthFieldToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongLengthMethodToLengthMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongLengthMethodToLengthMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.LengthMustWrapper.html" target="_self">LengthMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>length</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntGetSizeMethodToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntGetSizeMethodToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntGetSizeFieldToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntGetSizeFieldToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntSizeFieldToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntSizeFieldToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> <code>val</code> of type <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasIntSizeMethodToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasIntSizeMethodToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> method that results in <code>Int</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongGetSizeMethodToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongGetSizeMethodToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongGetSizeFieldToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongGetSizeFieldToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>getSize</code> <code>val</code> of type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongSizeFieldToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongSizeFieldToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> <code>val</code> type <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="convertHasLongSizeMethodToSizeMustWrapper%28T%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>convertHasLongSizeMethodToSizeMustWrapper</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>o</em> : <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/MustMatchers.SizeMustWrapper.html" target="_self">SizeMustWrapper</a>[<a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicitly converts an <code>AnyRef</code> of type <code>T</code> whose structure includes
+   a <code>size</code> method that results in <code>Long</code>
+   to a <code>SizeMustWrapper[T]</code>, to enable <code>must</code> methods to be invokable on that object.</dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

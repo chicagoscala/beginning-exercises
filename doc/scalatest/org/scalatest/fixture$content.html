@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.fixture</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Trait that when mixed into a <code>FixtureSuite</code> ensures the
+ <code>configMap</code> passed to <code>runTest</code> is passed along
+ as a fixture into each test.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureFeatureSpec.html" target="_self">FixtureFeatureSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a>
+        
+        <div>A sister trait to <code>org.scalatest.FeatureSpec</code> that can pass a fixture object into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureFlatSpec.html" target="_self">FixtureFlatSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a><code> with </code><a href="../../org/scalatest/verb/ShouldVerb.html" target="_self">ShouldVerb</a><code> with </code><a href="../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a><code> with </code><a href="../../org/scalatest/verb/CanVerb.html" target="_self">CanVerb</a>
+        
+        <div>A sister trait to <code>org.scalatest.FlatSpec</code> that can pass a fixture object into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureFunSuite.html" target="_self">FixtureFunSuite</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a>
+        
+        <div>A sister trait to <code>org.scalatest.FunSuite</code> that can pass a fixture object into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureSpec.html" target="_self">FixtureSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a>
+        
+        <div>A sister trait to <code>org.scalatest.Spec</code>, which passes a fixture object into each test.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a></em>
+        <code> extends </code><a href="../../org/scalatest/Suite.html" target="_self">Suite</a>
+        
+        <div><code>Suite</code> that can pass a fixture object into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/FixtureWordSpec.html" target="_self">FixtureWordSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSuite.html" target="_self">FixtureSuite</a><code> with </code><a href="../../org/scalatest/verb/ShouldVerb.html" target="_self">ShouldVerb</a><code> with </code><a href="../../org/scalatest/verb/MustVerb.html" target="_self">MustVerb</a><code> with </code><a href="../../org/scalatest/verb/CanVerb.html" target="_self">CanVerb</a>
+        
+        <div>A sister trait to <code>org.scalatest.WordSpec</code> that can pass a fixture object into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/MultipleFixtureFeatureSpec.html" target="_self">MultipleFixtureFeatureSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureFeatureSpec.html" target="_self">FixtureFeatureSpec</a><code> with </code><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        
+        <div>A sister trait to <code>org.scalatest.FeatureSpec</code> that can pass multiple types of fixture objects into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/MultipleFixtureFlatSpec.html" target="_self">MultipleFixtureFlatSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureFlatSpec.html" target="_self">FixtureFlatSpec</a><code> with </code><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        
+        <div>A sister trait to <code>org.scalatest.FlatSpec</code> that can pass multiple types of fixture objects into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/MultipleFixtureFunSuite.html" target="_self">MultipleFixtureFunSuite</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureFunSuite.html" target="_self">FixtureFunSuite</a><code> with </code><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        
+        <div>A sister trait to <code>org.scalatest.FunSuite</code> that can pass multiple types of fixture objects into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/MultipleFixtureSpec.html" target="_self">MultipleFixtureSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureSpec.html" target="_self">FixtureSpec</a><code> with </code><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        
+        <div>A sister trait to <code>org.scalatest.Spec</code> that can pass multiple types of fixture objects into its tests.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/fixture/MultipleFixtureWordSpec.html" target="_self">MultipleFixtureWordSpec</a></em>
+        <code> extends </code><a href="../../org/scalatest/fixture/FixtureWordSpec.html" target="_self">FixtureWordSpec</a><code> with </code><a href="../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        
+        <div>A sister trait to <code>org.scalatest.WordSpec</code> that can pass multiple types of fixture objects into its tests.</div>
+      </td>
+    </tr>        
+        </table>
+</body>
+      </html>

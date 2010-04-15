@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>object SuiteCompleted in org.scalatest.events</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/events$package.html" target="_self">org.scalatest.events</a>
+        <br></br>
+        <span class="entity">object  SuiteCompleted</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/events/SuiteCompleted"><code>org/scalatest/events/SuiteCompleted.scala</code></a>]
+      </div><hr></hr>
+      <a name="SuiteCompleted"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>object</code>
+        <em>SuiteCompleted</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Companion object for the <a href="SuiteCompleted.html"><code>SuiteCompleted</code></a> event, which contains overloaded factory methods
+ and an extractor method to facilitate pattern matching on <code>SuiteCompleted</code> objects.
+
+ <p>
+ All factory methods throw <code>NullPointerException</code> if any of the passed values are <code>null</code>.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/SuiteCompleted$object.html#apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%2COption%5Borg.scalatest.Rerunner%5D%2COption%5BAny%5D%29" target="_self">apply</a></em>
+        (<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+        
+        <div>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing the current thread's
+   name as <code>threadname</code> and the current time as <code>timeStamp</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/SuiteCompleted$object.html#apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%2COption%5Borg.scalatest.Rerunner%5D%29" target="_self">apply</a></em>
+        (<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+        
+        <div>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> as the
+   <code>payload</code>, the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/SuiteCompleted$object.html#apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%29" target="_self">apply</a></em>
+        (<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+        
+        <div>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> for
+   <code>formatter</code>, <code>None</code> as the <code>rerunner</code>, <code>None</code> as the <code>payload</code>,
+   the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/SuiteCompleted$object.html#apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%29" target="_self">apply</a></em>
+        (<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+        
+        <div>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> for <code>duration</code>,
+   <code>None</code> for <code>formatter</code>, <code>None</code> as the <code>rerunner</code>, <code>None</code> as the <code>payload</code>,
+   the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/events/SuiteCompleted$object.html#apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%29" target="_self">apply</a></em>
+        (<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+        
+        <div>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> as the
+   <code>rerunner</code>, <code>None</code> as the <code>payload</code>, the current threads name as <code>threadname</code>,
+   and the current time as <code>timeStamp</code>.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%2COption%5Borg.scalatest.Rerunner%5D%2COption%5BAny%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>], <em>payload</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing the current thread's
+   name as <code>threadname</code> and the current time as <code>timeStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of          other events reported during the same run</dd><dd><code>suiteName - </code>the name of the suite containing the suite that has completed</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the suite that has completed</dd><dd><code>duration - </code>an optional amount of time, in milliseconds, that was required to execute the suite that has completed</dd><dd><code>formatter - </code>an optional formatter that provides extra information that can be used by reporters in determining          how to present this event to the user</dd><dd><code>rerunner - </code>an optional <code>Rerunner</code> that can be used to rerun the suite that has completed (if <code>None</code>          is passed, the suite cannot be rerun)</dd><dd><code>payload - </code>an optional object that can be used to pass custom information to the reporter about the <code>SuiteCompleted</code> event</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of the passed values are <code>null</code></dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a new <code>SuiteCompleted</code> instance initialized with the passed and default values</dd></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%2COption%5Borg.scalatest.Rerunner%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>], <em>rerunner</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/Rerunner.html" target="_self">Rerunner</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> as the
+   <code>payload</code>, the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of          other events reported during the same run</dd><dd><code>suiteName - </code>the name of the suite containing the suite that has completed</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the suite that has completed</dd><dd><code>duration - </code>an optional amount of time, in milliseconds, that was required to execute the suite that has completed</dd><dd><code>formatter - </code>an optional formatter that provides extra information that can be used by reporters in determining          how to present this event to the user</dd><dd><code>rerunner - </code>an optional <code>Rerunner</code> that can be used to rerun the suite that has completed (if <code>None</code>          is passed, the suite cannot be rerun)</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of the passed values are <code>null</code></dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a new <code>SuiteCompleted</code> instance initialized with the passed and default values</dd></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%2COption%5Borg.scalatest.events.Formatter%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>], <em>formatter</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="../../../org/scalatest/events/Formatter.html" target="_self">Formatter</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> as the
+   <code>rerunner</code>, <code>None</code> as the <code>payload</code>, the current threads name as <code>threadname</code>,
+   and the current time as <code>timeStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of          other events reported during the same run</dd><dd><code>suiteName - </code>the name of the suite containing the suite that has completed</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the suite that has completed</dd><dd><code>duration - </code>an optional amount of time, in milliseconds, that was required to execute the suite that has completed</dd><dd><code>formatter - </code>an optional formatter that provides extra information that can be used by reporters in determining          how to present this event to the user</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of the passed values are <code>null</code></dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a new <code>SuiteCompleted</code> instance initialized with the passed and default values</dd></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%2COption%5BLong%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>duration</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> for
+   <code>formatter</code>, <code>None</code> as the <code>rerunner</code>, <code>None</code> as the <code>payload</code>,
+   the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of          other events reported during the same run</dd><dd><code>suiteName - </code>the name of the suite containing the suite that has completed</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the suite that has completed</dd><dd><code>duration - </code>an optional amount of time, in milliseconds, that was required to execute the suite that has completed</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of the passed values are <code>null</code></dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a new <code>SuiteCompleted</code> instance initialized with the passed and default values</dd></dl>
+    <hr></hr>
+<a name="apply%28org.scalatest.events.Ordinal%2CString%2COption%5BString%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>ordinal</em> : <a href="../../../org/scalatest/events/Ordinal.html" target="_self">Ordinal</a>, <em>suiteName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>suiteClassName</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]) : <a href="../../../org/scalatest/events/SuiteCompleted.html" target="_self">SuiteCompleted</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Constructs a new <code>SuiteCompleted</code> event with the passed parameters, passing <code>None</code> for <code>duration</code>,
+   <code>None</code> for <code>formatter</code>, <code>None</code> as the <code>rerunner</code>, <code>None</code> as the <code>payload</code>,
+   the current threads name as <code>threadname</code>, and the current time as <code>timeStamp</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>ordinal - </code>an <code>Ordinal</code> that can be used to place this event in order in the context of          other events reported during the same run</dd><dd><code>name - </code>a localized name identifying the suite that has completed, which should include the          suite name, suitable for presenting to the user</dd><dd><code>suiteName - </code>the name of the suite containing the suite that has completed</dd><dd><code>suiteClassName - </code>an optional fully qualifed <code>Suite</code> class name containing the suite that has completed</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if any of the passed values are <code>null</code></dd><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>a new <code>SuiteCompleted</code> instance initialized with the passed and default values</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

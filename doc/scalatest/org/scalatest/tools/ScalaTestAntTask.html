@@ -1,0 +1,925 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class ScalaTestAntTask in org.scalatest.tools</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/tools$package.html" target="_self">org.scalatest.tools</a>
+        <br></br>
+        <span class="entity">class  ScalaTestAntTask</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/tools/ScalaTestAntTask"><code>org/scalatest/tools/ScalaTestAntTask.scala</code></a>]
+      </div><hr></hr>
+      <a name="ScalaTestAntTask"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>class</code>
+        <em>ScalaTestAntTask</em>
+      </dt>
+      <dd><code> extends </code><a href="" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd><p>
+ An ant task to run ScalaTest.  Instructions on how to specify various
+ options are below.  See the scaladocs for the <code>Runner</code> class for a description
+ of what each of the options does.
+ </p>
+
+ <p>
+ To use the ScalaTest ant task, you must first define it in your ant file using <code>taskdef</code>.
+ Here's an example:
+ </p>
+
+ <pre>
+  &lt;path id="scalatest.classpath"&gt;
+    &lt;pathelement location="${lib}/scalatest.jar"/&gt;
+    &lt;pathelement location="${lib}/scala-library.jar"/&gt;
+  &lt;/path&gt;
+
+  &lt;target name="main" depends="dist"&gt;
+    &lt;taskdef name="scalatest" classname="org.scalatest.tools.ScalaTestAntTask"&gt;
+      &lt;classpath refid="scalatest.classpath"/&gt;
+    &lt;/taskdef&gt;
+
+    &lt;scalatest ...
+  &lt;/target&gt;
+ </pre>
+
+ <p>
+ Once defined, you use the task by specifying information in a <code>scalatest</code> element:
+ </p>
+
+ <pre>
+   &lt;scalatest ...&gt;
+     ...
+   &lt;/scalatest&gt;
+ </pre>
+
+ <p>
+ You can place key value pairs into the <code>configMap</code> using nested <code>&lt;config&gt;</code> elements,
+ like this:
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;config name="dbname" value="testdb"/&gt;
+     &lt;config name="server" value="192.168.1.188"/&gt;
+ </pre>
+
+ <p>
+ You can specify a runpath using either a <code>runpath</code> attribute and/or nested
+ <code>&lt;runpath&gt;</code> elements, using standard ant path notation:
+ </p>
+
+ <pre>
+   &lt;scalatest runpath="serviceuitest-1.1beta4.jar:myjini"&gt;
+ </pre>
+
+ or
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;runpath&gt;
+       &lt;pathelement location="serviceuitest-1.1beta4.jar"/&gt;
+       &lt;pathelement location="myjini"/&gt;
+     &lt;/runpath&gt;
+ </pre>
+
+ <p>
+ To add a URL to your runpath, use a <code>&lt;runpathurl&gt;</code> element
+ (since ant paths don't support URLs):
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;runpathurl url="http://foo.com/bar.jar"/&gt;
+ </pre>
+
+ <p>
+ You can specify reporters using nested <code>&lt;reporter&gt;</code> elements, where the <code>type</code>
+ attribute must be one of the following:
+ </p>
+
+ <ul>
+   <li>  <code>graphic</code>          </li>
+   <li>  <code>file</code>             </li>
+   <li>  <code>xml</code>              </li>
+   <li>  <code>stdout</code>           </li>
+   <li>  <code>stderr</code>           </li>
+   <li>  <code>reporterclass</code>    </li>
+ </ul>
+
+ <p>
+ Each may include a <code>config</code> attribute to specify the reporter configuration.
+ Types <code>file</code>, <code>xml</code> and <code>reporterclass</code> require additional attributes
+ <code>filename</code>, <code>directory</code>, and <code>classname</code>, respectively:
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;reporter type="stdout"        config="FAB"/&gt;
+     &lt;reporter type="file"          filename="test.out"/&gt;
+     &lt;reporter type="xml"           directory="target"/&gt;
+     &lt;reporter type="reporterclass" classname="my.ReporterClass"/&gt;
+ </pre>
+
+ <p>
+ Specify tags to include and/or exclude using <code>&lt;tagsToInclude&gt;</code> and
+ <code>&lt;tagsToExclude&gt;</code> elements, like this:
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;tagsToInclude&gt;
+         CheckinTests
+         FunctionalTests
+     &lt;/tagsToInclude&gt;
+
+     &lt;tagsToExclude&gt;
+         SlowTests
+         NetworkTests
+     &lt;/tagsToExclude&gt;
+ </pre>
+
+ <p>
+ To specify suites to run, use either a <code>suite</code> attribute or nested
+ <code>&lt;suite&gt;</code> elements:
+ </p>
+
+ <pre>
+   &lt;scalatest suite="com.artima.serviceuitest.ServiceUITestkit"&gt;
+ </pre>
+
+ <p>
+ or
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;suite classname="com.artima.serviceuitest.ServiceUITestkit"/&gt;
+ </pre>
+
+ <p>
+ To specify suites using members-only or wildcard package names, use
+ either the <code>membersonly</code> or <code>wildcard</code> attributes, or nested
+ <code>&lt;membersonly&gt;</code> or <code>&lt;wildcard&gt;</code> elements:
+ </p>
+
+ <pre>
+   &lt;scalatest membersonly="com.artima.serviceuitest"&gt;
+ </pre>
+
+ <p>
+ or
+ </p>
+
+ <pre>
+   &lt;scalatest wildcard="com.artima.joker"&gt;
+ </pre>
+
+ <p>
+ or
+ </p>
+
+ <pre>
+   &lt;scalatest&gt;
+     &lt;membersonly package="com.artima.serviceuitest"/&gt;
+     &lt;wildcard package="com.artima.joker"/&gt;
+ </pre>
+
+ <p>
+ Use attribute <code>parallel="true"</code> to specify parallel execution of suites.
+ (If the <code>parallel</code> attribute is left out or set to false, suites will be executed sequentially by one thread.)
+ When <code>parallel</code> is true, you can include an optional <code>numthreads</code> attribute to specify the number
+ of threads to be created in thread pool (<em>e.g.</em>, <code>numthreads="10"</code>).
+ </p>
+
+ <p>
+ Use attribute <code>haltonfailure="true"</code> to cause ant to fail the
+ build if there's a test failure.
+ </p>
+
+ <p>
+ Use attribute <code>fork="true"</code> to cause ant to run the tests in
+ a separate process.
+ </p>
+
+ <p>
+ When <code>fork</code> is <code>true</code>, attribute <code>maxmemory</code> may be used to specify
+ the maximum memory size that will be passed to the forked jvm.&nbsp; For example, the following setting
+ will cause <code>"-Xmx1280M"</code> to be passed to the java command used to
+ run the tests.
+ </p>
+
+ <pre>
+   &lt;scalatest maxmemory="1280M"&gt;
+ </pre>
+
+ <p>
+ When <code>fork</code> is true, nested <code>&lt;jvmarg&gt;</code> elements may be used
+ to pass additional arguments to the forked jvm.
+ For example, if you are running into 'PermGen space' memory errors,
+ you could add the following <code>jvmarg</code> to bump up the JVM's <code>MaxPermSize</code> value:
+ </p>
+
+ <pre>
+   &lt;jvmarg value="-XX:MaxPermSize=128m"/&gt;
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>George Berger</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../../org/scalatest/tools/ScalaTestTask.html" target="_self">ScalaTestTask</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredConfig%28org.scalatest.tools.NameValuePair%29" target="_self">addConfiguredConfig</a></em>
+        (<em>config</em> : <a href="" target="contentFrame" class="org/scalatest/tools/NameValuePair">org.scalatest.tools.NameValuePair</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets values from nested element <code>config</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredExcludes%28org.scalatest.tools.TextElement%29" target="_self">addConfiguredExcludes</a></em>
+        (<em>excludes</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>excludes</code>.
+   <b>The <code>excludes</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>tagsToExclude</code> attribute instead.</b></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredIncludes%28org.scalatest.tools.TextElement%29" target="_self">addConfiguredIncludes</a></em>
+        (<em>includes</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>includes</code>.
+   <b>The <code>includes</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>tagsToInclude</code> attribute instead.</b></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredJvmArg%28org.scalatest.tools.JvmArg%29" target="_self">addConfiguredJvmArg</a></em>
+        (<em>arg</em> : <a href="" target="contentFrame" class="org/scalatest/tools/JvmArg">org.scalatest.tools.JvmArg</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>jvmarg</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredMembersOnly%28org.scalatest.tools.PackageElement%29" target="_self">addConfiguredMembersOnly</a></em>
+        (<em>membersonly</em> : <a href="" target="contentFrame" class="org/scalatest/tools/PackageElement">org.scalatest.tools.PackageElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>membersonly</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredProperty%28org.scalatest.tools.NameValuePair%29" target="_self">addConfiguredProperty</a></em>
+        (<em>property</em> : <a href="" target="contentFrame" class="org/scalatest/tools/NameValuePair">org.scalatest.tools.NameValuePair</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets values from nested element <code>property</code>.
+   <b>The <code>property</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>config</code> attribute instead.</b></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredReporter%28org.scalatest.tools.ReporterElement%29" target="_self">addConfiguredReporter</a></em>
+        (<em>reporter</em> : <a href="" target="contentFrame" class="org/scalatest/tools/ReporterElement">org.scalatest.tools.ReporterElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>reporter</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredRunpath%28org.apache.tools.ant.types.Path%29" target="_self">addConfiguredRunpath</a></em>
+        (<em>runpath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>runpath</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredRunpathUrl%28org.scalatest.tools.RunpathUrl%29" target="_self">addConfiguredRunpathUrl</a></em>
+        (<em>runpathurl</em> : <a href="" target="contentFrame" class="org/scalatest/tools/RunpathUrl">org.scalatest.tools.RunpathUrl</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>runpathurl</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredSuite%28org.scalatest.tools.SuiteElement%29" target="_self">addConfiguredSuite</a></em>
+        (<em>suite</em> : <a href="" target="contentFrame" class="org/scalatest/tools/SuiteElement">org.scalatest.tools.SuiteElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>suite</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredTagsToExclude%28org.scalatest.tools.TextElement%29" target="_self">addConfiguredTagsToExclude</a></em>
+        (<em>tagsToExclude</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>excludes</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredTagsToInclude%28org.scalatest.tools.TextElement%29" target="_self">addConfiguredTagsToInclude</a></em>
+        (<em>tagsToInclude</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>tagsToInclude</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredTestNGSuites%28org.apache.tools.ant.types.Path%29" target="_self">addConfiguredTestNGSuites</a></em>
+        (<em>testNGSuitePath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>testngsuites</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#addConfiguredWildcard%28org.scalatest.tools.PackageElement%29" target="_self">addConfiguredWildcard</a></em>
+        (<em>wildcard</em> : <a href="" target="contentFrame" class="org/scalatest/tools/PackageElement">org.scalatest.tools.PackageElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value from nested element <code>wildcard</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#execute%28%29" target="_self">execute</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Executes the task.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setConcurrent%28Boolean%29" target="_self">setConcurrent</a></em>
+        (<em>concurrent</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>concurrent</code> attribute.
+   <b>Note: The <code>concurrent</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>parallel</code> attribute instead.</b></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setFork%28Boolean%29" target="_self">setFork</a></em>
+        (<em>fork</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>fork</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setHaltonfailure%28Boolean%29" target="_self">setHaltonfailure</a></em>
+        (<em>haltonfailure</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>haltonfailure</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setMaxmemory%28String%29" target="_self">setMaxmemory</a></em>
+        (<em>max</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>maxmemory</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setMembersonly%28String%29" target="_self">setMembersonly</a></em>
+        (<em>packageName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of <code>membersonly</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setNumthreads%28Int%29" target="_self">setNumthreads</a></em>
+        (<em>numthreads</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>numthreads</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setParallel%28Boolean%29" target="_self">setParallel</a></em>
+        (<em>parallel</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>parallel</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setRunpath%28org.apache.tools.ant.types.Path%29" target="_self">setRunpath</a></em>
+        (<em>runpath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>runpath</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setSuite%28String%29" target="_self">setSuite</a></em>
+        (<em>suite</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of <code>suite</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setTestNGSuites%28org.apache.tools.ant.types.Path%29" target="_self">setTestNGSuites</a></em>
+        (<em>testNGSuitePath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of the <code>testngsuites</code> attribute.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/tools/ScalaTestAntTask.html#setWildcard%28String%29" target="_self">setWildcard</a></em>
+        (<em>packageName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Sets value of <code>wildcard</code> attribute.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#setOwningTarget" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.setOwningTarget</a>, <a href="#getOwningTarget" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.getOwningTarget</a>, <a href="#setTaskName" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.setTaskName</a>, <a href="#getTaskName" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.getTaskName</a>, <a href="#setTaskType" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.setTaskType</a>, <a href="#init" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.init</a>, <a href="#getRuntimeConfigurableWrapper" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.getRuntimeConfigurableWrapper</a>, <a href="#setRuntimeConfigurableWrapper" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.setRuntimeConfigurableWrapper</a>, <a href="#maybeConfigure" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.maybeConfigure</a>, <a href="#reconfigure" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.reconfigure</a>, <a href="#handleOutput" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.handleOutput</a>, <a href="#handleFlush" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.handleFlush</a>, <a href="#handleInput" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.handleInput</a>, <a href="#handleErrorOutput" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.handleErrorOutput</a>, <a href="#handleErrorFlush" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.handleErrorFlush</a>, <a href="#log" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.log</a>, <a href="#log" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.log</a>, <a href="#log" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.log</a>, <a href="#log" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.log</a>, <a href="#perform" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.perform</a>, <a href="#isInvalid" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.isInvalid</a>, <a href="#getTaskType" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.getTaskType</a>, <a href="#getWrapper" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.getWrapper</a>, <a href="#bindToOwner" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.bindToOwner</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#setProject" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.setProject</a>, <a href="#getProject" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.getProject</a>, <a href="#getLocation" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.getLocation</a>, <a href="#setLocation" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.setLocation</a>, <a href="#setDescription" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.setDescription</a>, <a href="#getDescription" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.getDescription</a>, <a href="#clone" target="contentFrame" class="org/apache/tools/ant/ProjectComponent">org.apache.tools.ant.ProjectComponent.clone</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="execute%28%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>execute</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Executes the task.</dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task</a>.<a href="#execute" target="contentFrame" class="org/apache/tools/ant/Task">org.apache.tools.ant.Task.execute</a>
+        </dd>
+      </dl><hr></hr>
+<a name="setRunpath%28org.apache.tools.ant.types.Path%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setRunpath</em>(<em>runpath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>runpath</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setHaltonfailure%28Boolean%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setHaltonfailure</em>(<em>haltonfailure</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>haltonfailure</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setFork%28Boolean%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setFork</em>(<em>fork</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>fork</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setMaxmemory%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setMaxmemory</em>(<em>max</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>maxmemory</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setTestNGSuites%28org.apache.tools.ant.types.Path%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setTestNGSuites</em>(<em>testNGSuitePath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>testngsuites</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setConcurrent%28Boolean%29"></a><dl>
+      <dt>
+        @<a href="" target="contentFrame" class="scala/deprecated">scala.deprecated</a><br></br>
+        <code></code>
+        <code>def</code>
+        <em>setConcurrent</em>(<em>concurrent</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>concurrent</code> attribute.
+   <b>Note: The <code>concurrent</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>parallel</code> attribute instead.</b></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setNumthreads%28Int%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setNumthreads</em>(<em>numthreads</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>numthreads</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setParallel%28Boolean%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setParallel</em>(<em>parallel</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of the <code>parallel</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredRunpath%28org.apache.tools.ant.types.Path%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredRunpath</em>(<em>runpath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>runpath</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredTestNGSuites%28org.apache.tools.ant.types.Path%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredTestNGSuites</em>(<em>testNGSuitePath</em> : <a href="" target="contentFrame" class="org/apache/tools/ant/types/Path">org.apache.tools.ant.types.Path</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>testngsuites</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredRunpathUrl%28org.scalatest.tools.RunpathUrl%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredRunpathUrl</em>(<em>runpathurl</em> : <a href="" target="contentFrame" class="org/scalatest/tools/RunpathUrl">org.scalatest.tools.RunpathUrl</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>runpathurl</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredJvmArg%28org.scalatest.tools.JvmArg%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredJvmArg</em>(<em>arg</em> : <a href="" target="contentFrame" class="org/scalatest/tools/JvmArg">org.scalatest.tools.JvmArg</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>jvmarg</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredProperty%28org.scalatest.tools.NameValuePair%29"></a><dl>
+      <dt>
+        @<a href="" target="contentFrame" class="scala/deprecated">scala.deprecated</a><br></br>
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredProperty</em>(<em>property</em> : <a href="" target="contentFrame" class="org/scalatest/tools/NameValuePair">org.scalatest.tools.NameValuePair</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets values from nested element <code>property</code>.
+   <b>The <code>property</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>config</code> attribute instead.</b></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredConfig%28org.scalatest.tools.NameValuePair%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredConfig</em>(<em>config</em> : <a href="" target="contentFrame" class="org/scalatest/tools/NameValuePair">org.scalatest.tools.NameValuePair</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets values from nested element <code>config</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setSuite%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setSuite</em>(<em>suite</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of <code>suite</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setMembersonly%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setMembersonly</em>(<em>packageName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of <code>membersonly</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="setWildcard%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>setWildcard</em>(<em>packageName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value of <code>wildcard</code> attribute.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredSuite%28org.scalatest.tools.SuiteElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredSuite</em>(<em>suite</em> : <a href="" target="contentFrame" class="org/scalatest/tools/SuiteElement">org.scalatest.tools.SuiteElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>suite</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredMembersOnly%28org.scalatest.tools.PackageElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredMembersOnly</em>(<em>membersonly</em> : <a href="" target="contentFrame" class="org/scalatest/tools/PackageElement">org.scalatest.tools.PackageElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>membersonly</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredWildcard%28org.scalatest.tools.PackageElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredWildcard</em>(<em>wildcard</em> : <a href="" target="contentFrame" class="org/scalatest/tools/PackageElement">org.scalatest.tools.PackageElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>wildcard</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredReporter%28org.scalatest.tools.ReporterElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredReporter</em>(<em>reporter</em> : <a href="" target="contentFrame" class="org/scalatest/tools/ReporterElement">org.scalatest.tools.ReporterElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>reporter</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredTagsToInclude%28org.scalatest.tools.TextElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredTagsToInclude</em>(<em>tagsToInclude</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>tagsToInclude</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredIncludes%28org.scalatest.tools.TextElement%29"></a><dl>
+      <dt>
+        @<a href="" target="contentFrame" class="scala/deprecated">scala.deprecated</a><br></br>
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredIncludes</em>(<em>includes</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>includes</code>.
+   <b>The <code>includes</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>tagsToInclude</code> attribute instead.</b></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredTagsToExclude%28org.scalatest.tools.TextElement%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredTagsToExclude</em>(<em>tagsToExclude</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>excludes</code>.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="addConfiguredExcludes%28org.scalatest.tools.TextElement%29"></a><dl>
+      <dt>
+        @<a href="" target="contentFrame" class="scala/deprecated">scala.deprecated</a><br></br>
+        <code></code>
+        <code>def</code>
+        <em>addConfiguredExcludes</em>(<em>excludes</em> : <a href="" target="contentFrame" class="org/scalatest/tools/TextElement">org.scalatest.tools.TextElement</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Sets value from nested element <code>excludes</code>.
+   <b>The <code>excludes</code> attribute has been deprecated and will be removed in a future version of ScalaTest.
+   Please use the <code>tagsToExclude</code> attribute instead.</b></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

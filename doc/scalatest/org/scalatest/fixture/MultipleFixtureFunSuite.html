@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait MultipleFixtureFunSuite in org.scalatest.fixture</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/fixture$package.html" target="_self">org.scalatest.fixture</a>
+        <br></br>
+        <span class="entity">trait  MultipleFixtureFunSuite</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/fixture/MultipleFixtureFunSuite"><code>org/scalatest/fixture/MultipleFixtureFunSuite.scala</code></a>]
+      </div><hr></hr>
+      <a name="MultipleFixtureFunSuite"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>MultipleFixtureFunSuite</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/fixture/FixtureFunSuite.html" target="_self">FixtureFunSuite</a><code> with </code><a href="../../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a></dd>
+    </dl>
+      <dl><dd>A sister trait to <code>org.scalatest.FunSuite</code> that can pass multiple types of fixture objects into its tests.
+
+ <p>
+ This trait behaves similarly to trait <code>org.scalatest.FunSuite</code>, except that tests may take a fixture object, and unlike
+ a <code>FixtureFunSuite</code>, different tests may take different types of fixtures. This trait extends <code>FixtureFunSuite</code>
+ and mixes in <code>ConfigMapFixture</code>, which defines the <code>Fixture</code> type to be the <code>configMap</code>'s
+ type (<code>Map[String, Any]</code>) and defines the <code>withFixture</code> method to simply pass the <code>configMap</code>
+ to the test function. To write tests that take fixtures of types other than <code>Fixture</code> (<em>i.e.</em>,
+ <code>Map[String, Any]</code>), you can define implicit conversions from a function of type <code>(</code>&lt;the fixture type&gt;<code>) =&gt; Unit</code>
+ to a function of type <code>(FixtureParam) =&gt; Unit</code>. Each implicit conversion method serves as the with-fixture method for that type.
+ </p>
+ 
+ <p>
+ Subclasses of this trait must, therefore, do two things differently from a plain old <code>org.scalatest.FunSuite</code>:
+ </p>
+ 
+ <ol>
+ <li>define implicit <code>with<em>&lt;type&gt;</em>Fixture</code> methods</li>
+ <li>write tests that take the different fixture types for which you've defined implicit conversion methods (You can also define tests that don't take a <code>Fixture</code>.)</li>
+ </ol>
+
+ <p>
+ Here's an example that has two fixture types, <code>String</code> and <code>List[Int]</code>:
+ </p>
+ 
+ <pre>
+ import org.scalatest.fixture.MultipleFixtureFunSuite
+ 
+ class MySuite extends MultipleFixtureFunSuite {
+ 
+   // The "with-fixture" method for tests that take a String fixture
+   implicit def withStringFixture(testFunction: String => Unit): FixtureParam => Unit =
+     testFunction("howdy")
+ 
+   // The "with-fixture" method for tests that take a List[Int] fixture
+   implicit def withListFixture(testFunction: List[Int] => Unit): FixtureParam => Unit =
+     configMap => testFunction(List(configMap.size))
+ 
+   // A test that takes a String fixture
+   test("takes a string fixture") { (s: String) =>
+     assert(s === "howdy")
+   }
+ 
+   // A test that takes a List[Int] fixture
+   test("takes a list fixture") { (list: List[Int]) =>
+     assert(list.size === 1)
+   }
+ 
+   // A test that takes no fixture
+   test("takes no fixture") { () =>
+     assert(1 === 1)
+   }
+ }
+ </pre>
+
+ <p>
+ The first method in this class, <code>withStringFixture</code>, is the implicit conversion function for tests that take a fixture
+ of type <code>String</code>.  In this contrived example, the hard-coded string <code>"howdy"</code> is passed into the test:
+ </p>
+
+ <pre>
+ implicit def withStringFixture(testFunction: String => Unit): FixtureParam => Unit =
+   testFunction("howdy")
+ </pre>
+ 
+ <p>
+ Although the result type of this implicit conversion method is <code>FixtureParam => Unit</code>, if a fixture doesn't need anything
+ from the <code>configMap</code>, you can leave off the <code>configMap =></code> at the beginning of the result function. The
+ reason this works is that <code>MultipleFixtureFunSuite</code> inherits an implicit conversion from a by-name parameter to
+ <code>FixtureParam => Unit</code> from supertrait <code>FixtureFunSuite</code>. This implicit conversion is used to enable 
+ tests that take no fixture (such as the one named <code>takes no fixture</code> in this example) to be included in the
+ same class as tests that take type <code>Fixture</code>. That same implicit conversion is used here to allow you to leave off
+ the <code>configMap =></code> except when you actually need something from the <code>configMap</code>. By leaving it off, you
+ indicte to readers of the code that this fixture doesn't require anything from the <code>configMap</code>.
+ </p>
+
+ <p>
+ The next method in this class, <code>withListFixture</code>, is the implicit conversion function for tests that take a
+ fixture of type <code>List[Int]</code>.  In this contrived example, a <code>List[Int]</code> that contains one element, the
+ size of the <code>configMap</code>, is passed to the test function. Because the fixture uses the <code>configMap</code>,
+ it has an explicit <code>configMap =></code> parameter at the beginning of the result. (Remember, the <code>Fixture</code>
+ type is defined to be <code>Map[String, Any]</code>, the type of the <code>configMap</code>, in supertrait <code>ConfigMapFixture</code>.
+ </p>
+
+ <p>
+ Following the implicit conversion methods are the test declarations. One test is written to take the <code>String</code> fixture:
+ </p>
+
+ <pre>
+ test("takes a string fixture") { (s: String) =>
+   assert(s === "howdy")
+ }
+ </pre>
+
+ <p>
+ What happens at compile time is that because the <code>Fixture</code> type is <code>Map[String, Any]</code>, the <code>test</code> method
+ should be passed a function from type <code>(Map[String, Any]) => Unit</code>, or using the type alias, <code>(FixtureParam) => Unit</code>. Passing
+ a function of type <code>String => Unit</code> as is attempted here is a type error. Thus the compiler will look around for an implicit
+ conversion that will fix the type error, and will find the <code>withStringFixture</code> method. Because this is the only implicit
+ conversion that fixes the type error, it will apply it, effectively generating this code:
+ </p>
+
+ <pre>
+ // after the implicit withStringFixture method is applied by the compiler
+ test("takes a string fixture") {
+   withStringFixture { (s: String) =>
+     assert(s === "howdy")
+   }
+ }
+ </pre>
+
+ <p>
+ After passing the <code>(String) => Unit</code> function to <code>withStringFixture</code>, the result will be of
+ type <code>(FixtureParam) => Unit</code>, which the <code>test</code> method expects.
+ </p>
+
+ <p>
+ The next test is written to take the <code>List[Int]</code> fixture:
+ </p>
+
+ <pre>
+ test("takes a list fixture") { (list: List[Int]) =>
+   assert(list.size === 1)
+ }
+ </pre>
+
+ <p>
+ The compiler will apply the <code>withListFixture</code> implicit conversion in this case, effectively generating the following
+ code:
+ </p>
+
+ <pre>
+ test("takes a list fixture") {
+   withListFixture { (list: List[Int]) =>
+     assert(list.size === 1)
+   }
+ }
+ </pre>
+ 
+ <p>
+ Note that in a <code>FixtureFunSuite</code>, you need to specify the type of the fixture explicitly so the compiler knows
+ the type to convert from. So you must, for example, write:
+ </p>
+
+ <pre>
+ test("takes a list fixture") { (list: List[Int]) =>
+   assert(list.size === 1)
+ }
+ </pre>
+
+ <p>
+ The following attempt will fail to compile:
+ </p>
+
+ <pre>
+ // won't compile, because list is inferred to be of type FixtureParam
+ test("takes a list fixture") { list =>
+   assert(list.size === 1)
+ }
+ </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/fixture/ConfigMapFixture.html" target="_self">ConfigMapFixture</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/fixture/ConfigMapFixture.html#withFixture%28ConfigMapFixture.this.OneArgTest%29" target="_self">withFixture</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/fixture/FixtureFunSuite.html" target="_self">FixtureFunSuite</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#info" target="_self">info</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#test%28String%2Corg.scalatest.Tag*%29" target="_self">test</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#ignore%28String%2Corg.scalatest.Tag*%29" target="_self">ignore</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#testNames" target="_self">testNames</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#tags" target="_self">tags</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#testsFor%28Unit%29" target="_self">testsFor</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#convertPendingToFixtureFunction%28%3D%3Eorg.scalatest.PendingNothing%29" target="_self">convertPendingToFixtureFunction</a>, <a href="../../../org/scalatest/fixture/FixtureFunSuite.html#convertNoArgToFixtureFunction%28%28%29%3D%3EAny%29" target="_self">convertNoArgToFixtureFunction</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Suite.html" target="_self">Suite</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Suite.html#nestedSuites" target="_self">nestedSuites</a>, <a href="../../../org/scalatest/Suite.html#execute%28%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28Map%5BString%2CAny%5D%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28String%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#execute%28String%2CMap%5BString%2CAny%5D%29" target="_self">execute</a>, <a href="../../../org/scalatest/Suite.html#groups" target="_self">groups</a>, <a href="../../../org/scalatest/Suite.html#withFixture%28Suite.this.NoArgTest%29" target="_self">withFixture</a>, <a href="../../../org/scalatest/Suite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a>, <a href="../../../org/scalatest/Suite.html#suiteName" target="_self">suiteName</a>, <a href="../../../org/scalatest/Suite.html#pending" target="_self">pending</a>, <a href="../../../org/scalatest/Suite.html#pendingUntilFixed%28%3D%3EUnit%29" target="_self">pendingUntilFixed</a>, <a href="../../../org/scalatest/Suite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

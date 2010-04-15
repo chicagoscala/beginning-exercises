@@ -1,0 +1,1238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class OrNotWord in org.scalatest.matchers.Matchers.MatcherWrapper</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html" target="_self">org.scalatest.matchers.Matchers.MatcherWrapper</a>
+        <br></br>
+        <span class="entity">class  OrNotWord</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/Matchers/MatcherWrapper"><code>org/scalatest/matchers/Matchers/MatcherWrapper.scala</code></a>]
+      </div><hr></hr>
+      <a name="OrNotWord"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>OrNotWord</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+     the matchers DSL.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ShortTolerance%29" target="_self">be</a></em>
+        (<em>shortTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ShortTolerance.html" target="_self">ShortTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenShort should (not be (17.toShort plusOrMinus 2.toShort) or not be (17.toShort plusOrMinus 2.toShort))
+                                                                           ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.FloatTolerance%29" target="_self">be</a></em>
+        (<em>floatTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.FloatTolerance.html" target="_self">FloatTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenDotOhFloat should (not be (17.0f plusOrMinus 0.2f) or not be (17.0f plusOrMinus 0.2f))
+                                                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Null%29" target="_self">be</a></em>
+        [<em>T</em>](<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Null.html" target="_self">Null</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       map should (contain key (7) or not be (null))
+                                          ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfTheSameInstanceAsApplication%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfTheSameInstanceAsApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTheSameInstanceAsApplication.html" target="_self">ResultOfTheSameInstanceAsApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       obj should (not be theSameInstanceAs (otherString) or not be theSameInstanceAs (string))
+                                                                 ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfGreaterThanOrEqualToComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html" target="_self">ResultOfGreaterThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       8 should (not be >= (7) or not be >= (6))
+                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.IntTolerance%29" target="_self">be</a></em>
+        (<em>intTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.IntTolerance.html" target="_self">IntTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenInt should (not be (17 plusOrMinus 2) or not be (17 plusOrMinus 2))
+                                                         ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.DoubleTolerance%29" target="_self">be</a></em>
+        (<em>doubleTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.DoubleTolerance.html" target="_self">DoubleTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenDotOh should (not be (17.0 plusOrMinus 0.2) or not be (17.0 plusOrMinus 0.2))
+                                                               ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToSymbolApplication%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfAnWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToSymbolApplication.html" target="_self">ResultOfAnWordToSymbolApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       notAppleMock should (not be an ('apple) or not be an ('apple))
+                                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ByteTolerance%29" target="_self">be</a></em>
+        (<em>byteTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ByteTolerance.html" target="_self">ByteTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenByte should ((not be (19.toByte plusOrMinus 2.toByte)) or (not be (19.toByte plusOrMinus 2.toByte)))
+                                                                           ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfGreaterThanComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html" target="_self">ResultOfGreaterThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       7 should (not be > (5) or not be > (6))
+                                     ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>resultOfAnWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToBePropertyMatcherApplication.html" target="_self">ResultOfAnWordToBePropertyMatcherApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be an (directory) or not be an (file))
+                                                   ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be (directory) or not be (file))
+                                                ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToSymbolApplication%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfAWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToSymbolApplication.html" target="_self">ResultOfAWordToSymbolApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       isNotFileMock should (not be a ('directory) or not be a ('file))
+                                                          ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfLessThanOrEqualToComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html" target="_self">ResultOfLessThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       2 should (not be <= (3) or not be <= (2))
+                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BeMatcher%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>beMatcher</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html" target="_self">BeMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       2 should (not be (even) or not be (odd))
+                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Symbol%29" target="_self">be</a></em>
+        (<em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       notEmptyMock should (not be ('full) or not be ('empty))
+                                                  ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Any%29" target="_self">be</a></em>
+        (<em>any</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       1 should (not be (1) or not be (2))
+                                   ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.LongTolerance%29" target="_self">be</a></em>
+        (<em>longTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.LongTolerance.html" target="_self">LongTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       sevenLong should (not be (17L plusOrMinus 2L) or not be (17L plusOrMinus 2L))
+                                                            ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfTripleEqualsApplication%29" target="_self">be</a></em>
+        (<em>resultOfTripleEqualsApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTripleEqualsApplication.html" target="_self">ResultOfTripleEqualsApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       5 should (not be === (7) or not be === (8))
+                                       ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>resultOfAWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToBePropertyMatcherApplication.html" target="_self">ResultOfAWordToBePropertyMatcherApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be a (directory) or not be a (file))
+                                                  ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29" target="_self">be</a></em>
+        [<em>T</em>](<em>resultOfLessThanComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html" target="_self">ResultOfLessThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       5 should (not be < (7) or not be < (8))
+                                     ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28T%29" target="_self">contain</a></em>
+        [<em>T</em>](<em>expectedElement</em> : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="scala/Iterable">scala.Iterable</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28T%29#T" target="_self">T</a>]]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not contain (1) or not contain (3))
+                                                  ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29" target="_self">contain</a></em>
+        [<em>T</em>](<em>resultOfKeyWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfKeyWordApplication.html" target="_self">ResultOfKeyWordApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       Map("one" -> 1, "two" -> 2) should (not contain key ("two") or not contain key ("three"))
+                                                                          ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfValueWordApplication%5BT%5D%29" target="_self">contain</a></em>
+        [<em>T</em>](<em>resultOfValueWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfValueWordApplication.html" target="_self">ResultOfValueWordApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfValueWordApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="&lt;NoSymbol&gt;/&lt;refinement&gt;">&lt;NoSymbol&gt;.&lt;refinement&gt;</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       Map("one" -> 1, "two" -> 2) should (not contain value (2) or not contain value (3))
+                                                                        ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#endWith%28Matchers.this.ResultOfRegexWordApplication%29" target="_self">endWith</a></em>
+        (<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not endWith regex ("bob") or not endWith regex (decimal))
+                                                       ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#endWith%28String%29" target="_self">endWith</a></em>
+        (<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not endWith ("fred") or not endWith ("1.7"))
+                                                  ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#equal%28Any%29" target="_self">equal</a></em>
+        (<em>any</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       1 should (not equal (1) or not equal (2))
+                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#fullyMatch%28Matchers.this.ResultOfRegexWordApplication%29" target="_self">fullyMatch</a></em>
+        (<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not fullyMatch regex ("fred") or not fullyMatch regex (decimal))
+                                                           ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28Matchers.this.ResultOfLengthWordApplication%29" target="_self">have</a></em>
+        (<em>resultOfLengthWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLengthWordApplication.html" target="_self">ResultOfLengthWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not have length (2) or not have length (3))
+                                                      ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28Matchers.this.ResultOfSizeWordApplication%29" target="_self">have</a></em>
+        (<em>resultOfSizeWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfSizeWordApplication.html" target="_self">ResultOfSizeWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not have size (2) or not have size (3))
+                                                    ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29" target="_self">have</a></em>
+        [<em>T</em>](<em>firstPropertyMatcher</em> : <a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>propertyMatchers</em> : <a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]*) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       book should (not have (title ("Moby Dick")) or not have (author ("Melville")))
+                                                          ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#include%28String%29" target="_self">include</a></em>
+        (<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not include ("bob") or not include ("1.7"))
+                                                 ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#include%28Matchers.this.ResultOfRegexWordApplication%29" target="_self">include</a></em>
+        (<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not include regex ("fred") or not include regex (decimal))
+                                                        ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#startWith%28Matchers.this.ResultOfRegexWordApplication%29" target="_self">startWith</a></em>
+        (<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not startWith regex ("bob") or not startWith regex (decimal))
+                                                         ^
+       </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#startWith%28String%29" target="_self">startWith</a></em>
+        (<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not startWith ("fred") or not startWith ("1.7"))
+                                                    ^
+       </pre></div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="equal%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>equal</em>(<em>any</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       1 should (not equal (1) or not equal (2))
+                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>any</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       1 should (not be (1) or not be (2))
+                                   ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="have%28Matchers.this.ResultOfLengthWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>have</em>(<em>resultOfLengthWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLengthWordApplication.html" target="_self">ResultOfLengthWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not have length (2) or not have length (3))
+                                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="have%28Matchers.this.ResultOfSizeWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>have</em>(<em>resultOfSizeWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfSizeWordApplication.html" target="_self">ResultOfSizeWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not have size (2) or not have size (3))
+                                                    ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>have</em>[<em>T</em>](<em>firstPropertyMatcher</em> : <a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <em>propertyMatchers</em> : <a href="../../../org/scalatest/matchers/HavePropertyMatcher.html" target="_self">HavePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]*) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#have%28org.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D%2Corg.scalatest.matchers.HavePropertyMatcher%5BT%2C_%5D*%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       book should (not have (title ("Moby Dick")) or not have (author ("Melville")))
+                                                          ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Null%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>o</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Null.html" target="_self">Null</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       map should (contain key (7) or not be (null))
+                                          ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfLessThanComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanComparison.html" target="_self">ResultOfLessThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanComparison%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       5 should (not be < (7) or not be < (8))
+                                     ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfGreaterThanComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanComparison.html" target="_self">ResultOfGreaterThanComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanComparison%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       7 should (not be > (5) or not be > (6))
+                                     ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfLessThanOrEqualToComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfLessThanOrEqualToComparison.html" target="_self">ResultOfLessThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfLessThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       2 should (not be <= (3) or not be <= (2))
+                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfGreaterThanOrEqualToComparison</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfGreaterThanOrEqualToComparison.html" target="_self">ResultOfGreaterThanOrEqualToComparison</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfGreaterThanOrEqualToComparison%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       8 should (not be >= (7) or not be >= (6))
+                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfTripleEqualsApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>resultOfTripleEqualsApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTripleEqualsApplication.html" target="_self">ResultOfTripleEqualsApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       5 should (not be === (7) or not be === (8))
+                                       ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Symbol%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>symbol</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       notEmptyMock should (not be ('full) or not be ('empty))
+                                                  ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28org.scalatest.matchers.BeMatcher%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>beMatcher</em> : <a href="../../../org/scalatest/matchers/BeMatcher.html" target="_self">BeMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BeMatcher%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       2 should (not be (even) or not be (odd))
+                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>bePropertyMatcher</em> : <a href="../../../org/scalatest/matchers/BePropertyMatcher.html" target="_self">BePropertyMatcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28org.scalatest.matchers.BePropertyMatcher%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be (directory) or not be (file))
+                                                ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfAWordToSymbolApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfAWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToSymbolApplication.html" target="_self">ResultOfAWordToSymbolApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       isNotFileMock should (not be a ('directory) or not be a ('file))
+                                                          ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>resultOfAWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAWordToBePropertyMatcherApplication.html" target="_self">ResultOfAWordToBePropertyMatcherApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be a (directory) or not be a (file))
+                                                  ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfAnWordToSymbolApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfAnWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToSymbolApplication.html" target="_self">ResultOfAnWordToSymbolApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       notAppleMock should (not be an ('apple) or not be an ('apple))
+                                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em> &lt;: <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>](<em>resultOfAnWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfAnWordToBePropertyMatcherApplication.html" target="_self">ResultOfAnWordToBePropertyMatcherApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#be%28Matchers.this.ResultOfAnWordToBePropertyMatcherApplication%5BT%5D%29#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       myFile should (not be an (directory) or not be an (file))
+                                                   ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ResultOfTheSameInstanceAsApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>[<em>T</em>](<em>resultOfTheSameInstanceAsApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfTheSameInstanceAsApplication.html" target="_self">ResultOfTheSameInstanceAsApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       obj should (not be theSameInstanceAs (otherString) or not be theSameInstanceAs (string))
+                                                                 ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.DoubleTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>doubleTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.DoubleTolerance.html" target="_self">DoubleTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Double.html" target="_self">Double</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenDotOh should (not be (17.0 plusOrMinus 0.2) or not be (17.0 plusOrMinus 0.2))
+                                                               ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.FloatTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>floatTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.FloatTolerance.html" target="_self">FloatTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Float.html" target="_self">Float</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenDotOhFloat should (not be (17.0f plusOrMinus 0.2f) or not be (17.0f plusOrMinus 0.2f))
+                                                                      ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.LongTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>longTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.LongTolerance.html" target="_self">LongTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Long.html" target="_self">Long</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenLong should (not be (17L plusOrMinus 2L) or not be (17L plusOrMinus 2L))
+                                                            ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.IntTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>intTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.IntTolerance.html" target="_self">IntTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenInt should (not be (17 plusOrMinus 2) or not be (17 plusOrMinus 2))
+                                                         ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ShortTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>shortTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ShortTolerance.html" target="_self">ShortTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Short.html" target="_self">Short</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenShort should (not be (17.toShort plusOrMinus 2.toShort) or not be (17.toShort plusOrMinus 2.toShort))
+                                                                           ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="be%28Matchers.this.ByteTolerance%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>be</em>(<em>byteTolerance</em> : <a href="../../../org/scalatest/matchers/Matchers.ByteTolerance.html" target="_self">ByteTolerance</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/Byte.html" target="_self">Byte</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       sevenByte should ((not be (19.toByte plusOrMinus 2.toByte)) or (not be (19.toByte plusOrMinus 2.toByte)))
+                                                                           ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="fullyMatch%28Matchers.this.ResultOfRegexWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>fullyMatch</em>(<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not fullyMatch regex ("fred") or not fullyMatch regex (decimal))
+                                                           ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="include%28Matchers.this.ResultOfRegexWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>include</em>(<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not include regex ("fred") or not include regex (decimal))
+                                                        ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="include%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>include</em>(<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not include ("bob") or not include ("1.7"))
+                                                 ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="startWith%28Matchers.this.ResultOfRegexWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>startWith</em>(<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not startWith regex ("bob") or not startWith regex (decimal))
+                                                         ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="startWith%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>startWith</em>(<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not startWith ("fred") or not startWith ("1.7"))
+                                                    ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="endWith%28Matchers.this.ResultOfRegexWordApplication%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>endWith</em>(<em>resultOfRegexWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfRegexWordApplication.html" target="_self">ResultOfRegexWordApplication</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not endWith regex ("bob") or not endWith regex (decimal))
+                                                       ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="endWith%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>endWith</em>(<em>expectedSubstring</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       "fred" should (not endWith ("fred") or not endWith ("1.7"))
+                                                  ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="contain%28T%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>contain</em>[<em>T</em>](<em>expectedElement</em> : <a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28T%29#T" target="_self">T</a>) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="scala/Iterable">scala.Iterable</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28T%29#T" target="_self">T</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       Array(1, 2) should (not contain (1) or not contain (3))
+                                                  ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>contain</em>[<em>T</em>](<em>resultOfKeyWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfKeyWordApplication.html" target="_self">ResultOfKeyWordApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.html#T" target="_self">T</a><code> with </code><a href="" target="contentFrame" class="scala/collection/Map">scala.collection.Map</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfKeyWordApplication%5BT%5D%29#T" target="_self">T</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>]]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       Map("one" -> 1, "two" -> 2) should (not contain key ("two") or not contain key ("three"))
+                                                                          ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="contain%28Matchers.this.ResultOfValueWordApplication%5BT%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>contain</em>[<em>T</em>](<em>resultOfValueWordApplication</em> : <a href="../../../org/scalatest/matchers/Matchers.ResultOfValueWordApplication.html" target="_self">ResultOfValueWordApplication</a>[<a href="../../../org/scalatest/matchers/Matchers.MatcherWrapper.OrNotWord.html#contain%28Matchers.this.ResultOfValueWordApplication%5BT%5D%29#T" target="_self">T</a>]) : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="&lt;NoSymbol&gt;/&lt;refinement&gt;">&lt;NoSymbol&gt;.&lt;refinement&gt;</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables the following syntax:
+      
+       <pre>
+       Map("one" -> 1, "two" -> 2) should (not contain value (2) or not contain value (3))
+                                                                        ^
+       </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

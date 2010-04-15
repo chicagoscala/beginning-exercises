@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class ItWord in org.scalatest.fixture.FixtureFlatSpec</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/fixture/FixtureFlatSpec.html" target="_self">org.scalatest.fixture.FixtureFlatSpec</a>
+        <br></br>
+        <span class="entity">class  ItWord</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/fixture/FixtureFlatSpec"><code>org/scalatest/fixture/FixtureFlatSpec.scala</code></a>]
+      </div><hr></hr>
+      <a name="ItWord"></a><dl>
+      <dt>
+        
+        <code>protected final</code>
+        <code>class</code>
+        <em>ItWord</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Class that supports test (and shared test) registration via the instance referenced from <code>FixtureFlatSpec</code>'s <code>it</code> field.
+  
+   <p>
+   This class enables syntax such as the following test registration:
+   </p>
+  
+   <pre>
+   it should "pop values in last-in-first-out order" in { ... }
+   ^
+   </pre>
+  
+   <p>
+   It also enables syntax such as the following shared test registration:
+   </p>
+  
+   <pre>
+   it should behave like nonEmptyStack(lastItemPushed)
+   ^
+   </pre>
+  
+   <p>
+   For more information and examples of the use of the <code>it</code> field, see the main documentation 
+   for trait <a href="../FlatSpec.html"><code>FlatSpec</code></a>.
+   </p></dd></dl>
+      <dl></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#can%28org.scalatest.verb.BehaveWord%29" target="_self">can</a></em>
+        (<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+        
+        <div>Supports the registration of shared tests with <code>can</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#can%28String%29" target="_self">can</a></em>
+        (<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+        
+        <div>Supports the registration of tests with <code>can</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#must%28org.scalatest.verb.BehaveWord%29" target="_self">must</a></em>
+        (<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+        
+        <div>Supports the registration of shared tests with <code>must</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#must%28String%29" target="_self">must</a></em>
+        (<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+        
+        <div>Supports the registration of tests with <code>must</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#should%28org.scalatest.verb.BehaveWord%29" target="_self">should</a></em>
+        (<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+        
+        <div>Supports the registration of shared tests with <code>should</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItWord.html#should%28String%29" target="_self">should</a></em>
+        (<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+        
+        <div>Supports the registration of tests with <code>should</code> in a <code>FixtureFlatSpec</code>.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="should%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>should</em>(<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of tests with <code>should</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it should "pop values in last-in-first-out order" in { ... }
+        ^
+     </pre>
+    
+     <p>
+     For examples of test registration, see the <a href="../FlatSpec.html">main documentation</a>
+     for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of tests with <code>must</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it must "pop values in last-in-first-out order" in { ... }
+        ^
+     </pre>
+    
+     <p>
+     For examples of test registration, see the <a href="../FlatSpec.html">main documentation</a>
+     for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="can%28String%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>can</em>(<em>string</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>) : <a href="../../../org/scalatest/fixture/FixtureFlatSpec.ItVerbString.html" target="_self">ItVerbString</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of tests with <code>can</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it can "pop values in last-in-first-out order" in { ... }
+        ^
+     </pre>
+    
+     <p>
+     For examples of test registration, see the <a href="../FlatSpec.html">main documentation</a>
+     for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="should%28org.scalatest.verb.BehaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>should</em>(<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of shared tests with <code>should</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it should behave like nonFullStack(stackWithOneItem)
+        ^
+     </pre>
+    
+     <p>
+     For examples of shared tests, see the <a href="../FlatSpec.html#SharedTests">Shared tests section</a>
+     in the main documentation for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="must%28org.scalatest.verb.BehaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>must</em>(<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of shared tests with <code>must</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it must behave like nonFullStack(stackWithOneItem)
+        ^
+     </pre>
+    
+     <p>
+     For examples of shared tests, see the <a href="../FlatSpec.html#SharedTests">Shared tests section</a>
+     in the main documentation for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="can%28org.scalatest.verb.BehaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>can</em>(<em>behaveWord</em> : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>) : <a href="../../../org/scalatest/verb/BehaveWord.html" target="_self">BehaveWord</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Supports the registration of shared tests with <code>can</code> in a <code>FixtureFlatSpec</code>.
+    
+     <p>
+     This method supports syntax such as the following:
+     </p>
+    
+     <pre>
+     it can behave like nonFullStack(stackWithOneItem)
+        ^
+     </pre>
+    
+     <p>
+     For examples of shared tests, see the <a href="../FlatSpec.html#SharedTests">Shared tests section</a>
+     in the main documentation for trait <code>FlatSpec</code>.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

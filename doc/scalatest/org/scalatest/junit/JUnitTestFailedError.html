@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class JUnitTestFailedError in org.scalatest.junit</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/junit$package.html" target="_self">org.scalatest.junit</a>
+        <br></br>
+        <span class="entity">class  JUnitTestFailedError</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/junit/JUnitTestFailedError"><code>org/scalatest/junit/JUnitTestFailedError.scala</code></a>]
+      </div><hr></hr>
+      <a name="JUnitTestFailedError"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>class</code>
+        <em>JUnitTestFailedError</em>(<code>val </code><em>message</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <code>val </code><em>cause</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <code>val </code><em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>)
+      </dt>
+      <dd><code> extends </code><a href="" target="contentFrame" class="junit/framework/AssertionFailedError">junit.framework.AssertionFailedError</a><code> with </code><a href="../../../org/scalatest/StackDepth.html" target="_self">StackDepth</a></dd>
+    </dl>
+      <dl><dd>Exception that indicates a test failed.
+
+ <p>
+ The purpose of this exception is to encapsulate the same stack depth information provided by
+ <a href="../TestFailedException.html"><code>TestFailedException</code></a>, which is used
+ when running with ScalaTest, but be reported as
+ a failure not an error when running with JUnit.
+ The stack depth information indicates which line of test code failed, so that when running
+ with ScalaTest information can be presented to
+ the user that makes it quick to find the failing line of test code. (In other words, when
+ running with ScalaTest the user need not scan through the stack trace to find the correct filename
+ and line number of the failing test.)
+ </p>
+
+ <p>
+ JUnit distinguishes between <em>failures</em> and <em>errors</em>.
+ If a test fails because of a failed assertion, that is considered a <em>failure</em> in JUnit. If a test
+ fails for any other reason, either the test code or the application being tested threw an unexpected
+ exception, that is considered an <em>error</em> in JUnit. This class differs from
+ <a href="../TestFailedException.html"><code>TestFailedException</code></a> in that it extends
+ <code>junit.framework.AssertionFailedError</code>. Instances of this class are thrown by the
+ assertions provided by <a href="AssertionsForJUnit.html"><code>AssertionsForJUnit</code></a>, and matcher
+ expressions provided by <a href="ShouldMatchersForJUnit.html"><code>ShouldMatchersForJUnit</code></a>, and
+ <a href="MustMatchersForJUnit.html"><code>MustMatchersForJUnit</code></a>.
+ </p>
+
+ <p>
+ The way JUnit 3 (JUnit 3.8 and earlier releases) decided whether an exception represented a failure or error
+ is that only thrown <code>junit.framework.AssertionFailedError</code>s were considered failures. Any other
+ exception type was considered an error. The exception type thrown by the JUnit 3 assertion methods declared
+ in <code>junit.framework.Assert</code> (such as <code>assertEquals</code>, <code>assertTrue</code>,
+ and <code>fail</code>) was, therefore, <code>AssertionFailedError</code>. In JUnit 4, <code>AssertionFailedError</code>
+ was made to extend <code>java.lang.AssertionError</code>, and the distinction between failures and errors
+ was essentially dropped. However, some tools that integrate with JUnit carry on this distinction, so even
+ if you are using JUnit 4 you may want to use the "<code>ForJUnit</code>" of ScalaTest assertions and matchers.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>an optional detail message for this <code>TestFailedException</code>.</dd><dd><code>cause - </code>an optional cause, the <code>Throwable</code> that caused this <code>TestFailedException</code> to be thrown.</dd><dd><code>failedCodeStackDepth - </code>the depth in the stack trace of this exception at which the line of test code that failed resides.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if <code>message</code> is <code>null</code>, or <code>Some(null)</code>.</dd><dd><code>NullPointerException - </code>if <code>cause</code> is <code>null</code>, or <code>Some(null)</code>.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      <table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Additional Constructor Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitTestFailedError.html#this%28String%2CInt%29" target="_self">this</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+        
+        <div>Create a <code>JUnitTestFailedError</code> with a specified stack depth and detail message.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitTestFailedError.html#this%28Throwable%2CInt%29" target="_self">this</a></em>
+        (<em>cause</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+        
+        <div>Create a <code>JUnitTestFailedError</code> with the specified stack depth and cause.  The
+   <code>message</code> field of this exception object will be initialized to
+   <code>if (cause.getMessage == null) "" else cause.getMessage</code>.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitTestFailedError.html#this%28String%2CThrowable%2CInt%29" target="_self">this</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>cause</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+        
+        <div>Create a <code>JUnitTestFailedError</code> with the specified stack depth, detail
+   message, and cause.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitTestFailedError.html#this%28Int%29" target="_self">this</a></em>
+        (<em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+        
+        <div>Create a <code>JUnitTestFailedError</code> with specified stack depth and no detail message or cause.</div>
+      </td>
+    </tr>
+      </table>
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Values and Variables inherited from <a href="../../../org/scalatest/StackDepth.html" target="_self">StackDepth</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/StackDepth.html#failedCodeFileNameAndLineNumberString" target="_self">failedCodeFileNameAndLineNumberString</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>override final def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/junit/JUnitTestFailedError.html#initCause%28Throwable%29" target="_self">initCause</a></em>
+        (<em>throwable</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>) : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>
+        
+        
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#getMessage" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.getMessage</a>, <a href="#getLocalizedMessage" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.getLocalizedMessage</a>, <a href="#getCause" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.getCause</a>, <a href="#toString" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.toString</a>, <a href="#printStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.printStackTrace</a>, <a href="#printStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.printStackTrace</a>, <a href="#printStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.printStackTrace</a>, <a href="#fillInStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.fillInStackTrace</a>, <a href="#getStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.getStackTrace</a>, <a href="#setStackTrace" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable.setStackTrace</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      <table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Additional Constructor Details</td></tr>
+        </table><div><a name="this%28Int%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>this</em>(<em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a <code>JUnitTestFailedError</code> with specified stack depth and no detail message or cause.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>failedCodeStackDepth - </code>the depth in the stack trace of this exception at which the line of test code that failed resides.</dd></dl>
+    <hr></hr>
+<a name="this%28String%2CInt%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>this</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a <code>JUnitTestFailedError</code> with a specified stack depth and detail message.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>A detail message for this <code>JUnitTestFailedError</code>.</dd><dd><code>failedCodeStackDepth - </code>the depth in the stack trace of this exception at which the line of test code that failed resides.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if <code>message</code> is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="this%28Throwable%2CInt%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>this</em>(<em>cause</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a <code>JUnitTestFailedError</code> with the specified stack depth and cause.  The
+   <code>message</code> field of this exception object will be initialized to
+   <code>if (cause.getMessage == null) "" else cause.getMessage</code>.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>cause - </code>the cause, the <code>Throwable</code> that caused this <code>JUnitTestFailedError</code> to be thrown.</dd><dd><code>failedCodeStackDepth - </code>the depth in the stack trace of this exception at which the line of test code that failed resides.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if <code>cause</code> is <code>null</code>.</dd></dl>
+    <hr></hr>
+<a name="this%28String%2CThrowable%2CInt%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>this</em>(<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>cause</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>, <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="../../../org/scalatest/junit/JUnitTestFailedError.html" target="_self">JUnitTestFailedError</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a <code>JUnitTestFailedError</code> with the specified stack depth, detail
+   message, and cause.
+  
+   <p>Note that the detail message associated with cause is
+   <em>not</em> automatically incorporated in this throwable's detail
+   message.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>message - </code>A detail message for this <code>JUnitTestFailedError</code>.</dd><dd><code>cause - </code>the cause, the <code>Throwable</code> that caused this <code>JUnitTestFailedError</code> to be thrown.</dd><dd><code>failedCodeStackDepth - </code>the depth in the stack trace of this exception at which the line of test code that failed resides.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if <code>message</code> is <code>null</code>.</dd><dd><code>NullPointerException - </code>if <code>cause</code> is <code>null</code>.</dd></dl>
+    <hr></hr></div>
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="initCause%28Throwable%29"></a><dl>
+      <dt>
+        
+        <code>override final</code>
+        <code>def</code>
+        <em>initCause</em>(<em>throwable</em> : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>) : <a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>
+      </dt>
+      <dd></dd>
+    </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

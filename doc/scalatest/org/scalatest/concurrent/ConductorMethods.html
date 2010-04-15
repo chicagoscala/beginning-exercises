@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait ConductorMethods in org.scalatest.concurrent</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/concurrent$package.html" target="_self">org.scalatest.concurrent</a>
+        <br></br>
+        <span class="entity">trait  ConductorMethods</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/concurrent/ConductorMethods"><code>org/scalatest/concurrent/ConductorMethods.scala</code></a>]
+      </div><hr></hr>
+      <a name="ConductorMethods"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>ConductorMethods</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a><code> with </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that provides each test with access to a new <code>Conductor</code> 
+ via methods.
+
+ <p>
+ Here's an example of the use of this trait to test the <code>ArrayBlockingQueue</code>
+ concurrency abstraction from <code>java.util.concurrent</code>:
+ </p>
+
+ <pre>
+ import org.scalatest.FunSuite
+ import org.scalatest.concurrent.ConductorMethods
+ import org.scalatest.matchers.ShouldMatchers
+ import java.util.concurrent.ArrayBlockingQueue
+
+ class ArrayBlockingQueueSuite extends FunSuite with ConductorMethods with ShouldMatchers {
+ 
+   test("calling put on a full queue blocks the producer thread") {
+
+     val buf = new ArrayBlockingQueue[Int](1)
+ 
+     thread("producer") {
+       buf put 42
+       buf put 17
+       beat should be (1)
+     }
+ 
+     thread("consumer") {
+       waitForBeat(1)
+       buf.take should be (42)
+       buf.take should be (17)
+     }
+ 
+     whenFinished {
+       buf should be ('empty)
+     }
+   }
+
+   test("calling take on an empty queue blocks the consumer thread") {
+
+     val buf = new ArrayBlockingQueue[Int](1)
+
+     thread("producer") {
+       waitForBeat(1)
+       buf put 42
+       buf put 17
+     }
+
+     thread("consumer") {
+       buf.take should be (42)
+       buf.take should be (17)
+       beat should be (1)
+     }
+
+     whenFinished {
+       buf should be ('empty)
+     }
+   }
+ }
+ </pre>
+
+ <p>
+ For an explanation of how these tests work, see the documentation for <a href="Conductor.html"><code>Conductor</code></a>.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Josh Cough</dd><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#beat" target="_self">beat</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Gets the current value of the clock. Primarily useful in assert statements.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#isConductorFrozen" target="_self">isConductorFrozen</a></em>
+         : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+        
+        <div>Check if the clock has been frozen by any threads. (The only way a thread
+   can freeze the clock is by calling withClockFrozen.)</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28String%29" target="_self">thread</a></em>
+        [<em>T</em>](<em>name</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28String%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="java/lang/Thread">java.lang.Thread</a>
+        
+        <div>Create a new thread that will execute the given function.
+   If the test is started, then the thread will run the function immediately.
+   If it is not yet started, the Thread will wait to run the function until
+   all threads are up and ready to go.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28%3D%3ET%29" target="_self">thread</a></em>
+        [<em>T</em>](<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28%3D%3ET%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="java/lang/Thread">java.lang.Thread</a>
+        
+        <div>Create a new thread that will execute the given function.
+   If the test is started, then the thread will run the function immediately.
+   If it is not yet started, the Thread will wait to run the function until
+   all threads are up and ready to go.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#waitForBeat%28Int%29" target="_self">waitForBeat</a></em>
+        (<em>beat</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Force the current thread to block until the thread clock reaches the
+   specified value, at which point the current thread is unblocked.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#whenFinished%28%3D%3EUnit%29" target="_self">whenFinished</a></em>
+        (<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Register a function to be executed after the simulation has finished.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>protected def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#withConductorFrozen%28%3D%3ET%29" target="_self">withConductorFrozen</a></em>
+        [<em>T</em>](<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#withConductorFrozen%28%3D%3ET%29#T" target="_self">T</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Run the passed function, ensuring the clock does not advance while the function is running
+   (has not yet returned or thrown an exception).</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>override def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/concurrent/ConductorMethods.html#withFixture%28ConductorMethods.this.NoArgTest%29" target="_self">withFixture</a></em>
+        (<em>test</em> : <a href="../../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>Creates and initializes a private instance variable with a new Conductor,
+   ensuring it is visible to any thread, invokes the passed test function,
+   and invokes <code>conduct</code> on the <code>Conductor</code>, if it
+   was not already invoked by the test.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/AbstractSuite.html#run%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">run</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#runNestedSuites%28org.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runNestedSuites</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#runTests%28Option%5BString%5D%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2Corg.scalatest.Filter%2CMap%5BString%2CAny%5D%2COption%5Borg.scalatest.Distributor%5D%2Corg.scalatest.Tracker%29" target="_self">runTests</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#runTest%28String%2Corg.scalatest.Reporter%2Corg.scalatest.Stopper%2CMap%5BString%2CAny%5D%2Corg.scalatest.Tracker%29" target="_self">runTest</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#testNames" target="_self">testNames</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#nestedSuites" target="_self">nestedSuites</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#tags" target="_self">tags</a> (abstract), <a href="../../../org/scalatest/AbstractSuite.html#expectedTestCount%28org.scalatest.Filter%29" target="_self">expectedTestCount</a> (abstract)
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="thread%28%3D%3ET%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>thread</em>[<em>T</em>](<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28%3D%3ET%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="java/lang/Thread">java.lang.Thread</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a new thread that will execute the given function.
+   If the test is started, then the thread will run the function immediately.
+   If it is not yet started, the Thread will wait to run the function until
+   all threads are up and ready to go.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>f - </code>the function to be executed by the thread</dd></dl>
+    <hr></hr>
+<a name="thread%28String%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>thread</em>[<em>T</em>](<em>name</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>)(<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#thread%28String%29#T" target="_self">T</a>) : <a href="" target="contentFrame" class="java/lang/Thread">java.lang.Thread</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Create a new thread that will execute the given function.
+   If the test is started, then the thread will run the function immediately.
+   If it is not yet started, the Thread will wait to run the function until
+   all threads are up and ready to go.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>name - </code>the name of the thread</dd><dd><code>f - </code>the function to be executed by the thread</dd></dl>
+    <hr></hr>
+<a name="waitForBeat%28Int%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>waitForBeat</em>(<em>beat</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Force the current thread to block until the thread clock reaches the
+   specified value, at which point the current thread is unblocked.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>c - </code>the tick value to wait for</dd></dl>
+    <hr></hr>
+<a name="withConductorFrozen%28%3D%3ET%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>withConductorFrozen</em>[<em>T</em>](<em>f</em> : =&gt; <a href="../../../org/scalatest/concurrent/ConductorMethods.html#withConductorFrozen%28%3D%3ET%29#T" target="_self">T</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Run the passed function, ensuring the clock does not advance while the function is running
+   (has not yet returned or thrown an exception).</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="isConductorFrozen"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>isConductorFrozen</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Check if the clock has been frozen by any threads. (The only way a thread
+   can freeze the clock is by calling withClockFrozen.)</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="beat"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>beat</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Gets the current value of the clock. Primarily useful in assert statements.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Returns</b></dt><dd>the current tick value</dd></dl>
+    <hr></hr>
+<a name="whenFinished%28%3D%3EUnit%29"></a><dl>
+      <dt>
+        
+        <code>protected</code>
+        <code>def</code>
+        <em>whenFinished</em>(<em>fun</em> : =&gt; <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Register a function to be executed after the simulation has finished.</dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="withFixture%28ConductorMethods.this.NoArgTest%29"></a><dl>
+      <dt>
+        
+        <code>override</code>
+        <code>def</code>
+        <em>withFixture</em>(<em>test</em> : <a href="../../../org/scalatest/Suite.NoArgTest.html" target="_self">NoArgTest</a>) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Creates and initializes a private instance variable with a new Conductor,
+   ensuring it is visible to any thread, invokes the passed test function,
+   and invokes <code>conduct</code> on the <code>Conductor</code>, if it
+   was not already invoked by the test.</dd></dl>
+      <dl></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="../../../org/scalatest/AbstractSuite.html" target="_self">AbstractSuite</a>.<a href="../../../org/scalatest/AbstractSuite.html#withFixture%28AbstractSuite.this.NoArgTest%29" target="_self">withFixture</a>
+        </dd>
+      </dl><hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

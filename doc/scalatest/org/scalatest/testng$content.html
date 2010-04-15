@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.testng</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/testng/TestNGSuite.html" target="_self">TestNGSuite</a></em>
+        <code> extends </code><a href="../../org/scalatest/Suite.html" target="_self">Suite</a>
+        
+        <div>A suite of tests that can be run with either TestNG or ScalaTest. This trait allows you to mark any
+ method as a test using TestNG's <code>@Test</code> annotation, and supports all other TestNG annotations.
+ Here's an example:
+ </p>
+
+ <pre>
+ import org.scalatest.testng.TestNGSuite
+ import org.testng.annotations.Test
+ import org.testng.annotations.Configuration
+ import scala.collection.mutable.ListBuffer
+ 
+ class MySuite extends TestNGSuite {
+ 
+   var sb: StringBuilder = _
+   var lb: ListBuffer[String] = _
+ 
+   @Configuration { val beforeTestMethod = true }
+   def setUpFixture() {
+     sb = new StringBuilder("ScalaTest is ")
+     lb = new ListBuffer[String]
+   }
+ 
+   @Test { val invocationCount = 3 }
+   def easyTest() {
+     sb.append("easy!")
+     assert(sb.toString === "ScalaTest is easy!")
+     assert(lb.isEmpty)
+     lb += "sweet"
+   }
+ 
+   @Test { val groups = Array("com.mycompany.groups.SlowTest") }
+   def funTest() {
+     sb.append("fun!")
+     assert(sb.toString === "ScalaTest is fun!")
+     assert(lb.isEmpty)
+   }
+ }
+ </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/testng/TestNGWrapperSuite.html" target="_self">TestNGWrapperSuite</a></em>
+        (<em>xmlSuiteFilenames</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>])<code> extends </code><a href="../../org/scalatest/testng/TestNGSuite.html" target="_self">TestNGSuite</a>
+        
+        <div></div>
+      </td>
+    </tr>        
+        </table>
+</body>
+      </html>

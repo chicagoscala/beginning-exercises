@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class Filter in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">class  Filter</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/Filter"><code>org/scalatest/Filter.scala</code></a>]
+      </div><hr></hr>
+      <a name="Filter"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>Filter</em>(<code>val </code><em>tagsToInclude</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]], <code>val </code><em>tagsToExclude</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>])
+      </dt>
+      <dd><code> extends </code>(<a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) =&gt; <a href="" target="contentFrame" class="scala/List">scala.List</a>[(<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)]</dd>
+    </dl>
+      <dl><dd>Filter whose <code>apply</code> method determines which of the passed tests to run and ignore based on tags to include and exclude passed as
+ as class parameters.
+
+ <p>
+ This class handles the <code>org.scalatest.Ignore</code> tag specially, in that its <code>apply</code> method indicates which
+ tests should be ignored based on whether they are tagged with <code>org.scalatest.Ignore</code>. If
+ <code>"org.scalatest.Ignore"</code> is not passed in the <code>tagsToExclude</code> set, it will be implicitly added. However, if the 
+ <code>tagsToInclude</code> option is defined, and the contained set does not include <code>"org.scalatest.Ignore"</code>, then only those tests
+ that are both tagged with <code>org.scalatest.Ignore</code> and at least one of the tags in the <code>tagsToInclude</code> set
+ will be included in the result of <code>apply</code> and marked as ignored (so long as the test is not also
+ marked with a tag other than <code>org.scalatest.Ignore</code> that is a member of the <code>tagsToExclude</code>
+ set. For example, if <code>SlowAsMolasses</code> is a member of the <code>tagsToInclude</code> set and a
+ test is tagged with both <code>org.scalatest.Ignore</code> and <code>SlowAsMolasses</code>, and
+ <code>SlowAsMolasses</code> appears in the <code>tagsToExclude</code> set, the
+ <code>SlowAsMolasses</code> tag will "overpower" the <code>org.scalatest.Ignore</code> tag, and the
+ test will be filtered out entirely rather than being ignored.
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>tagsToInclude - </code>an optional <code>Set</code> of <code>String</code> tag names to include (<em>i.e.</em>, not filter out) when filtering tests</dd><dd><code>tagsToExclude - </code>a <code>Set</code> of <code>String</code> tag names to exclude (<em>i.e.</em>, filter out) when filtering tests</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if either <code>tagsToInclude</code> or <code>tagsToExclude</code> are null</dd><dd><code>IllegalArgumentException - </code>if <code>tagsToInclude</code> is defined, but contains an empty set</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/Filter.html#apply%28Set%5BString%5D%2CMap%5BString%2CSet%5BString%5D%5D%29" target="_self">apply</a></em>
+        (<em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : <a href="" target="contentFrame" class="scala/List">scala.List</a>[(<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)]
+        
+        <div>Filter test names based on their tags.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/Filter.html#apply%28String%2CMap%5BString%2CSet%5BString%5D%5D%29" target="_self">apply</a></em>
+        (<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : (<a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)
+        
+        <div>Filter one test name based on its tags.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/Filter.html#runnableTestCount%28Set%5BString%5D%2CMap%5BString%2CSet%5BString%5D%5D%29" target="_self">runnableTestCount</a></em>
+        (<em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+        
+        <div>Returns the number of tests that should be run after the passed <code>testNames</code> and <code>tags</code> have been filtered
+   with the <code>tagsToInclude</code> and <code>tagsToExclude</code> class parameters.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="" target="contentFrame" class="scala/Function2">scala.Function2</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="#toString" target="contentFrame" class="scala/Function2">scala.Function2.toString</a>, <a href="#curry" target="contentFrame" class="scala/Function2">scala.Function2.curry</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="apply%28Set%5BString%5D%2CMap%5BString%2CSet%5BString%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : <a href="" target="contentFrame" class="scala/List">scala.List</a>[(<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Filter test names based on their tags.
+  
+   <p>
+   Each tuple in the returned list contains a <code>String</code>
+   test name and a <code>Boolean</code> that indicates whether the test should be ignored. A test will be marked as ignored
+   if <code>org.scalatest.Ignore</code> is in its tags set, and either <code>tagsToInclude</code> is <code>None</code>, or
+   <code>tagsToInclude</code>'s value (a set) contains the test's name, unless another tag for that test besides <code>org.scalatest.Ignore</code>
+   is also included in <code>tagsToExclude</code>. For example, if a test is tagged with
+   both <code>org.scalatest.Ignore</code> and <code>SlowAsMolasses</code>, and <code>SlowAsMolasses</code>
+   appears in the <code>tagsToExclude</code> set, the <code>SlowAsMolasses</code> tag will
+   "overpower" the <code>org.scalatest.Ignore</code> tag, and this method will return
+   a list that does not include the test name.
+   </p>
+  
+   <pre>
+   for ((testName, ignoreTest) <- filter(testNames, tags))
+     if (ignoreTest)
+       // ignore the test
+     else
+       // execute the test
+   </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testNames - </code>test names to be filtered</dd><dd><code>tags - </code>a map from test name to tags, containing only test names included in the <code>testNames</code> set, and     only test names that have at least one tag</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>IllegalArgumentException - </code>if any set contained in the passed <code>tags</code> map is empty</dd></dl>
+    <dl>
+        <dt style="margin:10px 0 0 20px;">
+          <b>Overrides</b>
+        </dt>
+        <dd>
+        <a href="" target="contentFrame" class="scala/Function2">scala.Function2</a>.<a href="#apply" target="contentFrame" class="scala/Function2">scala.Function2.apply</a>
+        </dd>
+      </dl><hr></hr>
+<a name="apply%28String%2CMap%5BString%2CSet%5BString%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>apply</em>(<em>testName</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : (<a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Boolean.html" target="_self">Boolean</a>)
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Filter one test name based on its tags.
+  
+   <p>
+   The returned tuple contains a <code>Boolean</code>
+   that indicates whether the test should be filtered, and if not, a <code>Boolean</code> that
+   indicates whether the test should be ignored. A test will be marked as ignored
+   if <code>org.scalatest.Ignore</code> is in its tags set, and either <code>tagsToInclude</code>
+   is <code>None</code>, or <code>tagsToInclude</code>'s value (a set) contains the passed
+   test name, unless another tag for that test besides <code>org.scalatest.Ignore</code>
+   is also included in <code>tagsToExclude</code>. For example, if a test is tagged with
+   both <code>org.scalatest.Ignore</code> and <code>SlowAsMolasses</code>, and <code>SlowAsMolasses</code>
+   appears in the <code>tagsToExclude</code> set, the <code>SlowAsMolasses</code> tag will
+   "overpower" the <code>org.scalatest.Ignore</code> tag, and this method will return
+   (true, false). 
+   </p>
+   
+   <pre>
+   val (filterTest, ignoreTest) = filter(testName, tags)
+   if (!filterTest)
+     if (ignoreTest)
+       // ignore the test
+     else
+       // execute the test
+   </pre></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testName - </code>the test name to be filtered</dd><dd><code>tags - </code>a map from test name to tags, containing only test names that have at least one tag</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>IllegalArgumentException - </code>if any set contained in the passed <code>tags</code> map is empty</dd></dl>
+    <hr></hr>
+<a name="runnableTestCount%28Set%5BString%5D%2CMap%5BString%2CSet%5BString%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>runnableTestCount</em>(<em>testNames</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>], <em>tags</em> : <a href="" target="contentFrame" class="scala/collection/immutable/Map">scala.collection.immutable.Map</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <a href="" target="contentFrame" class="scala/collection/immutable/Set">scala.collection.immutable.Set</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Returns the number of tests that should be run after the passed <code>testNames</code> and <code>tags</code> have been filtered
+   with the <code>tagsToInclude</code> and <code>tagsToExclude</code> class parameters.
+  
+   <p>
+   The result of this method may be smaller than the number of
+   elements in the list returned by <code>apply</code>, because the count returned by this method does not include ignored tests,
+   and the list returned by <code>apply</code> does include ignored tests.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>testNames - </code>test names to be filtered</dd><dd><code>tags - </code>a map from test name to tags, containing only test names included in the <code>testNames</code> set, and     only test names that have at least one tag</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>IllegalArgumentException - </code>if any set contained in the passed <code>tags</code> map is empty</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait PrivateMethodTester in org.scalatest</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest$package.html" target="_self">org.scalatest</a>
+        <br></br>
+        <span class="entity">trait  PrivateMethodTester</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/PrivateMethodTester"><code>org/scalatest/PrivateMethodTester.scala</code></a>]
+      </div><hr></hr>
+      <a name="PrivateMethodTester"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>PrivateMethodTester</em>
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Trait that facilitates the testing of private methods.
+
+ To test a private method, mix in trait <code>PrivateMethodTester</code> and
+ create a <code>PrivateMethod</code> object, like this: 
+
+ <pre>
+ val decorateToStringValue = PrivateMethod[String]('decorateToStringValue)
+ </pre>
+
+ <p>
+ The type parameter on <code>PrivateMethod</code>, in this case <code>String</code>, is the result type of the private method
+ you wish to invoke. The symbol passed to the <code>PrivateMethod.apply</code> factory method, in this
+ case <code>'decorateToStringValue</code>, is the name of the private method to invoke. To test
+ the private method, use the <code>invokePrivate</code> operator, like this:
+ </p>
+
+ <pre>
+ targetObject invokePrivate decorateToStringValue(1)
+ </pre>
+
+ <p>
+ Here, <code>targetObject</code> is a variable or singleton object name referring to the object whose
+ private method you want to test. You pass the arguments to the private method in the parentheses after
+ the <code>PrivateMethod</code> object.
+ The result type of an <code>invokePrivate</code> operation will be the type parameter of the <code>PrivateMethod</code>
+ object, thus you need not cast the result to use it. In other words, after creating a <code>PrivateMethod</code> object, the
+ syntax to invoke the private method
+ looks like a regular method invocation, but with the dot (<code>.</code>) replaced by <code>invokePrivate</code>.
+ The private method is invoked dynamically via reflection, so if you have a typo in the method name symbol, specify the wrong result type,
+ or pass invalid parameters, the <code>invokePrivate</code> operation will compile, but throw an exception at runtime.
+ </p>
+
+ <p>
+ One limitation to be aware of is that you can't use <code>PrivateMethodTester</code> to test a private method
+ declared in a trait, because the class the trait gets mixed into will not declare that private method. Only the
+ class generated to hold method implementations for the trait will have that private method. If you want to
+ test a private method declared in a trait, and that method does not use any state of that trait, you can move
+ the private method to a companion object for the trait and test it using <code>PrivateMethodTester</code> that
+ way. If the private trait method you want to test uses the trait's state, your best options are to test it
+ indirectly via a non-private trait method that calls the private method, or make the private method package access
+ and test it directly via regular static method invocations. 
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../org/scalatest/PrivateMethodTester$object.html" target="_self">PrivateMethodTester</a></dd>
+      </dl><hr></hr>
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>implicit def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/PrivateMethodTester.html#anyRefToInvoker%28AnyRef%29" target="_self">anyRefToInvoker</a></em>
+        (<em>target</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../org/scalatest/PrivateMethodTester.Invoker.html" target="_self">Invoker</a>
+        
+        <div>Implicit conversion from <code>AnyRef</code> to <code>Invoker</code>, used to enable
+   assertions testing of private methods.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Class Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/PrivateMethodTester.Invocation.html" target="_self">Invocation</a></em>
+        [<em>T</em>](<code>val </code><em>methodName</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>, <code>val </code><em>args</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>*)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Class whose instances represent an invocation of a private method. Instances of this
+   class contain the name of the private method (<code>methodName</code>) and the arguments
+   to pass to it during the invocation (<code>args</code>).
+   The type parameter, <code>T</code>, is the return type of the private method.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/PrivateMethodTester.Invoker.html" target="_self">Invoker</a></em>
+        (<em>target</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Class used via an implicit conversion to enable private methods to be tested.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code>final class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/PrivateMethodTester.PrivateMethod.html" target="_self">PrivateMethod</a></em>
+        [<em>T</em>](<em>methodName</em> : <a href="" target="contentFrame" class="scala/Symbol">scala.Symbol</a>)<code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Represent a private method, whose apply method returns an <code>Invocation</code> object that
+   records the name of the private method to invoke, and any arguments to pass to it when invoked.
+   The type parameter, <code>T</code>, is the return type of the private method.</div>
+      </td>
+    </tr>
+      </table>
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Object Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> object</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/PrivateMethodTester.PrivateMethod$object.html" target="_self">PrivateMethod</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Contains a factory method for instantiating <code>PrivateMethod</code> objects.</div>
+      </td>
+    </tr>
+      </table>
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="anyRefToInvoker%28AnyRef%29"></a><dl>
+      <dt>
+        
+        <code>implicit</code>
+        <code>def</code>
+        <em>anyRefToInvoker</em>(<em>target</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>) : <a href="../../org/scalatest/PrivateMethodTester.Invoker.html" target="_self">Invoker</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>Implicit conversion from <code>AnyRef</code> to <code>Invoker</code>, used to enable
+   assertions testing of private methods.</dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>target - </code>the target object on which to invoke a private method.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Throws</b></dt><dd><code>NullPointerException - </code>if <code>target</code> is <code>null</code>.</dd></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

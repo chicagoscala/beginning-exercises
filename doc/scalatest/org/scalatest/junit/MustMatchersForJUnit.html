@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>trait MustMatchersForJUnit in org.scalatest.junit</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/junit$package.html" target="_self">org.scalatest.junit</a>
+        <br></br>
+        <span class="entity">trait  MustMatchersForJUnit</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/junit/MustMatchersForJUnit"><code>org/scalatest/junit/MustMatchersForJUnit.scala</code></a>]
+      </div><hr></hr>
+      <a name="MustMatchersForJUnit"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>trait</code>
+        <em>MustMatchersForJUnit</em>
+      </dt>
+      <dd><code> extends </code><a href="../../../org/scalatest/matchers/MustMatchers.html" target="_self">MustMatchers</a><code> with </code><a href="../../../org/scalatest/junit/AssertionsForJUnit.html" target="_self">AssertionsForJUnit</a></dd>
+    </dl>
+      <dl><dd>Trait that makes ScalaTest's <code>MustMatchers</code> DSL syntax available for use with JUnit.
+
+ <p>
+ The assertion methods provided in this trait look and behave exactly like the ones in
+ <a href="../matchers/MustMatchers.html"><code>MustMatchers</code></a>, except instead of throwing
+ <a href="../TestFailedException.html"><code>TestFailedException</code></a> they throw
+ <a href="JUnitTestFailedError.html"><code>JUnitTestFailedError</code></a>,
+ which extends <code>junit.framework.AssertionFailedError</code>.
+
+ <p>
+ JUnit 3 (release 3.8 and earlier) distinguishes between <em>failures</em> and <em>errors</em>.
+ If a test fails because of a failed assertion, that is considered a <em>failure</em>. If a test
+ fails for any other reason, either the test code or the application being tested threw an unexpected
+ exception, that is considered an <em>error</em>. The way JUnit 3 decides whether an exception represents
+ a failure or error is that only thrown <code>junit.framework.AssertionFailedError</code>s are considered
+ failures. Any other exception type is considered an error. The exception type thrown by the JUnit 3
+ assertion methods declared in <code>junit.framework.Assert</code> (such as <code>assertEquals</code>,
+ <code>assertTrue</code>, and <code>fail</code>) is, therefore, <code>AssertionFailedError</code>.
+ </p>
+
+ <p>
+ In JUnit 4, <code>AssertionFailedError</code> was made to extend <code>java.lang.AssertionError</code>,
+ and the distinction between failures and errors was essentially dropped. However, some tools that integrate
+ with JUnit carry on this distinction, so even if you are using JUnit 4 you may want to use this
+ <code>MustMatchersForJUnit</code> trait instead of plain-old ScalaTest
+ <a href="../matchers/MustMatchers.html"><code>MustMatchers</code></a>.
+ </p>
+
+ <p>
+ To use this trait in a JUnit 3 <code>TestCase</code>, you can mix it into your <code>TestCase</code> class, like this:
+ </p>
+
+ <pre>
+ import junit.framework.TestCase
+ import org.scalatest.junit.MustMatchersForJUnit
+
+ class MyTestCase extends TestCase with MustMatchersForJUnit {
+
+   def testSomething() {
+     "hello, world!" must startWith ("hello")
+   }
+
+   // ...
+ }
+ </pre>
+
+ <p>
+ You can alternatively import the methods defined in this trait.
+ </p>
+
+ <pre>
+ import junit.framework.TestCase
+ import org.scalatest.junit.MustMatchersForJUnit._
+
+ class MyTestCase extends TestCase {
+
+   def testSomething() {
+     "hello, world!" must startWith ("hello")
+   }
+
+   // ...
+ }
+ </pre>
+
+ <p>
+ For details on the importing approach, see the documentation
+ for the <a href="MustMatchersForJUnit$object.html"><code>MustMatchersForJUnit</code> companion object</a>.
+ For the details on the <code>MustMatchersForJUnit</code> syntax, see the Scaladoc documentation for
+ <a href="../matchers/MustMatchers.html"><code>org.scalatest.matchers.MustMatchers</code></a>
+ </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    <dl>
+      <dt style="margin:10px 0 0 20px;"><b>Direct Known Subclasses:</b></dt>
+      <dd><a href="../../../org/scalatest/junit/MustMatchersForJUnit$object.html" target="_self">MustMatchersForJUnit</a></dd>
+      </dl><hr></hr>
+      
+
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Values and Variables inherited from <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/matchers/Matchers.html#not" target="_self">not</a>, <a href="../../../org/scalatest/matchers/Matchers.html#be" target="_self">be</a>, <a href="../../../org/scalatest/matchers/Matchers.html#have" target="_self">have</a>, <a href="../../../org/scalatest/matchers/Matchers.html#contain" target="_self">contain</a>, <a href="../../../org/scalatest/matchers/Matchers.html#include" target="_self">include</a>, <a href="../../../org/scalatest/matchers/Matchers.html#fullyMatch" target="_self">fullyMatch</a>, <a href="../../../org/scalatest/matchers/Matchers.html#startWith" target="_self">startWith</a>, <a href="../../../org/scalatest/matchers/Matchers.html#endWith" target="_self">endWith</a>, <a href="../../../org/scalatest/matchers/Matchers.html#length" target="_self">length</a>, <a href="../../../org/scalatest/matchers/Matchers.html#size" target="_self">size</a>, <a href="../../../org/scalatest/matchers/Matchers.html#key" target="_self">key</a>, <a href="../../../org/scalatest/matchers/Matchers.html#value" target="_self">value</a>, <a href="../../../org/scalatest/matchers/Matchers.html#a" target="_self">a</a>, <a href="../../../org/scalatest/matchers/Matchers.html#an" target="_self">an</a>, <a href="../../../org/scalatest/matchers/Matchers.html#theSameInstanceAs" target="_self">theSameInstanceAs</a>, <a href="../../../org/scalatest/matchers/Matchers.html#regex" target="_self">regex</a>
+        </td></tr>
+      </table>
+<table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/matchers/MustMatchers.html" target="_self">MustMatchers</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToEvaluatingApplicationMustWrapper%28MustMatchers.this.ResultOfEvaluatingApplication%29" target="_self">convertToEvaluatingApplicationMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyMustWrapper%28T%29" target="_self">convertToAnyMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToDoubleMustWrapper%28Double%29" target="_self">convertToDoubleMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToFloatMustWrapper%28Float%29" target="_self">convertToFloatMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToLongMustWrapper%28Long%29" target="_self">convertToLongMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToIntMustWrapper%28Int%29" target="_self">convertToIntMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToShortMustWrapper%28Short%29" target="_self">convertToShortMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToByteMustWrapper%28Byte%29" target="_self">convertToByteMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToAnyRefMustWrapper%28T%29" target="_self">convertToAnyRefMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToCollectionMustWrapper%28Collection%5BT%5D%29" target="_self">convertToCollectionMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToSeqMustWrapper%28Seq%5BT%5D%29" target="_self">convertToSeqMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToArrayMustWrapper%28Array%5BT%5D%29" target="_self">convertToArrayMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToListMustWrapper%28List%5BT%5D%29" target="_self">convertToListMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToMapMustWrapper%28scala.collection.Map%5BK%2CV%5D%29" target="_self">convertToMapMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToStringMustWrapper%28String%29" target="_self">convertToStringMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaCollectionMustWrapper%28java.util.Collection%5BT%5D%29" target="_self">convertToJavaCollectionMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaListMustWrapper%28java.util.List%5BT%5D%29" target="_self">convertToJavaListMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertToJavaMapMustWrapper%28java.util.Map%5BK%2CV%5D%29" target="_self">convertToJavaMapMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasIntGetLengthMethodToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasIntGetLengthFieldToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasIntLengthFieldToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasIntLengthMethodToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasLongGetLengthMethodToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasLongGetLengthFieldToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthFieldToLengthMustWrapper%28T%29" target="_self">convertHasLongLengthFieldToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongLengthMethodToLengthMustWrapper%28T%29" target="_self">convertHasLongLengthMethodToLengthMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasIntGetSizeMethodToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntGetSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasIntGetSizeFieldToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasIntSizeFieldToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasIntSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasIntSizeMethodToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasLongGetSizeMethodToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongGetSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasLongGetSizeFieldToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeFieldToSizeMustWrapper%28T%29" target="_self">convertHasLongSizeFieldToSizeMustWrapper</a>, <a href="../../../org/scalatest/matchers/MustMatchers.html#convertHasLongSizeMethodToSizeMustWrapper%28T%29" target="_self">convertHasLongSizeMethodToSizeMustWrapper</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/matchers/Matchers.html" target="_self">Matchers</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/matchers/Matchers.html#convertToMatcherWrapper%28org.scalatest.matchers.Matcher%5BT%5D%29" target="_self">convertToMatcherWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertIterableMatcherToJavaCollectionMatcher%28org.scalatest.matchers.Matcher%5BIterable%5BT%5D%5D%29" target="_self">convertIterableMatcherToJavaCollectionMatcher</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertMapMatcherToJavaMapMatcher%28org.scalatest.matchers.Matcher%5Bscala.collection.Map%5BK%2CV%5D%5D%29" target="_self">convertMapMatcherToJavaMapMatcher</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToIntLengthWrapper%28AnyRef%7Bdeflength%3AInt%7D%29" target="_self">convertLengthFieldToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToIntLengthWrapper%28AnyRef%7Bdeflength%28%29%3AInt%7D%29" target="_self">convertLengthMethodToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToIntLengthWrapper%28AnyRef%7BdefgetLength%3AInt%7D%29" target="_self">convertGetLengthFieldToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToIntLengthWrapper%28AnyRef%7BdefgetLength%28%29%3AInt%7D%29" target="_self">convertGetLengthMethodToIntLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthFieldToLongLengthWrapper%28AnyRef%7Bdeflength%3ALong%7D%29" target="_self">convertLengthFieldToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLengthMethodToLongLengthWrapper%28AnyRef%7Bdeflength%28%29%3ALong%7D%29" target="_self">convertLengthMethodToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthFieldToLongLengthWrapper%28AnyRef%7BdefgetLength%3ALong%7D%29" target="_self">convertGetLengthFieldToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetLengthMethodToLongLengthWrapper%28AnyRef%7BdefgetLength%28%29%3ALong%7D%29" target="_self">convertGetLengthMethodToLongLengthWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToIntSizeWrapper%28AnyRef%7Bdefsize%3AInt%7D%29" target="_self">convertSizeFieldToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToIntSizeWrapper%28AnyRef%7Bdefsize%28%29%3AInt%7D%29" target="_self">convertSizeMethodToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToIntSizeWrapper%28AnyRef%7BdefgetSize%3AInt%7D%29" target="_self">convertGetSizeFieldToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToIntSizeWrapper%28AnyRef%7BdefgetSize%28%29%3AInt%7D%29" target="_self">convertGetSizeMethodToIntSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeFieldToLongSizeWrapper%28AnyRef%7Bdefsize%3ALong%7D%29" target="_self">convertSizeFieldToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSizeMethodToLongSizeWrapper%28AnyRef%7Bdefsize%28%29%3ALong%7D%29" target="_self">convertSizeMethodToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeFieldToLongSizeWrapper%28AnyRef%7BdefgetSize%3ALong%7D%29" target="_self">convertGetSizeFieldToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertGetSizeMethodToLongSizeWrapper%28AnyRef%7BdefgetSize%28%29%3ALong%7D%29" target="_self">convertGetSizeMethodToLongSizeWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertSymbolToHavePropertyMatcherGenerator%28Symbol%29" target="_self">convertSymbolToHavePropertyMatcherGenerator</a>, <a href="../../../org/scalatest/matchers/Matchers.html#equal%28Any%29" target="_self">equal</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertDoubleToPlusOrMinusWrapper%28Double%29" target="_self">convertDoubleToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertFloatToPlusOrMinusWrapper%28Float%29" target="_self">convertFloatToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertLongToPlusOrMinusWrapper%28Long%29" target="_self">convertLongToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertIntToPlusOrMinusWrapper%28Int%29" target="_self">convertIntToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertShortToPlusOrMinusWrapper%28Short%29" target="_self">convertShortToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#convertByteToPlusOrMinusWrapper%28Byte%29" target="_self">convertByteToPlusOrMinusWrapper</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3C%28T%29" target="_self">&lt;</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3E%28T%29" target="_self">&gt;</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3C%3D%28T%29" target="_self">&lt;=</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3E%3D%28T%29" target="_self">&gt;=</a>, <a href="../../../org/scalatest/matchers/Matchers.html#%3D%3D%3D%28Any%29" target="_self">===</a>, <a href="../../../org/scalatest/matchers/Matchers.html#evaluating%28%3D%3EAny%29" target="_self">evaluating</a>, <a href="../../../org/scalatest/matchers/Matchers.html#produce%28scala.reflect.Manifest%5BT%5D%29" target="_self">produce</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="../../../org/scalatest/Assertions.html" target="_self">Assertions</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Boolean%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%2CAny%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#assert%28Option%5BString%5D%29" target="_self">assert</a>, <a href="../../../org/scalatest/Assertions.html#convertToEqualizer%28Any%29" target="_self">convertToEqualizer</a>, <a href="../../../org/scalatest/Assertions.html#intercept%28%3D%3EAny%29" target="_self">intercept</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%2CAny%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#expect%28Any%29" target="_self">expect</a>, <a href="../../../org/scalatest/Assertions.html#fail%28%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28String%2CThrowable%29" target="_self">fail</a>, <a href="../../../org/scalatest/Assertions.html#fail%28Throwable%29" target="_self">fail</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

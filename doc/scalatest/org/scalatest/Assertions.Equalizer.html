@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class Equalizer in org.scalatest.Assertions</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../org/scalatest/Assertions.html" target="_self">org.scalatest.Assertions</a>
+        <br></br>
+        <span class="entity">class  Equalizer</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/Assertions"><code>org/scalatest/Assertions.scala</code></a>]
+      </div><hr></hr>
+      <a name="Equalizer"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>Equalizer</em>(<em>left</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>)
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>Class used via an implicit conversion to enable any two objects to be compared with
+   <code>===</code> in assertions in tests. For example:
+  
+   <pre>
+   assert(a === b)
+   </pre>
+  
+   <p>
+   The benefit of using <code>assert(a === b)</code> rather than <code>assert(a == b)</code> is
+   that a <code>TestFailedException</code> produced by the former will include the values of <code>a</code> and <code>b</code>
+   in its detail message.
+   The implicit method that performs the conversion from <code>Any</code> to <code>Equalizer</code> is
+   <code>convertToEqualizer</code> in trait <code>Assertions</code>.
+   </p>
+  
+   <p>
+   In case you're not familiar with how implicit conversions work in Scala, here's a quick explanation.
+   The <code>convertToEqualizer</code> method in <code>Assertions</code> is defined as an "implicit" method that takes an
+   <code>Any</code>, which means you can pass in any object, and it will convert it to an <code>Equalizer</code>.
+   The <code>Equalizer</code> has <code>===</code> defined. Most objects don't have <code>===</code> defined as a method
+   on them. Take two Strings, for example:
+   </p>
+  
+   <pre>
+   assert("hello" === "world")
+   </pre>
+  
+   <p>
+   Given this code, the Scala compiler looks for an <code>===</code> method on class <code>String</code>, because that's the class of
+   <code>"hello"</code>. <code>String</code> doesn't define <code>===</code>, so the compiler looks for an implicit conversion from
+   <code>String</code> to something that does have an <code>===</code> method, and it finds the <code>convertToEqualizer</code> method. It
+   then rewrites the code to this:
+   </p>
+  
+   <pre>
+   assert(convertToEqualizer("hello").===("world"))
+   </pre>
+  
+   <p>
+   So inside a <code>Suite</code> (which mixes in <code>Assertions</code>, <code>===</code> will work on anything. The only
+   situation in which the implicit conversion wouldn't 
+   happen is on types that have an <code>===</code> method already defined.
+   </p>
+   
+   <p>
+   The primary constructor takes one object, <code>left</code>, whose type is being converted to <code>Equalizer</code>. The <code>left</code>
+   value may be a <code>null</code> reference, because this is allowed by Scala's <code>==</code> operator.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Parameters</b></dt><dd><code>left - </code>An object to convert to <code>Equalizer</code>, which represents the <code>left</code> value       of an assertion.</dd><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/Assertions.Equalizer.html#%3D%3D%3D%28Any%29" target="_self">===</a></em>
+        (<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+        
+        <div>The <code>===</code> operation compares this <code>Equalizer</code>'s <code>left</code> value (passed
+     to the constructor, usually via an implicit conversion) with the passed <code>right</code> value 
+     for equality as determined by the expression <code>left == right</code>.
+     If <code>true</code>, <code>===</code> returns <code>None</code>. Else, <code>===</code> returns
+     a <code>Some</code> whose <code>String</code> value indicates the <code>left</code> and <code>right</code> values.</div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="%3D%3D%3D%28Any%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>===</em>(<em>right</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>) : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>The <code>===</code> operation compares this <code>Equalizer</code>'s <code>left</code> value (passed
+     to the constructor, usually via an implicit conversion) with the passed <code>right</code> value 
+     for equality as determined by the expression <code>left == right</code>.
+     If <code>true</code>, <code>===</code> returns <code>None</code>. Else, <code>===</code> returns
+     a <code>Some</code> whose <code>String</code> value indicates the <code>left</code> and <code>right</code> values.
+    
+     <p>
+     In its typical usage, the <code>Option[String]</code> returned by <code>===</code> will be passed to one of two
+     of trait <code>Assertion</code>' overloaded <code>assert</code> methods. If <code>None</code>,
+     which indicates the assertion succeeded, <code>assert</code> will return normally. But if <code>Some</code> is passed,
+     which indicates the assertion failed, <code>assert</code> will throw a <code>TestFailedException</code> whose detail
+     message will include the <code>String</code> contained inside the <code>Some</code>, which in turn includes the
+     <code>left</code> and <code>right</code> values. This <code>TestFailedException</code> is typically embedded in a 
+     <code>Report</code> and passed to a <code>Reporter</code>, which can present the <code>left</code> and <code>right</code>
+     values to the user.
+     </p></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>

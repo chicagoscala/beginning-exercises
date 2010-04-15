@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>All classes and objects in org.scalatest.prop</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../script.js"></script>
+        </head>
+        <body onload="init()"><div class="page-title"><div>ScalaTest 1.0</div></div><p><div>This document is the API specification for ScalaTest 1.0</div></p><table summary="" cellpadding="3" class="member">
+        <tr><td class="title" colspan="2">Class Summary</td></tr>
+        <tr>
+      <td class="modifiers" valign="top"> 
+        <code> trait</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/prop/Checkers.html" target="_self">Checkers</a></em>
+        <code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        
+        <div>Trait that contains several &#8220;check&#8221; methods that perform ScalaCheck property checks.
+ If ScalaCheck finds a test case for which a property doesn't hold, the problem will be reported as a ScalaTest test failure.</div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> class</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../org/scalatest/prop/PropertyTestFailedException.html" target="_self">PropertyTestFailedException</a></em>
+        (<em>message</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <em>cause</em> : <a href="" target="contentFrame" class="scala/Option">scala.Option</a>[<a href="" target="contentFrame" class="java/lang/Throwable">java.lang.Throwable</a>], <em>failedCodeStackDepth</em> : <a href="http://www.scala-lang.org/docu/files/api/scala/Int.html" target="_self">Int</a>, <code>val </code><em>undecoratedMessage</em> : <a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>, <code>val </code><em>args</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>], <code>val </code><em>labels</em> : <a href="" target="contentFrame" class="scala/List">scala.List</a>[<a href="" target="contentFrame" class="java/lang/String">java.lang.String</a>])<code> extends </code><a href="../../org/scalatest/TestFailedException.html" target="_self">TestFailedException</a>
+        
+        <div>Exception that indicates a test failed. The purpose of this exception is to encapsulate information about
+ the stack depth at which the line of test code that failed resides, so that information can be presented to
+ the user that makes it quick to find the failing line of test code. (I.e., the user need not scan through the
+ stack trace to find the correct filename and line number of the failing test.)</div>
+      </td>
+    </tr>        
+        </table>
+</body>
+      </html>

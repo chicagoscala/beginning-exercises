@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+        <head><title>class ArrayShouldWrapper in org.scalatest.matchers.ShouldMatchers</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8"></meta><meta content="scaladoc (version 2.7.3.r0-b20090402104749)" name="generator"></meta><link href="../../../style.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../../script.js"></script>
+        </head>
+        <body onload="init()">
+        <table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+        
+      <div class="entity">
+        <a href="../../../org/scalatest/matchers/ShouldMatchers.html" target="_self">org.scalatest.matchers.ShouldMatchers</a>
+        <br></br>
+        <span class="entity">class  ArrayShouldWrapper</span>
+      </div><hr></hr>
+      <div class="source">
+        [source: <a href="" class="org/scalatest/matchers/ShouldMatchers"><code>org/scalatest/matchers/ShouldMatchers.scala</code></a>]
+      </div><hr></hr>
+      <a name="ArrayShouldWrapper"></a><dl>
+      <dt>
+        
+        <code>final</code>
+        <code>class</code>
+        <em>ArrayShouldWrapper</em>[<em>T</em>](<em>left</em> : <a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>])
+      </dt>
+      <dd><code> extends </code><a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a></dd>
+    </dl>
+      <dl><dd>This class is part of the ScalaTest matchers DSL. Please see the documentation for <a href="ShouldMatchers.html"><code>ShouldMatchers</code></a> or <a href="MustMatchers.html"><code>MustMatchers</code></a> for an overview of
+   the matchers DSL.
+  
+   <p>
+   This class is used in conjunction with an implicit conversion to enable <code>should</code> methods to
+   be invoked on objects of type <code>scala.Array[T]</code>.
+   </p></dd></dl>
+      <dl><dt style="margin:10px 0 0 20px;">
+        <b>Author</b></dt><dd>Bill Venners</dd></dl>
+    
+      
+
+
+<table summary="" cellpadding="3" class="member">
+      <tr><td class="title" colspan="2">Method Summary</td></tr>
+      <tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#should%28ShouldMatchers.this.HaveWord%29" target="_self">should</a></em>
+        (<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSeq.html" target="_self">ResultOfHaveWordForSeq</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     array should have length (3)
+           ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#should%28ShouldMatchers.this.NotWord%29" target="_self">should</a></em>
+        (<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForArray.html" target="_self">ResultOfNotWordForArray</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     array should not have length (3)
+           ^
+     </pre></div>
+      </td>
+    </tr>
+<tr>
+      <td class="modifiers" valign="top"> 
+        <code> def</code>
+      </td>
+      <td class="signature">
+        <em><a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#should%28org.scalatest.matchers.Matcher%5BArray%5BT%5D%5D%29" target="_self">should</a></em>
+        (<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+        
+        <div>This method enables syntax such as the following:
+    
+     <pre>
+     array should equal (Array("one", "two"))
+           ^
+     </pre></div>
+      </td>
+    </tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html" target="_self">AnyRef</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#getClass%28%29" target="_self">getClass</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#hashCode%28%29" target="_self">hashCode</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#equals%28Any%29" target="_self">equals</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#clone%28%29" target="_self">clone</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#toString%28%29" target="_self">toString</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notify%28%29" target="_self">notify</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#notifyAll%28%29" target="_self">notifyAll</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28Long%2CInt%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#wait%28%29" target="_self">wait</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#finalize%28%29" target="_self">finalize</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%3D%3D%28AnyRef%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#%21%3D%28AnyRef%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#eq%28AnyRef%29" target="_self">eq</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#ne%28AnyRef%29" target="_self">ne</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/AnyRef.html#synchronized%28T0%29" target="_self">synchronized</a>
+        </td></tr>
+      </table><table summary="" cellpadding="3" class="inherited">
+        <tr><td class="title" colspan="2">
+          Methods inherited from <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html" target="_self">Any</a>
+        </td></tr>
+        <tr><td class="signature" colspan="2">
+          <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%3D%3D%28Any%29" target="_self">==</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#%21%3D%28Any%29" target="_self">!=</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#isInstanceOf" target="_self">isInstanceOf</a>, <a href="http://www.scala-lang.org/docu/files/api/scala/Any.html#asInstanceOf" target="_self">asInstanceOf</a>
+        </td></tr>
+      </table>
+
+
+      
+
+
+<table summary="" cellpadding="3" class="member-detail">
+          <tr><td class="title">Method Details</td></tr>
+        </table><div><a name="should%28org.scalatest.matchers.Matcher%5BArray%5BT%5D%5D%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>should</em>(<em>rightMatcher</em> : <a href="../../../org/scalatest/matchers/Matcher.html" target="_self">Matcher</a>[<a href="" target="contentFrame" class="scala/Array">scala.Array</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]]) : <a href="http://www.scala-lang.org/docu/files/api/scala/Unit.html" target="_self">Unit</a>
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     array should equal (Array("one", "two"))
+           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="should%28ShouldMatchers.this.HaveWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>should</em>(<em>haveWord</em> : <a href="../../../org/scalatest/matchers/Matchers.HaveWord.html" target="_self">HaveWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfHaveWordForSeq.html" target="_self">ResultOfHaveWordForSeq</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     array should have length (3)
+           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr>
+<a name="should%28ShouldMatchers.this.NotWord%29"></a><dl>
+      <dt>
+        
+        <code></code>
+        <code>def</code>
+        <em>should</em>(<em>notWord</em> : <a href="../../../org/scalatest/matchers/Matchers.NotWord.html" target="_self">NotWord</a>) : <a href="../../../org/scalatest/matchers/Matchers.ResultOfNotWordForArray.html" target="_self">ResultOfNotWordForArray</a>[<a href="../../../org/scalatest/matchers/ShouldMatchers.ArrayShouldWrapper.html#T" target="_self">T</a>]
+      </dt>
+      <dd></dd>
+    </dl>
+      <dl><dd>This method enables syntax such as the following:
+    
+     <pre>
+     array should not have length (3)
+           ^
+     </pre></dd></dl>
+      <dl></dl>
+    <hr></hr></div>
+
+
+    <hr></hr>
+        <div>Copyright (C) 2001-2009 Artima, Inc. All rights reserved.</div><table summary="" class="navigation">
+        <tr>
+          <td class="navigation-links" valign="top">
+            <!-- <table><tr></tr></table> -->
+          </td>
+          <td align="right" valign="top" style="white-space:nowrap;" rowspan="2">
+            <div class="doctitle-larger">ScalaTest 1.0</div>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      </body>
+      </html>
